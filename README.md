@@ -1,2 +1,2 @@
 # CrashDash
-Crash Dashboard written in php 
+Crash Dashboard written in php, html and css
