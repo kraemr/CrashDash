@@ -1,4 +1,5 @@
 Create Database AccidentDB
+use AccidentDB
 Create Table accident_data(
     land SMALLINT,
     region MEDIUMINT,
@@ -20,4 +21,24 @@ Create Table accident_data(
     road_surface_condition TINYINT,
     coordinate_UTM_x DOUBLE,
     coordinate_UTM_y DOUBLE
+);
+
+Create Table land_def(
+    land SMALLINT, # Foreign Key ?
+    land_str TINYTEXT,
+);
+
+Create Table munincipality_def(
+    munincipality MEDIUMINT, # Foreign Key ?
+    munincipality_str TINYTEXT
+);
+
+Create Table kinds_of_accidents_def(
+    kind TINYINT, # Foreign Key 
+    kind_str TINYTEXT
+);
+
+Create Table district_def(
+    district MEDIUMINT, # Foreign Key
+    district_str TINYTEXT
 );
