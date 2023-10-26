@@ -1,17 +1,17 @@
 Create Database AccidentDB
 use AccidentDB
 Create Table accident_data(
-    land SMALLINT,
-    region MEDIUMINT,
-    district MEDIUMINT,
-    munincipality MEDIUMINT,
-    year SMALLINT,
+    land SMALLINT, #ULAND
+    region MEDIUMINT, #UREGBEZ
+    district MEDIUMINT, #UKREIS
+    munincipality MEDIUMINT, #UGEMEINDE
+    year SMALLINT, 
     day SMALLINT,
     month SMALLINT,
-    category TINYINT,
-    kind TINYINT,
-    type TINYINT,
-    light_condition TINYINT,
+    category TINYINT, # UKATEGORIE
+    kind TINYINT, # UART
+    type TINYINT, # UTYP1
+    light_condition TINYINT, # ULICHTVERH
     bycicle_involved BOOLEAN,
     car_involved BOOLEAN,
     passenger_involved BOOLEAN,
@@ -19,8 +19,8 @@ Create Table accident_data(
     delivery_van_involved BOOLEAN,
     truck_bus_or_tram_involved BOOLEAN,
     road_surface_condition TINYINT,
-    coordinate_UTM_x DOUBLE,
-    coordinate_UTM_y DOUBLE
+    coordinate_UTM_x DOUBLE, #LINREFX
+    coordinate_UTM_y DOUBLE #LINREFY
 );
 
 Create Table land_def(
