@@ -23,3 +23,4 @@ Make a PHP Api, where you can just request data in json.
 
 ## Ajax/Map Tutorials
 - https://www.youtube.com/watch?v=rJesac0_Ftw
+- https://www.youtube.com/watch?v=wSNa5b1mS5Y (Better / Way more convenient visualisation of the Data but idk if we are allowed to use tbh) 
