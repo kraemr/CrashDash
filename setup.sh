@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo apt-get update -y
-sudo apt-get install python3-mysqldb docker docker.io -y
+sudo apt-get install python3-mysqldb php php-mysql docker docker.io -y
 sudo docker pull mariadb
 sudo docker container stop crash_db
 sudo docker container rm crash_db
