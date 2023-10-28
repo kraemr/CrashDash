@@ -1,7 +1,7 @@
 CREATE DATABASE AccidentDB;
 use AccidentDB;
 Create Table accident_data(
-    uident BIGINT, #UIDENTSTLAE
+    uident BIGINT UNSIGNED, #UIDENTSTLAE
     land SMALLINT, #ULAND
     region MEDIUMINT, #UREGBEZ
     district MEDIUMINT, #UKREIS
