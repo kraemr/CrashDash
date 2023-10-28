@@ -1,12 +1,14 @@
 CREATE DATABASE AccidentDB;
 use AccidentDB;
 Create Table accident_data(
+    uident BIGINT, #UIDENTSTLAE
     land SMALLINT, #ULAND
     region MEDIUMINT, #UREGBEZ
     district MEDIUMINT, #UKREIS
     munincipality MEDIUMINT, #UGEMEINDE
     year SMALLINT, 
     day SMALLINT,
+    hour SMALLINT,
     month SMALLINT,
     category TINYINT, # UKATEGORIE
     kind TINYINT, # UART

@@ -10,3 +10,5 @@ export CRASH_DB_IPADDR="$IPADDR"
 echo "$CRASH_DB_IPADDR"
 sleep 10
 res=$(sudo mariadb --host=$CRASH_DB_IPADDR -p"Test" < setup.sql)
+mkdir ./csvs
+python3 setup_db.py
