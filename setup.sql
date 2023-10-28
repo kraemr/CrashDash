@@ -1,5 +1,5 @@
-Create Database AccidentDB
-use AccidentDB
+CREATE DATABASE AccidentDB;
+use AccidentDB;
 Create Table accident_data(
     land SMALLINT, #ULAND
     region MEDIUMINT, #UREGBEZ
@@ -24,8 +24,8 @@ Create Table accident_data(
 );
 
 Create Table land_def(
-    land SMALLINT, # Foreign Key ?
-    land_str TINYTEXT,
+    land SMALLINT, 
+    land_str TINYTEXT
 );
 
 Create Table munincipality_def(
