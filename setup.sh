@@ -11,7 +11,9 @@ IPADDR="$(sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddres
 export CRASH_DB_IPADDR="$IPADDR"
 echo "$CRASH_DB_IPADDR"
 sleep 10 # Wait for mariadb to init
-res=$(sudo mariadb --host=$CRASH_DB_IPADDR -p"Test" < setup.sql) 
+res=$(sudo mariadb --host=$CRASH_DB_IPADDR -p"Test" < setup.sql) #Operation log grows large, delete or disable after, compress_rows to save space
 echo $res
-#mkdir ./csvs
-#python3 setup_db.py
+mkdir ./csvs
+python3 setup_db.py --download # downloads and unzips the contents
+python3 setup_db.py --fix      # fixes the filepaths (renames .txt to .csv ...)
+python3 setup_db.py --parse    # This parses each csv and inserts it into the db TODO: add ip param and password param for argv
