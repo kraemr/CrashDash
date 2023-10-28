@@ -1,6 +1,7 @@
 CREATE DATABASE AccidentDB;
 use AccidentDB;
 Create Table accident_data(
+    Id SERIAL,
     uident BIGINT UNSIGNED, #UIDENTSTLAE
     land SMALLINT, #ULAND
     region MEDIUMINT, #UREGBEZ
@@ -22,8 +23,13 @@ Create Table accident_data(
     truck_bus_or_tram_involved BOOLEAN,
     road_surface_condition TINYINT,
     coordinate_UTM_x DOUBLE, #LINREFX
-    coordinate_UTM_y DOUBLE #LINREFY
+    coordinate_UTM_y DOUBLE, #LINREFY
+    CONSTRAINT PK_Accident_Data PRIMARY KEY (Id)
 );
+
+CREATE INDEX IX_accident_year ON accident_data(year);
+CREATE INDEX IX_accident_month ON accident_data(month);
+CREATE INDEX IX_accident_region ON accident_data(region);
 
 Create Table land_def(
     land SMALLINT, 
@@ -31,7 +37,7 @@ Create Table land_def(
 );
 
 Create Table munincipality_def(
-    munincipality MEDIUMINT, # Foreign Key ?
+    munincipality MEDIUMINT, # Foreign Key
     munincipality_str TINYTEXT
 );
 

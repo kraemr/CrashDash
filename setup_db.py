@@ -33,6 +33,8 @@ def parse_csv():
     current_year = int(datetime.date.today().year)
     year_i = start_year
     year_i = int(year_i)
+    cursor.execute("SET sql_log_bin = 0;") # avoid huge binary logs
+    db.commit()
     while(year_i < current_year):
         print(str(year_i) + ":")
         filestr = ""
