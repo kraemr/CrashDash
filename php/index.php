@@ -3,8 +3,6 @@ $servername = "172.17.0.2";
 $username = "root";
 $password = "Test";
 
-
-
 // This gives a page of accident data
 // TODO write stored procedures
 try {
@@ -33,7 +31,7 @@ try {
   $offset = $page * $perpage;
 
 
-  $query = $conn->prepare("Select * from accident_data LIMIT ? OFFSET ? ");
+  $query = $conn->prepare("Select * from accident_data INNER JOIN land_def ON land_def.land=accident_data.land LIMIT ? OFFSET ? ");
   $query->bindValue(1,$perpage,PDO::PARAM_INT);
   $query->bindValue(2,$offset,PDO::PARAM_INT);
 

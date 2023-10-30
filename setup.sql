@@ -24,6 +24,8 @@ Create Table accident_data(
     road_surface_condition TINYINT,
     coordinate_UTM_x DOUBLE, #LINREFX
     coordinate_UTM_y DOUBLE, #LINREFY
+    longitude DOUBLE, # x
+    latitude DOUBLE, # y
     CONSTRAINT PK_Accident_Data PRIMARY KEY (Id)
 );
 
@@ -32,21 +34,25 @@ CREATE INDEX IX_accident_month ON accident_data(month);
 CREATE INDEX IX_accident_region ON accident_data(region);
 
 Create Table land_def(
-    land SMALLINT, 
-    land_str TINYTEXT
+    land SMALLINT,
+    land_str TINYTEXT,
+    CONSTRAINT PK_Land_def PRIMARY KEY (land)
 );
 
 Create Table munincipality_def(
     munincipality MEDIUMINT, # Foreign Key
-    munincipality_str TINYTEXT
+    munincipality_str TINYTEXT,
+    CONSTRAINT PK_munincipality_def PRIMARY KEY (munincipality)
 );
 
 Create Table kinds_of_accidents_def(
     kind TINYINT, # Foreign Key 
-    kind_str TINYTEXT
+    kind_str TINYTEXT,
+    CONSTRAINT PK_kind_def PRIMARY KEY (kind)
 );
 
 Create Table district_def(
     district MEDIUMINT, # Foreign Key
-    district_str TINYTEXT
+    district_str TINYTEXT,
+    CONSTRAINT PK_district_def PRIMARY KEY (district)
 );
