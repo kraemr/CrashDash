@@ -1,0 +1,11 @@
+number;name
+1;Collision with another vehicle which starts, stops or is stationary
+2;Collision with another vehicle moving ahead or waiting
+3;Collision with another vehicle moving laterally in the same direction
+4;Collision with another oncoming vehicle
+5;Collision with another vehicle which turns into or crosses a road
+6;Collision between vehicle and pedestrian
+7;Collision with an obstacle in the carriageway
+8;Leaving the carriageway to the right
+9;Leaving the carriageway to the left
+0;Accident of another kind
