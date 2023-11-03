@@ -51,6 +51,13 @@ Create Table kinds_of_accidents_def(
     CONSTRAINT PK_kind_def PRIMARY KEY (kind)
 );
 
+
+Create Table category_of_accidents_def(
+    category TINYINT, # Foreign Key 
+    category_str TINYTEXT,
+    CONSTRAINT PK_kind_def PRIMARY KEY (kind)
+);
+
 Create Table district_def(
     district MEDIUMINT, # Foreign Key
     district_str TINYTEXT,
