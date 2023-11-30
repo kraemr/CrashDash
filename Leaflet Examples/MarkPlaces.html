@@ -41,16 +41,12 @@
 						.then(data => {
 						var bounds = L.geoJSON(data).getBounds();
 						mymap.fitBounds(bounds);
-
 						// Entfernen Sie alle Marker, die nicht innerhalb der Grenzen liegen
 						markers.eachLayer(function (marker) {
 							if (!bounds.contains(marker.getLatLng())) {
 								markers.removeLayer(marker);
 							}
 						});
-
-              			// todo: Das Alte soll noch gelöscht werden vor jeder suchanfrage
-
 						L.geoJSON(data, {
 							style: function(feature) {
 								return {
