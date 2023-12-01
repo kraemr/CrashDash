@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+
+body {
+    margin: 0;
+    background-color: #f1f1f1;
+    font-family: 'Outfit', sans-serif;
+}
+
+.navbar {
+    background-color: #222;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    padding: 0 48px;
+}
+
+.navbar ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+    gap: 96px;
+    margin-right: 160px;
+    margin-left: auto;
+}
+
+.navbar ul li a {
+    color: #AFB4C1;
+    text-decoration: none;
+    transition: 0.15s;
+    letter-spacing: 1px;
+}
+
+.navbar ul li a:hover {
+    color: #fff;
+}
+
+.navbar img {
+    max-height: 70px;
+    padding-top: 5px;
+}
+
+.content {
+    padding: 112px 32px 0 32px;
+}
+
+.home-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+    margin: auto;
+    transition: 0.3s;
+}
+
+.selectioncard {
+    padding: 64px;
+    width: 164px;
+    height: 246px;
+    background-color: #fff;
+    border-radius: 16px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    font-size: 24px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.selectioncard:hover {
+    transform: scale(1.05);
+    background-color: #ffcd9a;
+}
+
+.selectioncard svg {
+    stroke: #3296FF;
+    transition: 0.3s;
+    margin-bottom: 48px;
+    margin-top: 24px;
+}
+
+
+.selectioncard a {
+    color: #222;
+    text-decoration: none;
+    transition: 0.3s;
+    letter-spacing: 2px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.selection-div {
+    display: flex;
+    justify-content: center;
+}
+
+.title-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 64px;
+}
+
+.dashboad-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-evenly;
+    gap: 64px;
+    align-items: center;
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+
+.dashboad-card {
+    margin: auto;
+    padding: 24px;
+    width: 80%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 16px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboad-card-upper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 16px;
+    height: 50px;
+}
+
+.dashboad-card-lower {
+    width: 100%;
+    height: 100%;
+}
