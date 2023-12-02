@@ -2,7 +2,10 @@
 <html>
 <head>
     <title>Dashboard</title>
+    <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
 </head>
 <body>
   <div class="navbar">
@@ -20,7 +23,62 @@
   </div>
 
   <div class="content">
+      <div style="display: flex; justify-content: space-between; gap: 64px;">
 
+        <div class="map-menu">
+          <input type="text" id="search-box" placeholder="Ort suchen">
+          <button onclick="search()">Suchen</button>
+        </div>
+  
+        <div class="mapDiv">
+          <div id="map" style="height: 85vh; border-radius: 16px;"></div>
+        </div>
+      </div>
   </div>  
 </body>
+
+<script>
+  var mymap = L.map('map').setView([51.505, -0.09], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+  }).addTo(mymap);
+
+  // Gruppe für die Marker erstellen
+  var markers = L.layerGroup().addTo(mymap);
+
+  function search() {
+    var query = document.getElementById("search-box").value;
+    var url = "https://nominatim.openstreetmap.org/search?q=" + query + "&format=json&addressdetails=1&limit=1&limit=1&countrycodes=de";
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        var lat = data[0].lat;
+        var lon = data[0].lon;
+        mymap.setView([lat, lon], 10);
+        var cityUrl = "https://nominatim.openstreetmap.org/search.php?q=" + query + "&polygon_geojson=1&format=geojson&limit=1&countrycodes=de";
+        fetch(cityUrl)
+          .then(response => response.json())
+          .then(data => {
+          var bounds = L.geoJSON(data).getBounds();
+          mymap.fitBounds(bounds);
+          // Entfernen Sie alle Marker, die nicht innerhalb der Grenzen liegen
+          markers.eachLayer(function (marker) {
+            if (!bounds.contains(marker.getLatLng())) {
+              markers.removeLayer(marker);
+            }
+          });
+          L.geoJSON(data, {
+            style: function(feature) {
+              return {
+                fillColor: '#3388ff',
+                fillOpacity: 0.4,
+                color: '#3388ff',
+                weight: 2
+              };
+          }}).addTo(mymap);
+        }).catch(error => console.error(error));		
+    }).catch(error => console.error(error));
+  }
+</script>
 </html>
