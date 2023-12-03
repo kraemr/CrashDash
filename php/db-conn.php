@@ -4,6 +4,5 @@ function connect_db(){
     #$servername = "localhost";
     $username = "root";
     $password = "Test";
-    return new PDO("mysql:host=$servername;dbname=AccidentDB", $username, $password);
-}
+    return new PDO("mysql:host=$servername;dbname=AccidentDB", $username, $password);}
 ?>
