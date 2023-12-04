@@ -183,8 +183,9 @@ body {
 
 .map-menu {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: left;
+    padding: 24px;
     width: 320px;
     height: 85VH;
     background-color: #fff;
@@ -198,4 +199,42 @@ body {
     background-color: #fff;
     border-radius: 16px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input {
+    width: 100%;
+    border-radius: 8px;
+    border: 2px solid #222;
+    font-weight: 500;
+    padding: 8px 12px 8px 12px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: #3296FF;
+}
+
+button {
+    border-radius: 8px;
+    border: 0px;
+    font-weight: 500;
+    padding: 10px 24px 10px 24px;
+    font-family: 'Outfit', sans-serif;
+    background-color: #65b0ff;
+    color: #fff;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #3296FF;
+}
+
+.centered-HBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 16px;
 }

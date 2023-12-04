@@ -26,10 +26,23 @@
       <div style="display: flex; justify-content: space-between; gap: 64px;">
 
         <div class="map-menu">
-          <input type="text" id="search-box" placeholder="Ort suchen">
-          <button onclick="search()">Suchen</button>
+          <p>Nach Bundesland/Stadt filtern:</p>
+          <div class="centered-HBox">
+            <input type="text" id="search-filter" placeholder="Bundesland/Stadt">
+            <button onclick="search()">Filtern</button>
+          </div>
+          <p>Jahr:</p>
+          <select id="year">
+            <option value="all">2016-2022</option>
+            <option value="2022" selected>2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+          </select> 
         </div>
-  
         <div class="mapDiv">
           <div id="map" style="height: 85vh; border-radius: 16px;"></div>
         </div>
@@ -47,8 +60,16 @@
   // Gruppe für die Marker erstellen
   var markers = L.layerGroup().addTo(mymap);
 
+  var geojsonLayer;
+
   function search() {
-    var query = document.getElementById("search-box").value;
+    // Alte GeoJSON entfernen
+    if (geojsonLayer != null) {
+      
+    }
+    
+
+    var query = document.getElementById("search-filter").value;
     var url = "https://nominatim.openstreetmap.org/search?q=" + query + "&format=json&addressdetails=1&limit=1&limit=1&countrycodes=de";
     fetch(url)
       .then(response => response.json())
@@ -60,9 +81,10 @@
         fetch(cityUrl)
           .then(response => response.json())
           .then(data => {
-          var bounds = L.geoJSON(data).getBounds();
+          geojsonLayer = L.geoJSON(data);
+          var bounds = geojsonLayer.getBounds();  
           mymap.fitBounds(bounds);
-          // Entfernen Sie alle Marker, die nicht innerhalb der Grenzen liegen
+          // Alle Marker die nicht in der Grenze liegen entfernen
           markers.eachLayer(function (marker) {
             if (!bounds.contains(marker.getLatLng())) {
               markers.removeLayer(marker);
@@ -71,9 +93,9 @@
           L.geoJSON(data, {
             style: function(feature) {
               return {
-                fillColor: '#3388ff',
+                fillColor: '#3296FF',
                 fillOpacity: 0.4,
-                color: '#3388ff',
+                color: '#3296FF',
                 weight: 2
               };
           }}).addTo(mymap);
