@@ -5,73 +5,52 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="style.css">
     <style>
-      .page-numbers {
-          bottom: 10px;
-          right: 10px;
-          font-size: 14px;
-          color: #555;
-      }
-
-      .pagination{
+      .control_row{
         display: flex;
-        margin-right: 10px;
+        gap: 32px;
       }
-
-      .pagination-buttons {
-          display: flex;
-          justify-content: space-between;
-          margin-top: 10px;
-      }
-
-      .pagination-buttons button {
-          padding: 5px 10px;
-          font-size: 14px;
-          cursor: pointer;
-      }
-
   </style>
   </head>
-
   <script>
-  
-  currentPage = 1;
-  function addRow(region,fatal,date,id) {
-    var tableBody = document.querySelector('#table-data tbody');
-    var newRow = tableBody.insertRow();
-    var cell1 = newRow.insertCell(0);
-    var cell2 = newRow.insertCell(1);
-    var cell3 = newRow.insertCell(2);
-    var cell4 = newRow.insertCell(2);
-    cell1.innerHTML = region;
-    cell2.innerHTML = fatal;
-    cell3.innerHTML = date;
-  }
-  function removeAllRows() {
+    currentPage = 1;
+    filterValue  =  null; // something like '2016' 
+    filterCond   =  null; // something like '<'
+    filterColumn =  null; // something like 'land'
+    function addRow(region,fatal,date,id) { // need to add the other column values here, maybe pass it in an object or map
+      var tableBody = document.querySelector('#table-data tbody');
+      var newRow = tableBody.insertRow();
+      var cell1 = newRow.insertCell(0);
+      var cell2 = newRow.insertCell(1);
+      var cell3 = newRow.insertCell(2);
+      cell1.innerHTML = region;
+      cell2.innerHTML = fatal;
+      cell3.innerHTML = date;
+    }
+
+  function removeAllRows() { // resets the table
       var tableBody = document.querySelector('#table-data tbody');
       tableBody.innerHTML = '';
   }
 
-  function updatePagination() {
-            const paginationContainer = document.getElementById('pagination');
-            paginationContainer.innerHTML = '';
-            const page = document.createElement('span');
-            page.textContent = "Page: ";
-            for (let i = currentPage; i <= currentPage + 3; i++) {
-                    const pageNumber = document.createElement('span');
-                    pageNumber.textContent = i + ' ';
-                    if (i === currentPage) {
-                      pageNumber.style.fontWeight = 'bold';
-                    }
-                    paginationContainer.appendChild(pageNumber);
-            }
-
-            if (currentPage + 5 < 10) {  // Assuming there are 10 pages, you can adjust this
-              const ellipsis = document.createElement('span');
-              ellipsis.textContent = '... ';
-              paginationContainer.appendChild(ellipsis);
-          }
-      }
-  function loadpage(){
+  function updatePagination() { // update page numbers
+    const paginationContainer = document.getElementById('pagination');
+    paginationContainer.innerHTML = '';
+    const page = document.createElement('span');
+    page.textContent = "Page: ";
+    for (let i = currentPage; i <= currentPage + 3; i++) {
+        const pageNumber = document.createElement('span');
+        pageNumber.textContent = i + ' ';
+        if (i === currentPage) {
+          pageNumber.style.fontWeight = 'bold';
+        }
+        paginationContainer.appendChild(pageNumber);
+        }
+        const ellipsis = document.createElement('span');
+        ellipsis.textContent = '... ';
+        paginationContainer.appendChild(ellipsis);
+    }
+    
+  function loadpage(){ //loads currentPage
     updatePagination();
     removeAllRows();
     var xhr = new XMLHttpRequest();
@@ -85,14 +64,32 @@
       addRow(element["land"],element["type"],element["year"])
       console.log(element);   
       }); //foreach 
-      } // call back
-    };
+      } // if xhr ready
+    };// xhr call back
     xhr.send();
-    console.log(xhr.responseText);
+    return xhr.responseType;
   }
-  // go back or forth :)
-  function changepage(action){
-    if(action === "next"){
+
+  function readSelectedColumn() {
+    var selectElement = document.getElementById("Filter_Column");
+    return selectElement.value;
+  }
+
+  // Reads the given filteroperator
+  function readSelectedOperator(){
+    var selectElement = document.getElementById("Filter_Condition");
+    const cond_map={"greater":">",
+                    "lesser":"<",
+                    "equal":"=",
+                    "greater or equal":">=",
+                    "lesser or equal":"<="
+                  };
+    return selectElement.value; 
+  }
+
+  function changepage(action){ // loads next or previous page
+    // three = becuase of js string shenanigans example: 1 == "1" is true 1 == 1 also, but 1 === "1" is false
+    if(action === "next"){ 
       currentPage++;
     }
     else if(action === "prev"){
@@ -118,30 +115,56 @@
     </ul>
   </div>
 
-
   <div class="content">
-    <div class="page-numbers" id="pagination">
-
-    </div>
+    <div class="control_row">
+    
+      <div class="page-numbers" id="pagination">
+      </div>
     
     <div class="pagination-buttons">
       <button onclick="changepage('back')">Back</button>
       <button onclick="changepage('next')">Next</button>
     </div>
 
-    <table id="table-data" border="1">
-      <thead>
-          <tr>
-              <th>region</th>
-              <th>fatality</th>
-              <th>date</th>
-          </tr>
-      </thead>
-      <tbody>
-          <!-- Existing rows or leave it empty if there are none initially -->
-      </tbody>
-  </table>
-  </div> 
+    <label for="Filter_Column">Filter Column:</label>
+    <select id="Filter_Column" name="selectOption">
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+        <!-- Add more options as needed -->
+    </select>
+
+    <label for="Filter_Condition">Filter Condition:</label>
+    <select id="Filter_Condition" name="selectOption">
+        <option value="greater">greater</option>
+        <option value="leser">lesser</option>
+        <option value="equal">equal</option>
+        <option value="greater or equal">greater or equal</option>
+        <option value="lesser or equal">less or equal</option>
+        <option value="none">None</option>
+    </select>
+
+    <label for="Filter_Value_Input">Enter Value:</label>
+    <input type="text" id="Filter_Value_Input" name="Filter_Value_Input" placeholder="">
+
+    <button onclick="applyFilter()">Apply Filter</button>
+
+ 
+
+  </div>
+  <table id="table-data" border="1">
+    <thead>
+        <tr>
+            <th>region</th>
+            <th>fatality</th>
+            <th>date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Existing rows or leave it empty if there are none initially -->
+    </tbody>
+</table>
+</div>
   
 
 
