@@ -29,8 +29,18 @@ Select from ... where year
 Get all data when clicking on a point by its SERIAL ID from GET Param id
 Select ... from where ID
 
-## API 
-- What data does the client need ? (number of accidents,number of accidents with passengers ...)
+## How to call the api/s 
+get-details.php?id=
+id is ID of accident in Database (Primary Key)
+
+get-pages.php?page=0&col=year&cond=eq&val=2016
+page = current page
+col = column to filter
+cond = >,<,<= ...
+val = the value which gets used to filter
+
+get-stats.php?
 
 
-
+## Security / Apache config
+webroot should be Webpage and anything else should be inaccessible to the user, also only execute php in php folder.

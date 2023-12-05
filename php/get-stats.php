@@ -1,21 +1,7 @@
 <?php
-// This uses user supplied filters, columnnamess and groupby to count occurences
-// TODO: Think about the best way to make this generic for all statistics
-
-/*
-{
-columns:[
-"year","land","" ...
-],
-condition:"year <= 2022 and land = \"Rhineland-Palantine\" "
-group_by:"year"
-order_by:"year"
-asc:true
-}
-The query should look like this: Select $column1,$column2, ... ,COUNT(*) from accident_data Where $cond Group by $group_by Order by $orderby;
-*/
+# This code is probably not safe, but for time reasons well. it is what is
 const permitted=["year","land","region","district","munincipality","year","day","month","hour","category","kind","type","light_condition","bycicle_involved","car_involved","passenger_involved","motorcycle_involved","delivery_van_involved","truck_bus_or_tram_involved","road_surface_condition"];
-function check_permitted_columns($cols){
+function check_permitted_columns($cols){ # this checks if an array of cols is allowed to be used
     if(count($cols) == 0){
         return false;
     }
@@ -27,10 +13,9 @@ function check_permitted_columns($cols){
     return true;
 }
 
-function check_permitted_column($col){  
+function check_permitted_column($col){ #check one column only
     return in_array($col,permitted);
 }
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the raw POST data
@@ -42,7 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $permitted = check_permitted_columns($cols);
             if($permitted == false){
                 //ERROR
-                echo "ERROR";
+                header('Content-Type: application/json');
+                echo '{"error":"invalid Column"}';
+                return;
             }            
             $cond_col = $decoded_data["condition_column"];
             $cond_val = $decoded_data["condition_value"];
@@ -52,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $group_by =  $decoded_data["group_by"]; # column name (string)
             $orderby =  $decoded_data["order_by"]; # column name (string)
             $ascending = $decoded_data["asc"]; # boolean
-            # for security reasons we dont just accept input and pass it on, since it does not get validated by prepared staement
+            # for security reasons we dont just accept input and pass it on, since it does not get validated by prepared staement (which compiles a function in sql backend)
             # instead check if strings match and insert the value else return error
             $operator_val = "";
             if($operator == ">") $operator_val = ">";
@@ -84,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $sql .= " asc";
             }
             require "db-conn.php";
-            $conn = connect_db();    
+            $conn = connect_db();  
             try{
                 $query = $conn->prepare($sql);
                 $query->bindValue(1,$cond_val,PDO::PARAM_STR);
@@ -94,7 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(['success' => true, 'data' => $results]);
             }
             catch(PDOException $e) {
+                header('Content-Type: application/json');
                 echo "Connection failed: " . $e->getMessage();
+                return;
             }
         }
     } 
@@ -102,14 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Return a JSON response for decoding error
         header('Content-Type: application/json');
         echo json_encode(['success' => false, 'error' => 'Invalid JSON']);
+        return;
     }
-
-
 } 
 else {
     // Return a JSON response for empty data
     header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'error' => 'Empty JSON data']);
+    echo json_encode(['success' => false, 'error' => 'Empty JSON data or GET request instead of POST']);
 }
-
 ?>

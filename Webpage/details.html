@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Details - View </title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="navbar">
+      <div class="logo">
+        <a href="home.html">
+            <img src="img/logo.jpg" alt="logo">
+        </a>
+    
+    </div>
+        <ul class="nav-menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="dashboad.html">Dashboard</a></li>
+            <li><a href="map.html">Map</a></li>
+            <li><a href="table-view.html">Table-View</a></li>
+        </ul>
+    
+    </div>
+    <div class="content">
+        <h1>Details</h1>
+        <div id="details">
+        <div id="Id">
+        </div> 
+        <div id="uident">
+        </div> <!-- UIDENTSTLAE -->
+        <div id="land">
+        </div> <!-- ULAND -->
+        <div id="region">
+        </div> <!-- UREGBEZ -->
+        <div id="district">
+        </div> <!-- UKREIS -->
+        <div id="munincipality">
+        </div> <!-- UGEMEINDE -->
+        <div id="year">
+        </div> 
+        <div id="day">
+        </div> 
+        <div id="hour">
+        </div> 
+        <div id="month">
+        </div> 
+        <div id="category">
+        </div> <!-- UKATEGORIE -->
+        <div id="kind">
+        </div> <!-- UART -->
+        <div id="type">
+        </div> <!-- UTYP1 -->
+        <div id="light_condition">
+        </div> <!-- ULICHTVERH -->
+        <div id="bycicle_involved">
+        </div> 
+        <div id="car_involved">
+        </div> 
+        <div id="passenger_involved">
+        </div> 
+        <div id="motorcycle_involved" >
+        </div> 
+        <div id="delivery_van_involved" >
+        </div> 
+        <div id="truck_bus_or_tram_involved" >
+        </div> 
+        <div id="road_surface_condition" >
+        </div> 
+        <div id="coordinate_UTM_x" >
+        </div> <!-- LINREFX -->
+        <div id="coordinate_UTM_y" >
+        </div> <!-- LINREFY -->
+        <div id="longitude" >
+        </div> <!-- x -->
+        <div id="latitude" >
+        </div> <!-- y -->
+        </div>
+    </div>
+
+<script>
+    const columnList = [
+        'Id',
+        'uident', // UIDENTSTLAE
+        'land', // ULAND
+        'region', // UREGBEZ
+        'district', // UKREIS
+        'munincipality', // UGEMEINDE
+        'year',
+        'day',
+        'hour',
+        'month',
+        'category', // UKATEGORIE
+        'kind', // UART
+        'type', // UTYP1
+        'light_condition', // ULICHTVERH
+        'bycicle_involved',
+        'car_involved',
+        'passenger_involved',
+        'motorcycle_involved',
+        'delivery_van_involved',
+        'truck_bus_or_tram_involved',
+        'road_surface_condition',
+        'coordinate_UTM_x', // LINREFX
+        'coordinate_UTM_y', // LINREFY
+        'longitude', // x
+        'latitude', // y
+    ];
+    
+    
+    
+    
+    function loadDetails(){
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+    
+    }
+    
+    function loadpage(){ //loads currentPage
+        var xhr = new XMLHttpRequest();
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        xhr.open('GET', "../php/get-details.php?id="+id, true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            for (const key in data) {
+                var detail_div = document.getElementById(key);
+                console.log(key);
+                detail_div.textContent = key + ": " + data[key];
+            }
+          } // if xhr ready
+        };// xhr call back
+        xhr.send();
+        return xhr.responseType;
+      }
+      window.onload = loadpage;
+    </script>
+    
+    </body>
+</html>

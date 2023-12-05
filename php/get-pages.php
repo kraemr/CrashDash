@@ -51,22 +51,42 @@ if($page < 1){
 $page = $page - 1; # page 0 is actually 
 $perpage = 100;
 $offset = $page * 100;
-if($filter_col == "None" || $filter_col == "None" || $filter_col == "None" || $filter_val == "None"){
-    $sql = "Select * from accident_data LIMIT 100 OFFSET ?";
-    $query = $conn->prepare($sql);
-    $query->bindValue(1,$offset,PDO::PARAM_INT);
-    $query->execute();
-    $results = $query->fetchAll(PDO::FETCH_ASSOC);
-    header('Content-Type: application/json');
-    echo json_encode($results);
-}else{
-    $sql = "Select * from accident_data where $filter_col $filter_cond ? LIMIT 100 OFFSET ?";
-    $query = $conn->prepare($sql);
-    $query->bindValue(1,$filter_val);
-    $query->bindValue(2,$offset,PDO::PARAM_INT);
-    $query->execute();
-    $results = $query->fetchAll(PDO::FETCH_ASSOC);
-    header('Content-Type: application/json');
-    echo json_encode($results);
+
+$Joins =  
+"INNER JOIN land_def ON land_def.land = accident_data.land".
+" INNER JOIN kind_def ON kind_def.kind = accident_data.kind" .
+" INNER JOIN category_def ON category_def.category = accident_data.category".
+" INNER JOIN type_def ON type_def.type = accident_data.type";
+
+if($filter_col == "None" || $filter_cond == "None" || $filter_val == "None"){
+    $sql = "Select * from accident_data $Joins LIMIT 100 OFFSET ?";
+    try{
+        $query = $conn->prepare($sql);
+        $query->bindValue(1,$offset,PDO::PARAM_INT);
+        $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        header('Content-Type: application/json');
+        echo json_encode($results);
+    }
+    catch(PDOException $e) {
+        header('Content-Type: application/json');
+        echo '{"error":"Database Error"}';
+    }
+}
+else{
+    $sql = "Select * from accident_data $Joins where $filter_col $filter_cond ? LIMIT 100 OFFSET ?";
+    try{
+        $query = $conn->prepare($sql);
+        $query->bindValue(1,$filter_val);
+        $query->bindValue(2,$offset,PDO::PARAM_INT);
+        $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        header('Content-Type: application/json');
+        echo json_encode($results);
+    }
+    catch(PDOException $e) {
+        header('Content-Type: application/json');
+        echo '{"error":"Database Error"}';
+    }
 }
 ?>
