@@ -26,48 +26,146 @@
       <div style="display: flex; justify-content: space-between; gap: 64px;">
 
         <div class="map-menu">
-          <p>Nach Bundesland/Stadt filtern:</p>
-          <div class="centered-HBox">
-            <input type="text" id="search-filter" placeholder="Bundesland/Stadt">
-            <button onclick="search()">Filtern</button>
+          <div>
+            <p>Nach Bundesland/Stadt filtern:</p>
+            <div class="centered-HBox">
+              <input type="text" id="search-filter" placeholder="Bundesland/Stadt" value="Rheinland-Pfalz">
+              <button onclick="search()">Filtern</button>
+            </div>
           </div>
-          <p>Jahr:</p>
-          <select id="year">
-            <option value="all">2016-2022</option>
-            <option value="2022" selected>2022</option>
-            <option value="2021">2021</option>
-            <option value="2020">2020</option>
-            <option value="2019">2019</option>
-            <option value="2018">2018</option>
-            <option value="2017">2017</option>
-            <option value="2016">2016</option>
-          </select> 
+          <div>
+            <p>Jahr:</p>
+            <select id="year">
+              <option value="all">Gesamter Zeitraum (2016-2022)</option>
+              <option value="2022" selected>2022</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+              <option value="2018">2018</option>
+              <option value="2017">2017</option>
+              <option value="2016">2016</option>
+            </select> 
+          </div>
+          <div>
+            <p>Unfalltypen:</p>
+
+            <div class="leftSided-HBox">
+              <p>Unfall mit Personenschaden</p>
+              <div class="checkbox-wrapper">
+                <input class="toggleBox toggleBox-skewed" id="ctb1" type="checkbox"/>
+                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb1"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="leftSided-HBox">
+            <p>Unfall mit Todesfolge</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="ctb2" type="checkbox"/>
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb2"></label>
+            </div>
+          </div>
+
+          <div class="leftSided-HBox">
+            <p>Unfall mit PKW-Beteiligung</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="ctb3" type="checkbox"/>
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb3"></label>
+            </div>
+          </div>
+
+          <div class="leftSided-HBox">
+            <p>Unfall mit Güter-KFZ-Beteiligung</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="ctb4" type="checkbox"/>
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb4"></label>
+            </div>
+          </div>
+
+          <div class="leftSided-HBox">
+            <p>Unfall mit Kraftrad-Beteiligung</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="ctb5" type="checkbox"/>
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb5"></label>
+            </div>
+          </div>
+
+          <div class="leftSided-HBox">
+            <p>Unfall mit Fahrrad-Beteiligung</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="ctb6" type="checkbox"/>
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb6"></label>
+            </div>
+          </div>
+
+          <div class="leftSided-HBox">
+            <p>Unfall mit Fußgänger-Beteiligung</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="ctb7" type="checkbox"/>
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb7"></label>
+            </div>
+          </div>
+
+          <button style="margin-top: 32px;" onclick="resetFilter()">Filter zurücksetzen</button> 
         </div>
         <div class="mapDiv">
-          <div id="map" style="height: 85vh; border-radius: 16px;"></div>
-        </div>
+          <div id="map" style="height: calc(100vh - 200px); border-radius: 16px;"></div>
+        </div>   
       </div>
+
   </div>  
 </body>
 
 <script>
-  var mymap = L.map('map').setView([51.505, -0.09], 13);
+  var lMap = L.map('map').setView([51.505, -0.09], 13);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-  }).addTo(mymap);
+  }).addTo(lMap);
 
   // Gruppe für die Marker erstellen
-  var markers = L.layerGroup().addTo(mymap);
+  var markers = L.layerGroup().addTo(lMap);
 
+  // Erstellen Sie eine LayerGroup
+  var geojsonLayer = L.layerGroup().addTo(lMap);
+
+  // Todo: Auf Nominatim wechseln (falls wir das echt benutzen)
+  fetch('geojson/countries.geojson')
+    .then(response => response.json())
+    .then(data => {
+        L.geoJSON(data, {
+            style: function(feature) {
+                // Alle Länder außer Deutschland grau färben
+                if (feature.properties.name !== "Germany") {
+                    return {
+                      fillColor: '#333',
+                      fillOpacity: 0.15,
+                      color: 'transparent'
+                    };
+                }
+                else {
+                    return {
+                      fillColor: 'transparent',
+                      fillOpacity: 0.0,
+                      color: '#3296FF',
+                      weight: 2
+                    };
+                }
+            }
+        }).addTo(lMap);
+  });
+
+  // Globale Variable für den GeoJSON-Layer
   var geojsonLayer;
+
+  // search(); -> Todo: Löscht das dann nicht mehr
 
   function search() {
     // Alte GeoJSON entfernen
-    if (geojsonLayer != null) {
-      
+    if (geojsonLayer) {
+      lMap.removeLayer(geojsonLayer);
     }
-    
+  
 
     var query = document.getElementById("search-filter").value;
     var url = "https://nominatim.openstreetmap.org/search?q=" + query + "&format=json&addressdetails=1&limit=1&limit=1&countrycodes=de";
@@ -76,31 +174,74 @@
       .then(data => {
         var lat = data[0].lat;
         var lon = data[0].lon;
-        mymap.setView([lat, lon], 10);
+        lMap.setView([lat, lon], 10);
         var cityUrl = "https://nominatim.openstreetmap.org/search.php?q=" + query + "&polygon_geojson=1&format=geojson&limit=1&countrycodes=de";
         fetch(cityUrl)
           .then(response => response.json())
           .then(data => {
-          geojsonLayer = L.geoJSON(data);
-          var bounds = geojsonLayer.getBounds();  
-          mymap.fitBounds(bounds);
+          var bounds = L.geoJSON(data).getBounds();  
+          lMap.fitBounds(bounds);
           // Alle Marker die nicht in der Grenze liegen entfernen
           markers.eachLayer(function (marker) {
             if (!bounds.contains(marker.getLatLng())) {
               markers.removeLayer(marker);
             }
           });
-          L.geoJSON(data, {
-            style: function(feature) {
+
+          geojsonLayer = L.geoJSON(data, {
+          style: function(feature) {
               return {
-                fillColor: '#3296FF',
-                fillOpacity: 0.4,
-                color: '#3296FF',
-                weight: 2
+                  fillColor: '#3296FF',
+                  fillOpacity: 0.4,
+                  color: '#3296FF',
+                  weight: 2
               };
-          }}).addTo(mymap);
+          }
+          }).addTo(lMap);
+          
         }).catch(error => console.error(error));		
     }).catch(error => console.error(error));
   }
+
+  function resetFilter() {
+    document.getElementById("search-filter").value = "Deutschland";
+    document.getElementById("year").value = "2022";
+    document.getElementById("ctb1").checked = false;
+    document.getElementById("ctb2").checked = false;
+    document.getElementById("ctb3").checked = false;
+    document.getElementById("ctb4").checked = false;
+    document.getElementById("ctb5").checked = false;
+    document.getElementById("ctb6").checked = false;
+    document.getElementById("ctb7").checked = false;
+
+    search();
+  }
+
+  // On-Change-Listener für die Checkboxen und die Select-Box hinzufügen
+  document.getElementById("ctb1").addEventListener("change", function() {
+    search();
+  });
+  document.getElementById("ctb2").addEventListener("change", function() {
+    search();
+  });
+  document.getElementById("ctb3").addEventListener("change", function() {
+    search();
+  });
+  document.getElementById("ctb4").addEventListener("change", function() {
+    search();
+  });
+  document.getElementById("ctb5").addEventListener("change", function() {
+    search();
+  });
+  document.getElementById("ctb6").addEventListener("change", function() {
+    search();
+  });
+  document.getElementById("ctb7").addEventListener("change", function() {
+    search();
+  });
+  document.getElementById("year").addEventListener("change", function() {
+    search();
+  });
+  
 </script>
 </html>

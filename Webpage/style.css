@@ -184,10 +184,17 @@ body {
     align-items: left;
     padding: 24px;
     width: 320px;
-    height: 85VH;
     background-color: #fff;
     border-radius: 16px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    gap: 16px;
+}
+
+.map-menu P {
+    font-size: 15px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    margin-bottom: 8px;
 }
 
 .mapDiv {
@@ -196,6 +203,7 @@ body {
     background-color: #fff;
     border-radius: 16px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: calc(100vh - 200px);
 }
 
 input {
@@ -228,6 +236,60 @@ button:hover {
     background-color: #3296FF;
 }
 
+select {
+    width: 100%;
+    border-radius: 8px;
+    border: 2px solid #222;
+    font-weight: 500;
+    padding: 8px 12px 8px 12px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+}
+
+select:focus {
+    border-color: #3296FF;
+}
+
+select option {
+    font-weight: 500;
+    padding: 8px 12px 8px 12px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+th {
+    background-color: #222;
+    color: white;
+}
+
+.centered-HBox p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.leftSided-HBox p {
+    margin: 0px;
+    padding: 0px;
+}
+
 .centered-HBox {
     display: flex;
     justify-content: center;
@@ -235,3 +297,120 @@ button:hover {
     flex-direction: row;
     gap: 16px;
 }
+
+.leftSided-HBox  {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.checkbox-wrapper .toggleBox {
+    display: none;
+  }
+  .checkbox-wrapper .toggleBox,
+  .checkbox-wrapper .toggleBox:after,
+  .checkbox-wrapper .toggleBox:before,
+  .checkbox-wrapper .toggleBox *,
+  .checkbox-wrapper .toggleBox *:after,
+  .checkbox-wrapper .toggleBox *:before,
+  .checkbox-wrapper .toggleBox + .toggleBox-btn {
+    box-sizing: border-box;
+  }
+  .checkbox-wrapper .toggleBox::-moz-selection,
+  .checkbox-wrapper .toggleBox:after::-moz-selection,
+  .checkbox-wrapper .toggleBox:before::-moz-selection,
+  .checkbox-wrapper .toggleBox *::-moz-selection,
+  .checkbox-wrapper .toggleBox *:after::-moz-selection,
+  .checkbox-wrapper .toggleBox *:before::-moz-selection,
+  .checkbox-wrapper .toggleBox + .toggleBox-btn::-moz-selection,
+  .checkbox-wrapper .toggleBox::selection,
+  .checkbox-wrapper .toggleBox:after::selection,
+  .checkbox-wrapper .toggleBox:before::selection,
+  .checkbox-wrapper .toggleBox *::selection,
+  .checkbox-wrapper .toggleBox *:after::selection,
+  .checkbox-wrapper .toggleBox *:before::selection,
+  .checkbox-wrapper .toggleBox + .toggleBox-btn::selection {
+    background: none;
+  }
+  .checkbox-wrapper .toggleBox + .toggleBox-btn {
+    outline: 0;
+    display: block;
+    width: 50px;
+    height: 26px;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+  }
+  .checkbox-wrapper .toggleBox + .toggleBox-btn:after,
+  .checkbox-wrapper .toggleBox + .toggleBox-btn:before {
+    position: relative;
+    display: block;
+    content: "";
+    width: 50%;
+    height: 100%;
+  }
+  .checkbox-wrapper .toggleBox + .toggleBox-btn:after {
+    left: 0;
+  }
+  .checkbox-wrapper .toggleBox + .toggleBox-btn:before {
+    display: none;
+  }
+  .checkbox-wrapper .toggleBox:checked + .toggleBox-btn:after {
+    left: 50%;
+  }
+
+  .checkbox-wrapper .toggleBox-skewed + .toggleBox-btn {
+    overflow: hidden;
+    transform: skew(-10deg);
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    line-height: 26px;
+    background: #444;
+  }
+  .checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:after,
+  .checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:before {
+    transform: skew(10deg);
+    display: inline-block;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    line-height: 2em;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  }
+
+  .checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:after {
+    left: 100%;
+    content: attr(data-tg-on);
+  }
+  .checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:before {
+    left: 0;
+    content: attr(data-tg-off);
+  }
+  .checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:active {
+    background: #999;
+  }
+  .checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:active:before {
+    left: -10%;
+  }
+  .checkbox-wrapper .toggleBox-skewed:checked + .toggleBox-btn {
+    background: #3296FF;
+  }
+  .checkbox-wrapper .toggleBox-skewed:checked + .toggleBox-btn:before {
+    left: -100%;
+  }
+  .checkbox-wrapper .toggleBox-skewed:checked + .toggleBox-btn:after {
+    left: 0;
+  }
+  .checkbox-wrapper .toggleBox-skewed:checked + .toggleBox-btn:active:after {
+    left: 10%;
+  }
