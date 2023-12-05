@@ -30,7 +30,7 @@
             <p>Nach Bundesland/Stadt filtern:</p>
             <div class="centered-HBox">
               <input type="text" id="search-filter" placeholder="Bundesland/Stadt" value="Rheinland-Pfalz">
-              <button onclick="search()">Filtern</button>
+              <button onclick="search(true)">Filtern</button>
             </div>
           </div>
           <div>
@@ -110,7 +110,7 @@
         </div>
         <div class="mapDiv">
           <div id="map" style="height: calc(100vh - 200px); border-radius: 16px;"></div>
-        </div>   
+          </div>   
       </div>
 
   </div>  
@@ -160,14 +160,43 @@
 
   // search(); -> Todo: Löscht das dann nicht mehr
 
-  function search() {
-    // Alte GeoJSON entfernen
-    if (geojsonLayer) {
-      lMap.removeLayer(geojsonLayer);
-    }
-  
+  function search(areaChanged) {
+    if (areaChanged) {
+      // Alte GeoJSON entfernen
+      if (geojsonLayer != null) {
+        lMap.removeLayer(geojsonLayer);
+      }
 
-    var query = document.getElementById("search-filter").value;
+      var query = document.getElementById("search-filter").value;
+      var cityUrl = "https://nominatim.openstreetmap.org/search.php?q=" + query + "&polygon_geojson=1&format=geojson&limit=1&countrycodes=de";
+      fetch(cityUrl)
+        .then(response => response.json())
+        .then(data => {
+        var bounds = L.geoJSON(data).getBounds();  
+        lMap.fitBounds(bounds);
+        // Alle Marker die nicht in der Grenze liegen entfernen
+        markers.eachLayer(function (marker) {
+          if (!bounds.contains(marker.getLatLng())) {
+            markers.removeLayer(marker);
+          }
+        });
+
+        geojsonLayer = L.geoJSON(data, {
+        style: function(feature) {
+            return {
+                fillColor: '#3296FF',
+                fillOpacity: 0.4,
+                color: '#3296FF',
+                weight: 2
+            };
+        }
+        }).addTo(lMap); 
+
+      }).catch(error => console.error(error));	
+    }
+
+       
+    /* Ohne highligting der Städte
     var url = "https://nominatim.openstreetmap.org/search?q=" + query + "&format=json&addressdetails=1&limit=1&limit=1&countrycodes=de";
     fetch(url)
       .then(response => response.json())
@@ -175,32 +204,7 @@
         var lat = data[0].lat;
         var lon = data[0].lon;
         lMap.setView([lat, lon], 10);
-        var cityUrl = "https://nominatim.openstreetmap.org/search.php?q=" + query + "&polygon_geojson=1&format=geojson&limit=1&countrycodes=de";
-        fetch(cityUrl)
-          .then(response => response.json())
-          .then(data => {
-          var bounds = L.geoJSON(data).getBounds();  
-          lMap.fitBounds(bounds);
-          // Alle Marker die nicht in der Grenze liegen entfernen
-          markers.eachLayer(function (marker) {
-            if (!bounds.contains(marker.getLatLng())) {
-              markers.removeLayer(marker);
-            }
-          });
-
-          geojsonLayer = L.geoJSON(data, {
-          style: function(feature) {
-              return {
-                  fillColor: '#3296FF',
-                  fillOpacity: 0.4,
-                  color: '#3296FF',
-                  weight: 2
-              };
-          }
-          }).addTo(lMap);
-          
-        }).catch(error => console.error(error));		
-    }).catch(error => console.error(error));
+    }).catch(error => console.error(error)); */
   }
 
   function resetFilter() {
@@ -214,33 +218,33 @@
     document.getElementById("ctb6").checked = false;
     document.getElementById("ctb7").checked = false;
 
-    search();
+    search(true);
   }
 
   // On-Change-Listener für die Checkboxen und die Select-Box hinzufügen
   document.getElementById("ctb1").addEventListener("change", function() {
-    search();
+    search(false);
   });
   document.getElementById("ctb2").addEventListener("change", function() {
-    search();
+    search(false);
   });
   document.getElementById("ctb3").addEventListener("change", function() {
-    search();
+    search(false);
   });
   document.getElementById("ctb4").addEventListener("change", function() {
-    search();
+    search(false);
   });
   document.getElementById("ctb5").addEventListener("change", function() {
-    search();
+    search(false);
   });
   document.getElementById("ctb6").addEventListener("change", function() {
-    search();
+    search(false);
   });
   document.getElementById("ctb7").addEventListener("change", function() {
-    search();
+    search(false);
   });
   document.getElementById("year").addEventListener("change", function() {
-    search();
+    search(false);
   });
   
 </script>

@@ -80,9 +80,9 @@ body {
 }
 
 .selectioncard {
-    padding: 64px;
     width: 164px;
     height: 246px;
+    padding: 64px;
     background-color: #fff;
     border-radius: 16px;
     justify-content: center;
@@ -95,6 +95,10 @@ body {
     font-weight: 600;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: 0.3s;
+}
+
+.selectioncard a {
+    padding: 64px;
 }
 
 .selectioncard:hover {
