@@ -51,3 +51,9 @@ sudo chmod 775 /var/www/html
 sudo mv apache2.conf /etc/apache2/apache2.conf
 sudo service apache2 restart
 ```
+
+
+## Map Problems
+- Performance : Idee (Mehr filtering z.b bundesland by default in sql)
+- Memory limit in apache php is reached when calling map api --> leads to http 500, 
+Solution: set max_memory_limit in apaches php config to 256M 
