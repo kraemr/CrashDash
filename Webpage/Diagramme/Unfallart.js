@@ -7,7 +7,7 @@ var chart = new Chart(donutObject, {
     data: {
         datasets: [{
             data: [25, 40, 35],  // hier noch Beispielwerte mit echten Werten ersetzen...
-            backgroundColor: ['#2ecc71', '#3498db', '#e74c3c'],
+            backgroundColor: ['#82CAFA', '#001F3F', '#00FF00'],
             borderColor: '#fff',
             borderWidth: 2
         }],

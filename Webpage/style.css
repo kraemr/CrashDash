@@ -141,7 +141,7 @@ body {
 
 .dashboad-row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     justify-content: space-evenly;
     gap: 64px;
     align-items: center;
@@ -408,3 +408,5 @@ th {
   .checkbox-wrapper .toggleBox-skewed:checked + .toggleBox-btn:active:after {
     left: 10%;
   }
+
+
