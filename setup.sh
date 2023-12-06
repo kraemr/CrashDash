@@ -22,6 +22,16 @@ python3 setup_db.py -i land_def land land_str bundesländer.csv
 python3 setup_db.py -i type_def type type_str type.csv
 python3 setup_db.py -i category_def category category_str category.csv
 python3 setup_db.py -i kind_def kind kind_str kind.csv
+
+python3 setup_db.py -i light_condition_def light_condition light_condition_str licht.csv
+python3 setup_db.py -i bycicle_involved_def bycicle_involved bycicle_involved_str rad.csv
+python3 setup_db.py -i car_involved_def car_involved car_involved_str istpkw.csv
+python3 setup_db.py -i passenger_involved_def passenger_involved passenger_involved_str istfuss.csv
+python3 setup_db.py -i motorcycle_involved_def motorcycle_involved motorcycle_involved_str istKrad.csv
+python3 setup_db.py -i delivery_van_involved_def delivery_van_involved delivery_van_involved_str istgfkz.csv
+python3 setup_db.py -i truck_bus_or_tram_involved_def truck_bus_or_tram_involved truck_bus_or_tram_involved_str istsonstig.csv
+python3 setup_db.py -i road_surface_condition_def road_surface_condition road_surface_condition_str strzustand.csv
+
 sudo python3 setup_db.py --download # downloads and unzips the contents
 sudo python3 setup_db.py --fix      # fixes the filepaths (renames .txt to .csv ...)
 sudo python3 setup_db.py --parse    # This parses each csv and inserts it into the db TODO: add ip param and password param for argvc
