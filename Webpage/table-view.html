@@ -133,50 +133,56 @@
 
   <div class="content">
     <div class="control_row">
+      <div class="leftSided-HBox" style="gap:64px;">
+        <div>
+          <label for="Filter_Column">Filter Column:</label>
+          <select id="Filter_Column" name="selectOption">
+              <option value="land">land</option>
+              <option value="munincipality">munincipality</option>
+              <option value="year">year</option>
+              <!-- Add more options as needed -->
+          </select>
+        </div>
+  
+        <div>
+          <label for="Filter_Condition">Filter Condition:</label>
+          <select id="Filter_Condition" name="selectOption">
+              <option value="greater">greater</option>
+              <option value="leser">lesser</option>
+              <option value="equal">equal</option>
+              <option value="greater or equal">greater or equal</option>
+              <option value="lesser or equal">less or equal</option>
+              <option value="none">None</option>
+          </select>
+        </div>
     
-      <div class="page-numbers" id="pagination">
+        <div style="width: 500px;">
+          <label for="Filter_Value_Input">Enter Value:</label>
+          <input type="text" id="Filter_Value_Input" name="Filter_Value_Input" placeholder="">
+        </div>
       </div>
-    
-    <div class="pagination-buttons">
-      <button onclick="changepage('back')">Back</button>
-      <button onclick="changepage('next')">Next</button>
+      
+      <button onclick="applyFilter()">Apply Filter</button>
     </div>
-
-    <label for="Filter_Column">Filter Column:</label>
-    <select id="Filter_Column" name="selectOption">
-        <option value="land">land</option>
-        <option value="munincipality">munincipality</option>
-        <option value="year">year</option>
-        <!-- Add more options as needed -->
-    </select>
-
-    <label for="Filter_Condition">Filter Condition:</label>
-    <select id="Filter_Condition" name="selectOption">
-        <option value="greater">greater</option>
-        <option value="leser">lesser</option>
-        <option value="equal">equal</option>
-        <option value="greater or equal">greater or equal</option>
-        <option value="lesser or equal">less or equal</option>
-        <option value="none">None</option>
-    </select>
-
-    <label for="Filter_Value_Input">Enter Value:</label>
-    <input type="text" id="Filter_Value_Input" name="Filter_Value_Input" placeholder="">
-
-    <button onclick="applyFilter()">Apply Filter</button>
+    
+    <table id="table-data" border="1">
+      <thead>
+          <tr>
+              <th>region</th>
+              <th>fatality</th>
+              <th>date</th>
+          </tr>
+      </thead>
+      <tbody>
+          <!-- This will be dynamically filled by js -->
+      </tbody>
+  </table>
+  <div class="control_row">
+    <button onclick="changepage('back')">Back</button>
+    <div class="page-numbers" id="pagination"></div>
+    <button onclick="changepage('next')">Next</button>
   </div>
-  <table id="table-data" border="1">
-    <thead>
-        <tr>
-            <th>region</th>
-            <th>fatality</th>
-            <th>date</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- This will be dynamically filled by js -->
-    </tbody>
-</table>
+  </div>
 </div>
 </body>
 </html>
