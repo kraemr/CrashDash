@@ -322,13 +322,6 @@ th {
   .checkbox-wrapper .toggleBox + .toggleBox-btn {
     box-sizing: border-box;
   }
-  .checkbox-wrapper .toggleBox::-moz-selection,
-  .checkbox-wrapper .toggleBox:after::-moz-selection,
-  .checkbox-wrapper .toggleBox:before::-moz-selection,
-  .checkbox-wrapper .toggleBox *::-moz-selection,
-  .checkbox-wrapper .toggleBox *:after::-moz-selection,
-  .checkbox-wrapper .toggleBox *:before::-moz-selection,
-  .checkbox-wrapper .toggleBox + .toggleBox-btn::-moz-selection,
   .checkbox-wrapper .toggleBox::selection,
   .checkbox-wrapper .toggleBox:after::selection,
   .checkbox-wrapper .toggleBox:before::selection,
@@ -345,10 +338,7 @@ th {
     height: 26px;
     position: relative;
     cursor: pointer;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    user-select: none;
   }
   .checkbox-wrapper .toggleBox + .toggleBox-btn:after,
   .checkbox-wrapper .toggleBox + .toggleBox-btn:before {
