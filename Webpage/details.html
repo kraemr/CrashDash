@@ -78,33 +78,33 @@
     </div>
 
 <script>
-    const columnList = [
-        'Id',
-        'uident', // UIDENTSTLAE
-        'land', // ULAND
-        'region', // UREGBEZ
-        'district', // UKREIS
-        'munincipality', // UGEMEINDE
-        'year',
-        'day',
-        'hour',
-        'month',
-        'category', // UKATEGORIE
-        'kind', // UART
-        'type', // UTYP1
-        'light_condition', // ULICHTVERH
-        'bycicle_involved',
-        'car_involved',
-        'passenger_involved',
-        'motorcycle_involved',
-        'delivery_van_involved',
-        'truck_bus_or_tram_involved',
-        'road_surface_condition',
-        'coordinate_UTM_x', // LINREFX
-        'coordinate_UTM_y', // LINREFY
-        'longitude', // x
-        'latitude', // y
-    ];
+    const columnMap = {
+        'Id':'Id',
+        'uident':"Uident", // UIDENTSTLAE
+        'land_str':'Bundesland', // ULAND
+        'region':'Bezirk', // UREGBEZ
+        'district':"Kreis", // UKREIS
+        'munincipality':"Gemeinde", // UGEMEINDE
+        'year':"Jahr",
+        'day_str':"Wochentag",
+        'hour':"Stunde",
+        'month':"Monat",
+        'category_str':"Kategorie", // UKATEGORIE
+        'kind_str':"UnfallArt", // UART
+        'type_str':"UnfallTyp", // UTYP1
+        'light_condition_str':"Lichtverhältnis", // ULICHTVERH
+        'bycicle_involved_str':"Fahrrad involviert",
+        'car_involved_str':"Pkw involviert",
+        'passenger_involved_str':"Fußgänger involviert",
+        'motorcycle_involved_str':"Motorrad involviert",
+        'delivery_van_involved_str':"Lieferwagen involviert",
+        'truck_bus_or_tram_involved_str':"sonstige Fahrzeuge involviert",
+        'road_surface_condition_str':"Straßen Oberfläche",
+        'coordinate_UTM_x':"Koordinate UTM X", // LINREFX
+        'coordinate_UTM_y':"Koordinate UTM Y", // LINREFY
+        'longitude':"Längengrad", // x
+        'latitude':"Breitengrad", // y
+    };
     
     function loadpage(){ //loads currentPage
         var xhr = new XMLHttpRequest();
@@ -115,9 +115,14 @@
           if (xhr.readyState === 4 && xhr.status === 200) {
             var data = JSON.parse(xhr.responseText);
             for (const key in data) {
+                console.log(key);
                 var detail_div = document.getElementById(key);
                 if(detail_div != null){
-                    detail_div.textContent = key + ": " + data[key];
+                    let paragraph = document.createElement("p");
+                    const textNode = document.createTextNode(columnMap[key] + ": " + data[key]);
+                    //detail_div.textContent = columnMap[key] + ": " + data[key];
+                    paragraph.appendChild(textNode);
+                    detail_div.appendChild(paragraph);
                 }
             }
           } // if xhr ready
