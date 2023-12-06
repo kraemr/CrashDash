@@ -31,6 +31,7 @@ python3 setup_db.py -i motorcycle_involved_def motorcycle_involved motorcycle_in
 python3 setup_db.py -i delivery_van_involved_def delivery_van_involved delivery_van_involved_str istgfkz.csv
 python3 setup_db.py -i truck_bus_or_tram_involved_def truck_bus_or_tram_involved truck_bus_or_tram_involved_str istsonstig.csv
 python3 setup_db.py -i road_surface_condition_def road_surface_condition road_surface_condition_str strzustand.csv
+python3 setup_db.py -i day_def day day_str wochentag.csv
 
 sudo python3 setup_db.py --download # downloads and unzips the contents
 sudo python3 setup_db.py --fix      # fixes the filepaths (renames .txt to .csv ...)

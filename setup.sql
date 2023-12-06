@@ -120,6 +120,12 @@ CREATE TABLE road_surface_condition_def (
     CONSTRAINT PK_road_surface_condition_def PRIMARY KEY (road_surface_condition)
 );
 
+CREATE TABLE day_def (
+    day TINYINT,
+    day_str TINYTEXT,
+    CONSTRAINT PK_day_def PRIMARY KEY (day)
+);
+
 CREATE INDEX IX_land_def ON land_def(land);
 CREATE INDEX IX_kind_def ON kind_def(kind);
 CREATE INDEX IX_cat_def  ON category_def(category);  
