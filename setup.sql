@@ -29,16 +29,12 @@ Create Table accident_data(
     latitude FLOAT, # y
     CONSTRAINT PK_Accident_Data PRIMARY KEY (Id)
 );
-
 CREATE INDEX IX_accident_year ON accident_data(year);
 CREATE INDEX IX_accident_month ON accident_data(month);
 CREATE INDEX IX_accident_region ON accident_data(region);
-
 CREATE INDEX IX_accident_land ON accident_data(land);
 CREATE INDEX IX_accident_kind ON accident_data(kind);
 CREATE INDEX IX_accident_category ON accident_data(category);
-
-
 Create Table land_def(
     land SMALLINT,
     land_str TINYTEXT,
@@ -56,7 +52,6 @@ Create Table kind_def(
     kind_str TINYTEXT,
     CONSTRAINT PK_kind_def PRIMARY KEY (kind)
 );
-
 
 Create Table category_def(
     category TINYINT, # Foreign Key 
@@ -76,7 +71,6 @@ Create Table district_def(
     district_str TINYTEXT,
     CONSTRAINT PK_district_def PRIMARY KEY (district)
 );
-
 CREATE INDEX IX_land_def ON land_def(land);
 CREATE INDEX IX_kind_def ON kind_def(kind);
 CREATE INDEX IX_cat_def  ON category_def(category);  

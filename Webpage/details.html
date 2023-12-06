@@ -28,7 +28,7 @@
         </div> 
         <div id="uident">
         </div> <!-- UIDENTSTLAE -->
-        <div id="land">
+        <div id="land_str">
         </div> <!-- ULAND -->
         <div id="region">
         </div> <!-- UREGBEZ -->
@@ -44,11 +44,11 @@
         </div> 
         <div id="month">
         </div> 
-        <div id="category">
+        <div id="category_str">
         </div> <!-- UKATEGORIE -->
-        <div id="kind">
+        <div id="kind_str">
         </div> <!-- UART -->
-        <div id="type">
+        <div id="type_str">
         </div> <!-- UTYP1 -->
         <div id="light_condition">
         </div> <!-- ULICHTVERH -->
@@ -106,15 +106,6 @@
         'latitude', // y
     ];
     
-    
-    
-    
-    function loadDetails(){
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get('id');
-    
-    }
-    
     function loadpage(){ //loads currentPage
         var xhr = new XMLHttpRequest();
         const urlParams = new URLSearchParams(window.location.search);
@@ -125,8 +116,9 @@
             var data = JSON.parse(xhr.responseText);
             for (const key in data) {
                 var detail_div = document.getElementById(key);
-                console.log(key);
-                detail_div.textContent = key + ": " + data[key];
+                if(detail_div != null){
+                    detail_div.textContent = key + ": " + data[key];
+                }
             }
           } // if xhr ready
         };// xhr call back

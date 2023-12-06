@@ -1,5 +1,3 @@
-
-
 <?php
 // returns category,kind,type,longitude,latitude and ID
 // This gives a page of accident data

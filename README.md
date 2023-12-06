@@ -44,3 +44,7 @@ get-stats.php?
 
 ## Security / Apache config
 webroot should be Webpage and anything else should be inaccessible to the user, also only execute php in php folder.
+
+
+## apache2 Config
+replace /etc/apache2/apache2.conf
