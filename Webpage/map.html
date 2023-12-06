@@ -184,9 +184,8 @@
 
   // Globale Variable für den GeoJSON-Layer
   var geojsonLayer;
-
+  changeYear();
   search(true);
-
   function search(areaChanged) {
     // Alle Marker entfernen -> todo: könnte man optimieren
     markers.clearLayers();
@@ -199,18 +198,7 @@
         -> HIER DIE JSON PER API LADEN     
         var year = document.getElementById("year").value;
     */
-
-    fetch('output.json')  
-    .then(response => response.json())
-    .then(data => {
-      // Merker mit Clustern hinzufügen
-
-      for (var i = 0; i < data.length; ++i) {
-        var m = L.marker([data[i].lat, data[i].lng]);
-        markers.addLayer(m);
-      }
-    }).catch(error => console.error(error));
-    
+  
     if (areaChanged) {
       // Alte GeoJSON entfernen
       if (geojsonLayer != null) {
@@ -259,6 +247,25 @@
     search(true);
   }
 
+  function changeYear(){
+    var year = document.getElementById("year").value;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "../php/map-api.php?year="+year, true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var data = JSON.parse(xhr.responseText);
+
+        data.forEach(element => {
+          var m = L.marker([element.latitude, element.longitude]);
+          markers.addLayer(m);
+        }); //foreach 
+      } // if xhr ready
+    };// xhr call back
+    xhr.send();
+
+  }
+
+
   // On-Change-Listener für die Checkboxen und die Select-Box hinzufügen
   document.getElementById("ctb1").addEventListener("change", function() {
     search(false);
@@ -282,7 +289,7 @@
     search(false);
   });
   document.getElementById("year").addEventListener("change", function() {
-    search(false);
+    changeYear();
   });
   
 </script>
