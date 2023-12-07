@@ -28,6 +28,7 @@ body {
     display: flex;
     align-items: center;
     padding: 0 48px;
+    z-index: 100;
 }
 
 .navbar ul {
@@ -187,18 +188,27 @@ body {
     flex-direction: column;
     align-items: left;
     padding: 24px;
-    width: 320px;
+    width: 360px;
     background-color: #fff;
     border-radius: 16px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    gap: 16px;
+    gap: 11px;
 }
 
-.map-menu P {
+.map-menu p {
     font-size: 15px;
     font-family: 'Outfit', sans-serif;
     font-weight: 500;
     margin-bottom: 8px;
+    margin-top: -4px;
+}
+
+.map-menu h3 {
+    font-size: 17px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    margin-bottom: 6px;
+    margin-top: 8px;
 }
 
 .mapDiv {
@@ -207,7 +217,7 @@ body {
     background-color: #fff;
     border-radius: 16px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: calc(100vh - 200px);
+    height: calc(100vh - 175px);
 }
 
 input {
@@ -312,26 +322,29 @@ th {
 
 .checkbox-wrapper .toggleBox {
     display: none;
-  }
-  .checkbox-wrapper .toggleBox,
-  .checkbox-wrapper .toggleBox:after,
-  .checkbox-wrapper .toggleBox:before,
-  .checkbox-wrapper .toggleBox *,
-  .checkbox-wrapper .toggleBox *:after,
-  .checkbox-wrapper .toggleBox *:before,
-  .checkbox-wrapper .toggleBox + .toggleBox-btn {
+}
+
+.checkbox-wrapper .toggleBox,
+.checkbox-wrapper .toggleBox:after,
+.checkbox-wrapper .toggleBox:before,
+.checkbox-wrapper .toggleBox *,
+.checkbox-wrapper .toggleBox *:after,
+.checkbox-wrapper .toggleBox *:before,
+.checkbox-wrapper .toggleBox + .toggleBox-btn {
     box-sizing: border-box;
-  }
-  .checkbox-wrapper .toggleBox::selection,
-  .checkbox-wrapper .toggleBox:after::selection,
-  .checkbox-wrapper .toggleBox:before::selection,
-  .checkbox-wrapper .toggleBox *::selection,
-  .checkbox-wrapper .toggleBox *:after::selection,
-  .checkbox-wrapper .toggleBox *:before::selection,
-  .checkbox-wrapper .toggleBox + .toggleBox-btn::selection {
+}
+
+.checkbox-wrapper .toggleBox::selection,
+.checkbox-wrapper .toggleBox:after::selection,
+.checkbox-wrapper .toggleBox:before::selection,
+.checkbox-wrapper .toggleBox *::selection,
+.checkbox-wrapper .toggleBox *:after::selection,
+.checkbox-wrapper .toggleBox *:before::selection,
+.checkbox-wrapper .toggleBox + .toggleBox-btn::selection {
     background: none;
-  }
-  .checkbox-wrapper .toggleBox + .toggleBox-btn {
+}
+
+.checkbox-wrapper .toggleBox + .toggleBox-btn {
     outline: 0;
     display: block;
     width: 50px;
@@ -339,26 +352,30 @@ th {
     position: relative;
     cursor: pointer;
     user-select: none;
-  }
-  .checkbox-wrapper .toggleBox + .toggleBox-btn:after,
-  .checkbox-wrapper .toggleBox + .toggleBox-btn:before {
+}
+
+.checkbox-wrapper .toggleBox + .toggleBox-btn:after,
+.checkbox-wrapper .toggleBox + .toggleBox-btn:before {
     position: relative;
     display: block;
     content: "";
     width: 50%;
     height: 100%;
-  }
-  .checkbox-wrapper .toggleBox + .toggleBox-btn:after {
-    left: 0;
-  }
-  .checkbox-wrapper .toggleBox + .toggleBox-btn:before {
-    display: none;
-  }
-  .checkbox-wrapper .toggleBox:checked + .toggleBox-btn:after {
-    left: 50%;
-  }
+}
 
-  .checkbox-wrapper .toggleBox-skewed + .toggleBox-btn {
+.checkbox-wrapper .toggleBox + .toggleBox-btn:after {
+    left: 0;
+}
+
+.checkbox-wrapper .toggleBox + .toggleBox-btn:before {
+    display: none;
+}
+
+.checkbox-wrapper .toggleBox:checked + .toggleBox-btn:after {
+    left: 50%;
+}
+
+.checkbox-wrapper .toggleBox-skewed + .toggleBox-btn {
     overflow: hidden;
     transform: skew(-10deg);
     -webkit-backface-visibility: hidden;
@@ -367,9 +384,9 @@ th {
     font-size: 14px;
     line-height: 26px;
     background: #444;
-  }
-  .checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:after,
-  .checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:before {
+}
+.checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:after,
+.checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:before {
     transform: skew(10deg);
     display: inline-block;
     transition: all 0.2s ease;
@@ -380,45 +397,49 @@ th {
     font-weight: bold;
     color: #fff;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-  }
+}
 
-  .checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:after {
+.checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:after {
     left: 100%;
     content: attr(data-tg-on);
-  }
-  .checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:before {
+}
+.checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:before {
     left: 0;
     content: attr(data-tg-off);
-  }
-  .checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:active {
+}
+.checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:active {
     background: #999;
-  }
-  .checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:active:before {
+}
+.checkbox-wrapper .toggleBox-skewed + .toggleBox-btn:active:before {
     left: -10%;
-  }
-  .checkbox-wrapper .toggleBox-skewed:checked + .toggleBox-btn {
+}
+.checkbox-wrapper .toggleBox-skewed:checked + .toggleBox-btn {
     background: #3296FF;
-  }
-  .checkbox-wrapper .toggleBox-skewed:checked + .toggleBox-btn:before {
+}
+.checkbox-wrapper .toggleBox-skewed:checked + .toggleBox-btn:before {
     left: -100%;
-  }
-  .checkbox-wrapper .toggleBox-skewed:checked + .toggleBox-btn:after {
+}
+.checkbox-wrapper .toggleBox-skewed:checked + .toggleBox-btn:after {
     left: 0;
-  }
-  .checkbox-wrapper .toggleBox-skewed:checked + .toggleBox-btn:active:after {
+}
+.checkbox-wrapper .toggleBox-skewed:checked + .toggleBox-btn:active:after {
     left: 10%;
-  }
+}
 
-  .page-numbers {
+.checkbox-wrapper {
+    margin-left: auto;
+}
+
+.page-numbers {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 16px;
     margin-top: 32px;
     margin-bottom: 32px;
-  }
+}
 
-  .page-numbers span {
+.page-numbers span {
     border-radius: 8px;
     min-width: 20px;
     min-height: 20px;
@@ -427,12 +448,20 @@ th {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: 0.3s;
-  }
+}
 
-  .control_row {
+.control_row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 32px;
     margin: 32px 0px 32px 0px;
-  }
+}
+
+.warning-btn {
+    background-color: #fc5c65;
+}
+
+.warning-btn:hover {
+    background-color: #fb2a36;
+}
