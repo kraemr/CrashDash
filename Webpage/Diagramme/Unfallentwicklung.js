@@ -7,7 +7,7 @@ var data = {
     ],
     datasets: [
         {
-            label: 'Gesamt',
+            label: 'Fußgänger',
             borderColor: '#9b59b6',
             backgroundColor: 'rgba(0, 0, 0, 0)', // Transparente Hintergrundfarbe entfernt
             data: [50, 75, 60, 45, 80, 65, 70, 55, 40, 60, 75, 90],

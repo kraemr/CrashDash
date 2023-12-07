@@ -1,17 +1,23 @@
 // Definitionen zuerst
 var data = {
-    labels: ['Regen', 'Schnee', 'Trocken', 'Glatteis'],
+    labels: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag' ],
     datasets: [{
-      label: 'Unfallkorrelation zu Witterungsverhältnissen/Straßenkonditionen',
-      data: [25, 35, 8, 45], // Hier sollten die tatsächlichen Daten aus DB stehen
+      label: 'Unfallkorrelation nach Wochentag',
+      data: [25, 35, 8, 45, 35, 8, 45], // Hier sollten die tatsächlichen Daten aus DB stehen
       backgroundColor: [
         'rgba(75, 192, 192, 1.0)',
+        'rgba(255, 99, 132, 1.0)',
+        'rgba(255, 206, 86, 1.0)',
+        'rgba(54, 162, 235, 1.0)',
         'rgba(255, 99, 132, 1.0)',
         'rgba(255, 206, 86, 1.0)',
         'rgba(54, 162, 235, 1.0)'
       ],
       borderColor: [
         'rgba(75, 192, 192, 1)',
+        'rgba(255, 99, 132, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(54, 162, 235, 1)',
         'rgba(255, 99, 132, 1)',
         'rgba(255, 206, 86, 1)',
         'rgba(54, 162, 235, 1)'
@@ -37,7 +43,7 @@ var data = {
   };
   
   // Diagramm erstellen
-  var ctx = document.getElementById('WetterChartDiagramm').getContext('2d');
+  var ctx = document.getElementById('WochentagChartDiagramm').getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: data,

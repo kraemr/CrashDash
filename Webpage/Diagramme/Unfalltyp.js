@@ -6,12 +6,13 @@ var chart = new Chart(pieObject, {
     type: 'pie',
     data: {
         datasets: [{
-            data: [25, 40, 35],  // hier noch Beispielwerte mit echten Werten ersetzen...
-            backgroundColor: ['#8B008B', '#40E0D0' , '#7FFF00'],
+            data: [25, 40, 35, 21, 42, 32, 54],  // hier noch Beispielwerte mit echten Werten ersetzen...
+            backgroundColor: ['#82CAFA', '#001F3F', '#00FF00', '#0F1FFF', '#F11F00', '#82CAFB', '#001FFF'],
             borderColor: '#fff',
             borderWidth: 2
         }],
-        labels: ["U_Typ1", "U_Typ2", "U_Typ3"],
+        labels: ["fahren", "abbiegen", "einbiegen/kreuzen", "überschreiten", "durch ruhenden Verkehr", "im Längsverkehr", "sonstiges"],
+
     }
 });
 

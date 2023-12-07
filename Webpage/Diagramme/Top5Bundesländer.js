@@ -1,8 +1,8 @@
 
-        var ctx = document.getElementById('StädteDiagramm').getContext('2d');
+        var ctx = document.getElementById('BundeslandDiagramm').getContext('2d');
 
         // Hier rein die Unfalldaten aus der Datenbank...
-        var accidentData = [120, 95, 80, 75, 70, 65, 60, 55, 50, 45];
+        var accidentData = [120, 95, 80, 75, 69];
 
         // Farbskala wird generiert die von Hellrot bis Dunkelrot basierend auf den Unfalldaten verändert
         var colors = accidentData.map(function (value) {
@@ -11,9 +11,9 @@
        
             return 'rgba(255, ' + redIntensity + ', 0)';
         });
-//HIERHER Stadtnamen aus DB ziehen
+//HIERHER Bundesland aus DB ziehen
         var data = {
-            labels: ['Stadt A', 'Stadt B', 'Stadt C', 'Stadt D', 'Stadt E', 'Stadt F', 'Stadt G', 'Stadt H', 'Stadt I', 'Stadt J'],
+            labels: ['Bundesland A', 'Bundesland B', 'Bundesland C', 'Bundeslamd D', 'Bundesland E'],
             datasets: [
                 {
                     backgroundColor: colors,
