@@ -53,7 +53,8 @@
 
         <div class="map-menu">
           <h3>Nach Bundesland/Stadt filtern:</h3>
-           <div>
+           
+          <div>
             <p>Bundesland auswählen:</p>
             <select id="region">
               <option value="Baden-Württemberg">Baden-Württemberg</option>
@@ -74,10 +75,31 @@
               <option value="Thüringen">Thüringen</option>            
             </select> 
           </div>
+
+
+          <div>
+            <p>Unfall-Ausgang:</p>
+            <select id="type">
+              <option value="1">Zusammenstoß mit anfahrendem/anhaltendem/ruhendem Fahrzeug</option>
+              <option value="2">Zusammenstoß mit vorausfahrendem / wartendem Fahrzeug</option>
+              <option value="3">Zusammenstoß mit seitlich in gleicher Richtung fahrendem Fahrzeug</option>
+              <option value="4">Zusammenstoß mit entgegenkommendem Fahrzeug</option>
+              <option value="5">Zusammenstoß mit einbiegendem / kreuzendem Fahrzeug</option>
+              <option value="6">Zusammenstoß zwischen Fahrzeug und Fußgänger</option>
+              <option value="7">Aufprall auf Fahrbahnhindernis</option>
+              <option value="8">Abkommen von Fahrbahn nach rechts</option>
+              <option value="9">Abkommen von Fahrbahn nach links</option>
+              <option value="0">Unfall anderer Art</option>
+            </select> 
+          </div>
+
+
+            
+
           <div>
             <p>oder erweiterten Filter benutzen</p>
             <div class="centered-HBox">
-              <input type="text" id="search-filter" placeholder="Bundesland/Stadt" value="Mainz">
+              <input type="text" id="search-filter" placeholder="Stadt/Bezirk/Straße" value="Mainz">
             </div>
           </div>
 
@@ -258,8 +280,10 @@
   }}
 
   function resetFilter() {
-    document.getElementById("search-filter").value = "Deutschland";
+    document.getElementById("region").value = "Rheinland-Pfalz";
+    document.getElementById("search-filter").value = "Mainz";
     document.getElementById("year").value = "2022";
+
     document.getElementById("ctb1").checked = false;
     document.getElementById("ctb2").checked = false;
     document.getElementById("ctb3").checked = false;
@@ -314,6 +338,10 @@
   });
   document.getElementById("year").addEventListener("change", function() {
     changeYear();
+  });
+
+  document.getElementById("region").addEventListener("change", function() {
+    search(true);
   });
   
 </script>

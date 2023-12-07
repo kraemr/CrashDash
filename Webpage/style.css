@@ -195,6 +195,12 @@ body {
     gap: 11px;
 }
 
+.mp-logo {
+    max-height: 70px; 
+    margin-bottom: -22px; 
+    margin-left: 24px;
+}
+
 .map-menu p {
     font-size: 15px;
     font-family: 'Outfit', sans-serif;
