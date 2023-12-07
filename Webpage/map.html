@@ -57,29 +57,30 @@
           <div>
             <p>Bundesland auswählen:</p>
             <select id="region">
-              <option value="Baden-Württemberg">Baden-Württemberg</option>
-              <option value="Bayern">Bayern</option>
-              <option value="Berlin">Berlin</option>
-              <option value="Brandenburg">Brandenburg</option>
-              <option value="Bremen">Bremen</option>
-              <option value="Hamburg">Hamburg</option>
-              <option value="Hessen">Hessen</option>
-              <option value="Mecklenburg-Vorpommern">Mecklenburg-Vorpommern</option>
-              <option value="Niedersachsen">Niedersachsen</option>
-              <option value="Nordrhein-Westfalen">Nordrhein-Westfalen</option>
-              <option value="Rheinland-Pfalz">Rheinland-Pfalz</option>
-              <option value="Saarland">Saarland</option>
-              <option value="Sachsen">Sachsen</option>
-              <option value="Sachsen-Anhalt">Sachsen-Anhalt</option>
-              <option value="Schleswig-Holstein">Schleswig-Holstein</option>
-              <option value="Thüringen">Thüringen</option>            
+              <option value="1">Schleswig-Holstein (SH)</option>
+              <option value="2">Hamburg (HH)</option>
+              <option value="3">Niedersachsen (NI)</option>
+              <option value="4">Bremen (HB)</option>
+              <option value="5">Nordrhein-Westfalen (NW)</option>
+              <option value="6">Hessen (HE)</option>
+              <option value="7">Rheinland-Pfalz (RP)</option>
+              <option value="8">Baden-Württemberg (BW)</option>
+              <option value="9">Bayern (BY)</option>
+              <option value="10">Saarland (SL)</option>
+              <option value="11">Berlin (BE)</option>
+              <option value="12">Brandenburg (BB)</option>
+              <option value="13">Mecklenburg-Vorpommern (MV)</option>
+              <option value="14">Sachsen (SN)</option>
+              <option value="15">Sachsen-Anhalt (ST)</option>
+              <option value="16">Thüringen (TH)</option>
             </select> 
+            
           </div>
 
 
           <div>
             <p>Unfall-Ausgang:</p>
-            <select id="type">
+            <select id="kind">
               <option value="1">Zusammenstoß mit anfahrendem/anhaltendem/ruhendem Fahrzeug</option>
               <option value="2">Zusammenstoß mit vorausfahrendem / wartendem Fahrzeug</option>
               <option value="3">Zusammenstoß mit seitlich in gleicher Richtung fahrendem Fahrzeug</option>
@@ -90,6 +91,8 @@
               <option value="8">Abkommen von Fahrbahn nach rechts</option>
               <option value="9">Abkommen von Fahrbahn nach links</option>
               <option value="0">Unfall anderer Art</option>
+              <option value="-1">Kein Filter</option>
+
             </select> 
           </div>
 
@@ -230,7 +233,7 @@
 
   // Globale Variable für den GeoJSON-Layer
   var geojsonLayer;
-  changeYear();
+  resetFilter();
   search(true);
   function search(areaChanged) {
     // Alle Marker entfernen -> todo: könnte man optimieren
@@ -239,11 +242,22 @@
 
     // Marker aus output.json laden
     var jsonMarkers = [];
-
-    /* 
-        -> HIER DIE JSON PER API LADEN     
-        var year = document.getElementById("year").value;
-    */
+    let year = document.getElementById("year").value;
+    let land = document.getElementById("region").value;// bundesland
+    let kind = document.getElementById("kind").value;// bundesland
+    console.log("bundesland: " + document.getElementById("region").value);
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "../php/map-api.php?year="+year+"&land="+land+"&kind="+kind, true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        let data = JSON.parse(xhr.responseText);
+        data.forEach(element => {
+          var m = L.marker([element.latitude, element.longitude]);
+          markers.addLayer(m);
+        }); //foreach 
+      } // if xhr ready
+    };// xhr call back
+    xhr.send();
   
     if (areaChanged) {
       // Alte GeoJSON entfernen
@@ -279,30 +293,15 @@
       }).catch(error => console.error(error));
   }}
 
-  function resetFilter() {
-    document.getElementById("region").value = "Rheinland-Pfalz";
-    document.getElementById("search-filter").value = "Mainz";
-    document.getElementById("year").value = "2022";
-
-    document.getElementById("ctb1").checked = false;
-    document.getElementById("ctb2").checked = false;
-    document.getElementById("ctb3").checked = false;
-    document.getElementById("ctb4").checked = false;
-    document.getElementById("ctb5").checked = false;
-    document.getElementById("ctb6").checked = false;
-    document.getElementById("ctb7").checked = false;
-
-    search(true);
-  }
-
   function changeYear(){
     var year = document.getElementById("year").value;
+    var land = document.getElementById("region").value;// bundesland
+    var kind = document.getElementById("kind").value;
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "../php/map-api.php?year="+year, true);
+    xhr.open("GET", "../php/map-api.php?year="+year+"&land="+land, true);
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
         var data = JSON.parse(xhr.responseText);
-
         data.forEach(element => {
           var m = L.marker([element.latitude, element.longitude]);
           markers.addLayer(m);
@@ -310,9 +309,25 @@
       } // if xhr ready
     };// xhr call back
     xhr.send();
-
+  
   }
 
+  function resetFilter() {
+    document.getElementById("region").value = 7;
+    document.getElementById("search-filter").value = "Mainz";
+    document.getElementById("year").value = "2022";
+    document.getElementById("kind").value = "";
+    document.getElementById("ctb1").checked = false;
+    document.getElementById("ctb2").checked = false;
+    document.getElementById("ctb3").checked = false;
+    document.getElementById("ctb4").checked = false;
+    document.getElementById("ctb5").checked = false;
+    document.getElementById("ctb6").checked = false;
+    document.getElementById("ctb7").checked = false;
+    search(true);
+  }
+
+  /*
 
   // On-Change-Listener für die Checkboxen und die Select-Box hinzufügen
   document.getElementById("ctb1").addEventListener("change", function() {
@@ -343,6 +358,7 @@
   document.getElementById("region").addEventListener("change", function() {
     search(true);
   });
+  */
   
 </script>
 </html>

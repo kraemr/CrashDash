@@ -99,10 +99,7 @@
       xhr.open('GET', "../php/get-pages.php?page="+currentPage, true);
     }
     else{
-      xhr.open(
-        'GET', "../php/get-pages.php?page="+currentPage+"&col="+filterColumn+"&cond="+filterCond+"&val="+filterValue, 
-        true
-      );
+      xhr.open('GET', "../php/get-pages.php?page="+currentPage+"&col="+filterColumn+"&cond="+filterCond+"&val="+filterValue, true);
     }
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
@@ -219,9 +216,6 @@
               <th>Unfall-Typ</th>
               <th>Lichtverhältnis</th>
               <th>Details</th>
-
-
-
           </tr>
       </thead>
       <tbody>
