@@ -52,14 +52,9 @@ $page = $page - 1; # page 0 is actually
 $perpage = 100;
 $offset = $page * 100;
 
-$Joins =  
-"INNER JOIN land_def ON land_def.land = accident_data.land".
-" INNER JOIN kind_def ON kind_def.kind = accident_data.kind" .
-" INNER JOIN category_def ON category_def.category = accident_data.category".
-" INNER JOIN type_def ON type_def.type = accident_data.type";
-
+require('util.php');
 if($filter_col == "None" || $filter_cond == "None" || $filter_val == "None"){
-    $sql = "Select * from accident_data $Joins LIMIT 100 OFFSET ?";
+    $sql = "Select * from accident_data $JOINS LIMIT 100 OFFSET ?";
     try{
         $query = $conn->prepare($sql);
         $query->bindValue(1,$offset,PDO::PARAM_INT);
@@ -74,7 +69,7 @@ if($filter_col == "None" || $filter_cond == "None" || $filter_val == "None"){
     }
 }
 else{
-    $sql = "Select * from accident_data $Joins where $filter_col $filter_cond ? LIMIT 100 OFFSET ?";
+    $sql = "Select * from accident_data $JOINS where $filter_col $filter_cond ? LIMIT 100 OFFSET ?";
     try{
         $query = $conn->prepare($sql);
         $query->bindValue(1,$filter_val);

@@ -25,15 +25,47 @@
       loadpage();
     }
 
-    function addRow(region,fatal,date,id) { // need to add the other column values here, maybe pass it in an object or map
+    function addRow(element) {
       let tableBody = document.querySelector('#table-data tbody');
       let newRow = tableBody.insertRow();
-      let cell1 = newRow.insertCell(0);
-      let cell2 = newRow.insertCell(1);
-      let cell3 = newRow.insertCell(2);
-      cell1.innerHTML = region;
-      cell2.innerHTML = fatal;
-      cell3.innerHTML = date;
+      
+      let cell = newRow.insertCell(0);
+      cell.innerHTML = element["land_str"];
+      let cell1 = newRow.insertCell(1);
+      cell1.innerHTML = element["hour"];
+      let cell2 = newRow.insertCell(2);
+      cell2.innerHTML = element["day_str"];
+      let cell3 = newRow.insertCell(3);
+      cell3.innerHTML = element["month"];
+      let cell4 = newRow.insertCell(4);
+      cell4.innerHTML = element["year"];
+      let cell5 = newRow.insertCell(5);
+      cell5.innerHTML = element["category_str"];
+      let cell6 = newRow.insertCell(6);
+      cell6.innerHTML = element["kind_str"];
+      let cell7 = newRow.insertCell(7);
+      cell7.innerHTML = element["type_str"];
+      let cell8 = newRow.insertCell(8);
+      cell8.innerHTML = element["light_condition_str"];
+      let cell9 = newRow.insertCell(9)
+      let link = document.createElement("a");
+      link.href = "deails.html?id=" + element["Id"];
+      link.text = "More Details";
+      cell9.appendChild(link);
+      /*
+    category TINYINT, # UKATEGORIE
+    kind TINYINT, # UART
+    type TINYINT, # UTYP1
+    light_condition TINYINT, # ULICHTVERH
+    bycicle_involved BOOLEAN,
+    car_involved BOOLEAN,
+    passenger_involved BOOLEAN,
+    motorcycle_involved BOOLEAN,
+    delivery_van_involved BOOLEAN,
+    truck_bus_or_tram_involved BOOLEAN,
+    road_surface_condition TINYINT,
+    */
+      
     }
 
   function removeAllRows() { // resets the table
@@ -76,7 +108,7 @@
       if (xhr.readyState === 4 && xhr.status === 200) {
         var data = JSON.parse(xhr.responseText);
         data.forEach(element => {
-          addRow(element["land"],element["type"],element["year"]);
+          addRow(element);
         }); //foreach 
       } // if xhr ready
     };// xhr call back
@@ -107,7 +139,7 @@
     if(action === "next"){ 
       currentPage++;
     }
-    else if(action === "prev"){
+    else if(action === "back"){
       currentPage--;
     }
     loadpage();
@@ -137,9 +169,15 @@
         <div>
           <label for="Filter_Column">Filter Column:</label>
           <select id="Filter_Column" name="selectOption">
-              <option value="land">land</option>
-              <option value="munincipality">munincipality</option>
-              <option value="year">year</option>
+              <option value="land">Bundesland</option>
+              <option value="hour">Stunde</option>
+              <option value="day">Wochentag</option>
+              <option value="month">Monat</option>
+              <option value="year">Jahr</option>
+              <option value="category">Kategorie</option>
+              <option value="kind">Unfall-Art</option>
+              <option value="type">Unfall-Typ</option>
+              <option value="light_condition">Lichtverhältnis</option>
               <!-- Add more options as needed -->
           </select>
         </div>
@@ -168,9 +206,19 @@
     <table id="table-data" border="1">
       <thead>
           <tr>
-              <th>region</th>
-              <th>fatality</th>
-              <th>date</th>
+              <th>Bundesland</th>
+              <th>Stunde</th>
+              <th>Wochentag</th>
+              <th>Monat</th>
+              <th>Jahr</th>
+              <th>Kategorie</th>
+              <th>Unfall-Art</th>
+              <th>Unfall-Typ</th>
+              <th>Lichtverhältnis</th>
+              <th>Details</th>
+
+
+
           </tr>
       </thead>
       <tbody>
