@@ -49,7 +49,7 @@
       cell8.innerHTML = element["light_condition_str"];
       let cell9 = newRow.insertCell(9)
       let link = document.createElement("a");
-      link.href = "deails.html?id=" + element["Id"];
+      link.href = "details.html?id=" + element["Id"];
       link.text = "More Details";
       cell9.appendChild(link);
       /*
@@ -141,6 +141,9 @@
     }
     else if(action === "back"){
       currentPage--;
+      if(currentPage < 1){
+        currentPage = 1;
+      }
     }
     loadpage();
   }
