@@ -1,5 +1,3 @@
-
-
 var pieObject = document.getElementById('UnfallAusgangDiagramm');
 
 var chart = new Chart(pieObject, {

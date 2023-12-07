@@ -4,75 +4,101 @@
     <title>Dashboard</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <style>
+        .dashboad-card-upper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px; /* Passen Sie die Höhe nach Bedarf an */
+        }
+    </style>
 </head>
 <body>
-  <div class="navbar">
-    <div class="logo">
-      <a href="home.html">
-          <img src="img/logo.jpg" alt="logo">
-      </a>
-  </div>
-    <ul class="nav-menu">
-      <li><a href="home.html">Home</a></li>
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="map.html">Map</a></li>
-      <li><a href="table-view.html">Table-View</a></li>
-    </ul>
-  </div>
+    <div class="navbar">
+        <div class="logo">
+            <a href="home.html">
+                <img src="img/logo.jpg" alt="logo">
+            </a>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="map.html">Map</a></li>
+            <li><a href="table-view.html">Table-View</a></li>
+        </ul>
+    </div>
 
-  <div class="content">
-    <div class="dashboad-row">
-        <div class="dashboad-card">
-            <div class="dashboad-card-upper">
-              <p>Hier könnte ihr Filter stehen!</p>
+    <div class="content">
+        <div class="dashboad-row">
+            <div class="dashboad-card">
+                <div class="dashboad-card-upper">
+                    <h2>Top 10 Unfallstädte</h2>
+                </div><br><br>
+                <div class="dashboad-card-lower">
+                    <canvas id="StädteDiagramm" height="300"></canvas>
+                    <script src="Diagramme/Top10Unfallstädte.js"></script>
+                </div>
             </div>
-            <div class="dashboad-card-lower">
-              <p>Grafik</p>
+
+
+            <div class="dashboad-card">
+                <div class="dashboad-card-upper">
+                    <h2>Unfallausgang nach Verletzungsgrad</h2>
+                </div><br><br>
+                <div class="dashboad-card-lower">
+                    <canvas id="UnfallAusgangDiagramm"></canvas>
+                    <script src="Diagramme/Unfallausgang.js"></script>
+                </div>
             </div>
         </div>
-        <div class="dashboad-card">
-          <div class="dashboad-card-upper">
-            <p>Hier könnte ihr Filter stehen!</p>
-          </div>
-          <div class="dashboad-card-lower">
-            <p>Grafik</p>
-          </div>
-      </div>
-      <div class="dashboad-card">
-        <div class="dashboad-card-upper">
-          <p>Hier könnte ihr Filter stehen!</p>
+
+
+        <div class="dashboad-row">
+            <div class="dashboad-card">
+                <div class="dashboad-card-upper">
+                    <h2>Unfallausgang nach Wetter</h2>
+                </div><br><br>
+                <div class="dashboad-card-lower">
+                    <canvas id="WetterChartDiagramm" height="300"></canvas>
+                    <script src="Diagramme/UnfallWetter.js"></script>
+                </div>
+            </div>
+
+
+            <div class="dashboad-card">
+                <div class="dashboad-card-upper">
+                    <h2>Unfallentwicklung im Jahr: ****</h2>
+                </div><br><br>
+                <div class="dashboad-card-lower">
+                    <canvas id="lineDiagramm" height="300"></canvas>
+                    <script src="Diagramme/EntwicklungProJahr.js"></script>
+                </div>
+            </div>
         </div>
-        <div class="dashboad-card-lower">
-          <p>Grafik</p>
+
+
+        <div class="dashboad-row">
+            <div class="dashboad-card">
+                <div class="dashboad-card-upper">
+                    <h2>Unfallart</h2>
+                </div><br><br>
+                <div class="dashboad-card-lower">
+                    <canvas id="UnfallArtDiagramm"></canvas>
+                    <script src="Diagramme/Unfallart.js"></script>
+                </div>
+            </div>
+
+            <div class="dashboad-card">
+                <div class="dashboad-card-upper">
+                    <h2>Unfalltypen</h2>
+                </div><br><br>
+                <div class="dashboad-card-lower">
+                    <canvas id="UnfallTypDiagramm"></canvas>
+                    <script src="Diagramme/Unfalltyp.js"></script>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
-    <div class="dashboad-row">
-      <div class="dashboad-card">
-          <div class="dashboad-card-upper">
-            <p>Hier könnte ihr Filter stehen!</p>
-          </div>
-          <div class="dashboad-card-lower">
-            <p>Grafik</p>
-          </div>
-      </div>
-      <div class="dashboad-card">
-        <div class="dashboad-card-upper">
-          <p>Hier könnte ihr Filter stehen!</p>
-        </div>
-        <div class="dashboad-card-lower">
-          <p>Grafik</p>
-        </div>
-    </div>
-    <div class="dashboad-card">
-      <div class="dashboad-card-upper">
-        <p>Hier könnte ihr Filter stehen!</p>
-      </div>
-      <div class="dashboad-card-lower">
-        <p>Grafik</p>
-      </div>
-  </div>
-  </div>
-  </div>  
+    </div>  
 </body>
 </html>

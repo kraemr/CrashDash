@@ -52,17 +52,39 @@
       <div style="display: flex; justify-content: space-between; gap: 64px;">
 
         <div class="map-menu">
+          <h3>Nach Bundesland/Stadt filtern:</h3>
+           <div>
+            <p>Bundesland auswählen:</p>
+            <select id="region">
+              <option value="Baden-Württemberg">Baden-Württemberg</option>
+              <option value="Bayern">Bayern</option>
+              <option value="Berlin">Berlin</option>
+              <option value="Brandenburg">Brandenburg</option>
+              <option value="Bremen">Bremen</option>
+              <option value="Hamburg">Hamburg</option>
+              <option value="Hessen">Hessen</option>
+              <option value="Mecklenburg-Vorpommern">Mecklenburg-Vorpommern</option>
+              <option value="Niedersachsen">Niedersachsen</option>
+              <option value="Nordrhein-Westfalen">Nordrhein-Westfalen</option>
+              <option value="Rheinland-Pfalz">Rheinland-Pfalz</option>
+              <option value="Saarland">Saarland</option>
+              <option value="Sachsen">Sachsen</option>
+              <option value="Sachsen-Anhalt">Sachsen-Anhalt</option>
+              <option value="Schleswig-Holstein">Schleswig-Holstein</option>
+              <option value="Thüringen">Thüringen</option>            
+            </select> 
+          </div>
           <div>
-            <p>Nach Bundesland/Stadt filtern:</p>
+            <p>oder erweiterten Filter benutzen</p>
             <div class="centered-HBox">
               <input type="text" id="search-filter" placeholder="Bundesland/Stadt" value="Mainz">
-              <button onclick="search(true)">Filtern</button>
             </div>
           </div>
+
+          
           <div>
             <p>Jahr:</p>
             <select id="year">
-              <option value="all">Gesamter Zeitraum (2016-2022)</option>
               <option value="2022" selected>2022</option>
               <option value="2021">2021</option>
               <option value="2020">2020</option>
@@ -72,14 +94,16 @@
               <option value="2016">2016</option>
             </select> 
           </div>
+          
+          <button onclick="search(true)">Filtern</button>
+          
+          <br><h3>Weitere Filteroptionen:</h3>
           <div>
-            <p>Unfalltypen:</p>
-
             <div class="leftSided-HBox">
               <p>Unfall mit Personenschaden</p>
               <div class="checkbox-wrapper">
                 <input class="toggleBox toggleBox-skewed" id="ctb1" type="checkbox" checked/>
-                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb1" ></label>
+                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb1"></label>
               </div>
             </div>
           </div>
@@ -132,10 +156,10 @@
             </div>
           </div>
 
-          <button style="margin-top: 32px;" onclick="resetFilter()">Filter zurücksetzen</button> 
+          <button style="margin-top: 32px;" class="warning-btn" onclick="resetFilter()">Filter zurücksetzen</button> 
         </div>
         <div class="mapDiv">
-          <div id="map" style="height: calc(100vh - 200px); border-radius: 16px;"></div>
+          <div id="map" style="height: calc(100vh - 175px); position: inherit; border-radius: 16px; z-index: 1;"></div>
           </div>   
       </div>
 

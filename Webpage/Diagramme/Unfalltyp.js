@@ -7,7 +7,7 @@ var chart = new Chart(pieObject, {
     data: {
         datasets: [{
             data: [25, 40, 35],  // hier noch Beispielwerte mit echten Werten ersetzen...
-            backgroundColor: ['#2ecc71', '#3498db', '#e74c3c'],
+            backgroundColor: ['#8B008B', '#40E0D0' , '#7FFF00'],
             borderColor: '#fff',
             borderWidth: 2
         }],
