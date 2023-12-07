@@ -409,4 +409,30 @@ th {
     left: 10%;
   }
 
+  .page-numbers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
 
+  .page-numbers span {
+    border-radius: 8px;
+    min-width: 20px;
+    min-height: 20px;
+    text-align: center;
+    padding: 4px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+  }
+
+  .control_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    margin: 32px 0px 32px 0px;
+  }

@@ -38,9 +38,22 @@ page = current page
 col = column to filter
 cond = >,<,<= ...
 val = the value which gets used to filter
-
 get-stats.php?
-
 
 ## Security / Apache config
 webroot should be Webpage and anything else should be inaccessible to the user, also only execute php in php folder.
+
+## Db setup/ apache2 Config
+```bash
+sudo ./setup.sh
+#replace /etc/apache2/apache2.conf with the one in CrashDash
+sudo chmod 775 /var/www/html
+sudo mv apache2.conf /etc/apache2/apache2.conf
+sudo service apache2 restart
+```
+
+
+## Map Problems
+- Performance : Idee (Mehr filtering z.b bundesland by default in sql)
+- Memory limit in apache php is reached when calling map api --> leads to http 500, 
+Solution: set max_memory_limit in apaches php config to 256M 

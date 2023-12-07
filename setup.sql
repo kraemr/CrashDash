@@ -29,15 +29,12 @@ Create Table accident_data(
     latitude FLOAT, # y
     CONSTRAINT PK_Accident_Data PRIMARY KEY (Id)
 );
-
 CREATE INDEX IX_accident_year ON accident_data(year);
 CREATE INDEX IX_accident_month ON accident_data(month);
 CREATE INDEX IX_accident_region ON accident_data(region);
-
 CREATE INDEX IX_accident_land ON accident_data(land);
 CREATE INDEX IX_accident_kind ON accident_data(kind);
 CREATE INDEX IX_accident_category ON accident_data(category);
-
 
 Create Table land_def(
     land SMALLINT,
@@ -57,7 +54,6 @@ Create Table kind_def(
     CONSTRAINT PK_kind_def PRIMARY KEY (kind)
 );
 
-
 Create Table category_def(
     category TINYINT, # Foreign Key 
     category_str TINYTEXT,
@@ -70,11 +66,64 @@ Create Table type_def(
     CONSTRAINT PK_type_def PRIMARY KEY (type)
 );
 
-
 Create Table district_def(
     district MEDIUMINT, # Foreign Key
     district_str TINYTEXT,
     CONSTRAINT PK_district_def PRIMARY KEY (district)
+);
+
+CREATE TABLE light_condition_def (
+    light_condition TINYINT,
+    light_condition_str TINYTEXT,
+    CONSTRAINT PK_light_condition_def PRIMARY KEY (light_condition)
+);
+
+CREATE TABLE bycicle_involved_def (
+    bycicle_involved BOOLEAN,
+    bycicle_involved_str TINYTEXT,
+    CONSTRAINT PK_bycicle_involved_def PRIMARY KEY (bycicle_involved)
+);
+
+CREATE TABLE car_involved_def (
+    car_involved BOOLEAN,
+    car_involved_str TINYTEXT,
+    CONSTRAINT PK_car_involved_def PRIMARY KEY (car_involved)
+);
+
+CREATE TABLE passenger_involved_def (
+    passenger_involved BOOLEAN,
+    passenger_involved_str TINYTEXT,
+    CONSTRAINT PK_passenger_involved_def PRIMARY KEY (passenger_involved)
+);
+
+CREATE TABLE motorcycle_involved_def (
+    motorcycle_involved BOOLEAN,
+    motorcycle_involved_str TINYTEXT,
+    CONSTRAINT PK_motorcycle_involved_def PRIMARY KEY (motorcycle_involved)
+);
+
+CREATE TABLE delivery_van_involved_def (
+    delivery_van_involved BOOLEAN,
+    delivery_van_involved_str TINYTEXT,
+    CONSTRAINT PK_delivery_van_involved_def PRIMARY KEY (delivery_van_involved)
+);
+
+CREATE TABLE truck_bus_or_tram_involved_def (
+    truck_bus_or_tram_involved BOOLEAN,
+    truck_bus_or_tram_involved_str TINYTEXT,
+    CONSTRAINT PK_truck_bus_or_tram_involved_def PRIMARY KEY (truck_bus_or_tram_involved)
+);
+
+CREATE TABLE road_surface_condition_def (
+    road_surface_condition TINYINT,
+    road_surface_condition_str TINYTEXT,
+    CONSTRAINT PK_road_surface_condition_def PRIMARY KEY (road_surface_condition)
+);
+
+CREATE TABLE day_def (
+    day TINYINT,
+    day_str TINYTEXT,
+    CONSTRAINT PK_day_def PRIMARY KEY (day)
 );
 
 CREATE INDEX IX_land_def ON land_def(land);
