@@ -254,8 +254,7 @@
         data.forEach(element => {
           var m = L.marker([element.latitude, element.longitude]);
           var href = "details.html?id=" + element["Id"];
-          var popupContent = "<button href='" + href + "'>" + "Mehr Informationen anzeigen" + "</button>";
-
+          var popupContent = "<a href='" + href + "'>" + "Mehr Informationen anzeigen" + "</a>";
           m.bindPopup().openPopup();
 
           markers.addLayer(m);
