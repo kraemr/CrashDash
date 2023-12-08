@@ -253,7 +253,7 @@
         let data = JSON.parse(xhr.responseText);
         data.forEach(element => {
           var m = L.marker([element.latitude, element.longitude]);
-          var href = "details.html?id=" + element["Id"];
+          var href = "details.html?id=" + element.ID;
           var popupContent = "<a href='" + href + "'>" + "Mehr Informationen anzeigen" + "</a>";
           m.bindPopup(popupContent).openPopup();
 
