@@ -11,6 +11,7 @@
       }
   </style>
   </head>
+
   <script>
     var currentPage = 1;
     var filterValue  =  null; // something like '2016' 
@@ -178,7 +179,6 @@
               <option value="kind">Unfall-Art</option>
               <option value="type">Unfall-Typ</option>
               <option value="light_condition">Lichtverhältnis</option>
-              <!-- Add more options as needed -->
           </select>
         </div>
   
@@ -196,7 +196,24 @@
     
         <div style="width: 500px;">
           <label for="Filter_Value_Input">Enter Value:</label>
-          <input type="text" id="Filter_Value_Input" name="Filter_Value_Input" placeholder="">
+          <select type="text" id="Filter_Value_Input" name="Filter_Value_Input" placeholder="">
+            <option value="1">Schleswig-Holstein</option>
+            <option value="2">Hamburg</option>
+            <option value="3">Niedersachsen</option>
+            <option value="4">Bremen</option>
+            <option value="5">Nordrhein-Westfalen</option>
+            <option value="6">Hessen</option>
+            <option value="7">Rheinland-Pfalz</option>
+            <option value="8">Baden-Württemberg</option>
+            <option value="9">Bayern</option>
+            <option value="10">Saarland/option>
+            <option value="11">Berlin</option>
+            <option value="12">Brandenburg</option>
+            <option value="13">Mecklenburg-Vorpommern)</option>
+            <option value="14">Sachsen</option>
+            <option value="15">Sachsen-Anhalt</option>
+            <option value="16">Thüringen</option>
+          </select>
         </div>
       </div>
       
@@ -229,5 +246,422 @@
   </div>
   </div>
 </div>
+
+<script>
+  // Check if "Filter_Column" text has been changed
+  document.getElementById("Filter_Column").addEventListener("change", function() {
+      // Get the value of the input field with id="Filter_Column"
+      var input = document.getElementById("Filter_Column").value;
+      // If the input field is empty, display a message
+      if (input == 'land') {
+        document.getElementById("Filter_Value_Input").placeholder = "Wähle ein Bundesland";
+        // Aktuelle Optionen clearen
+        document.getElementById("Filter_Value_Input").innerHTML = "";
+
+        // Optionen für Bundesländer einfügen
+        var option = document.createElement("option");
+        option.value = "1";
+        option.text = "Schleswig-Holstein";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "2";
+        option.text = "Hamburg";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "3";
+        option.text = "Niedersachsen";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "4";
+        option.text = "Bremen";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "5";
+        option.text = "Nordrhein-Westfalen";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "6";
+        option.text = "Hessen";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "7";
+        option.text = "Rheinland-Pfalz";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "8";
+        option.text = "Baden-Württemberg";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "9";
+        option.text = "Bayern";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "10";
+        option.text = "Saarland";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "11";
+        option.text = "Berlin";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "12";
+        option.text = "Brandenburg";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "13";
+        option.text = "Mecklenburg-Vorpommern";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "14";
+        option.text = "Sachsen";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "15";
+        option.text = "Sachsen-Anhalt";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "16";
+        option.text = "Thüringen";
+        document.getElementById("Filter_Value_Input").add(option);
+
+      } else if (input == 'hour') {
+        document.getElementById("Filter_Value_Input").placeholder = "Wähle eine Stunde aus";
+
+        // Aktuelle Optionen clearen
+        document.getElementById("Filter_Value_Input").innerHTML = "";
+
+        // Optionen für Stunden einfügen
+        for (var i = 0; i <= 24; i++) {
+          var option = document.createElement("option");
+          option.value = i.toString();
+          option.text = i.toString();
+          document.getElementById("Filter_Value_Input").add(option);
+        }
+      } 
+      
+      else if (input == 'day') {
+        document.getElementById("Filter_Value_Input").placeholder = "Wochentag wählen";
+
+        // Aktuelle Optionen clearen
+        document.getElementById("Filter_Value_Input").innerHTML = "";
+
+        // Optionen für Wochentage einfügen
+        var option = document.createElement("option");
+        option.value = "2";
+        option.text = "Montag";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "3";
+        option.text = "Dienstag";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "4";
+        option.text = "Mittwoch";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "5";
+        option.text = "Donnerstag";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "6";
+        option.text = "Freitag";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "7";
+        option.text = "Samstag";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "1";
+        option.text = "Sonntag";
+        document.getElementById("Filter_Value_Input").add(option);
+      } 
+      
+      else if (input == 'month') {
+        document.getElementById("Filter_Value_Input").placeholder = "Monat auswählen";
+
+        // Aktuelle Optionen clearen
+        document.getElementById("Filter_Value_Input").innerHTML = "";
+
+        // Optionen für Monate einfügen
+        var option = document.createElement("option");
+        option.value = "1";
+        option.text = "Januar";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "2";
+        option.text = "Februar";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "3";
+        option.text = "März";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "4";
+        option.text = "April";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "5";
+        option.text = "Mai";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "6";
+        option.text = "Juni";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "7";
+        option.text = "Juli";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "8";
+        option.text = "August";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "9";
+        option.text = "September";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "10";
+        option.text = "Oktober";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "11";
+        option.text = "November";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "12";
+        option.text = "Dezember";
+        document.getElementById("Filter_Value_Input").add(option);
+      } 
+      
+      else if (input == 'year') {
+        document.getElementById("Filter_Value_Input").placeholder = "Jahr auswählen";
+
+        // Aktuelle Optionen clearen
+        document.getElementById("Filter_Value_Input").innerHTML = "";
+
+        // Optionen für Jahre einfügen
+        for (var i = 2016; i <= 2022; i++) {
+          var option = document.createElement("option");
+          option.value = i.toString();
+          option.text = i.toString();
+          document.getElementById("Filter_Value_Input").add(option);
+        }
+      } 
+      
+      else if (input == 'category') {
+        document.getElementById("Filter_Value_Input").placeholder = "Kategorie auswählen";
+
+        // Aktuelle Optionen clearen
+        document.getElementById("Filter_Value_Input").innerHTML = "";
+
+        /*
+          1 = Unfall mit Getöteten
+          2 = Unfall mit Schwerverletzten
+          3 = Unfall mit Leichtverletzten
+        */
+
+        // Optionen für Kategorien einfügen
+        var option = document.createElement("option");
+        option.value = "1";
+        option.text = "Unfall mit Getöteten";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "2";
+        option.text = "Unfall mit Schwerverletzten";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "3";
+        option.text = "Unfall mit Leichtverletzten";
+        document.getElementById("Filter_Value_Input").add(option);
+      } 
+      
+      else if (input == 'kind') {
+        document.getElementById("Filter_Value_Input").placeholder = "Unfall-Art auswählen";
+
+        // Aktuelle Optionen clearen
+        document.getElementById("Filter_Value_Input").innerHTML = "";
+
+        /*
+          1;Kollision mit einem anderen Fahrzeug, das startet, stoppt oder steht
+          2;Kollision mit einem vorausfahrenden oder wartenden Fahrzeug
+          3;Kollision mit einem seitlich in dieselbe Richtung fahrenden Fahrzeug
+          4;Kollision mit einem entgegenkommenden Fahrzeug
+          5;Kollision mit einem Fahrzeug, das in eine Straße einbiegt oder diese überquert
+          6;Kollision zwischen Fahrzeug und Fußgänger
+          7;Kollision mit einem Hindernis auf der Fahrbahn
+          8;Verlassen der Fahrbahn nach rechts
+          9;Verlassen der Fahrbahn nach links
+          0;Unfall anderer Art
+        */
+
+        // Optionen für Unfall-Arten einfügen
+        var option = document.createElement("option");
+        option.value = "1";
+        option.text = "Kollision mit einem anderen Fahrzeug, das startet, stoppt oder steht";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "2";
+        option.text = "Kollision mit einem vorausfahrenden oder wartenden Fahrzeug";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "3";
+        option.text = "Kollision mit einem seitlich in dieselbe Richtung fahrenden Fahrzeug";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "4";
+        option.text = "Kollision mit einem entgegenkommenden Fahrzeug";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "5";
+        option.text = "Kollision mit einem Fahrzeug, das in eine Straße einbiegt oder diese überquert";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "6";
+        option.text = "Kollision zwischen Fahrzeug und Fußgänger";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "7";
+        option.text = "Kollision mit einem Hindernis auf der Fahrbahn";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "8";
+        option.text = "Verlassen der Fahrbahn nach rechts";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "9";
+        option.text = "Verlassen der Fahrbahn nach links";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "0";
+        option.text = "Unfall anderer Art";
+        document.getElementById("Filter_Value_Input").add(option);
+      } 
+      
+      else if (input == 'type') {
+        document.getElementById("Filter_Value_Input").placeholder = "Unfall-Typ auswählen";
+
+        // Aktuelle Optionen clearen
+        document.getElementById("Filter_Value_Input").innerHTML = "";
+
+        /*
+          1 = Fahrunfall
+          2 = Abbiegeunfall
+          3 = Einbiegen / Kreuzen-Unfall
+          4 = Überschreiten-Unfall
+          5 = Unfall durch ruhenden Verkehr
+          6 = Unfall im Längsverkehr
+          7 = sonstiger Unfall
+        */
+
+        // Optionen für Unfall-Typen einfügen
+        var option = document.createElement("option");
+        option.value = "1";
+        option.text = "Fahrunfall";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "2";
+        option.text = "Abbiegeunfall";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "3";
+        option.text = "Einbiegen / Kreuzen-Unfall";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "4";
+        option.text = "Überschreiten-Unfall";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "5";
+        option.text = "Unfall durch ruhenden Verkehr";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "6";
+        option.text = "Unfall im Längsverkehr";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "7";
+        option.text = "sonstiger Unfall";
+        document.getElementById("Filter_Value_Input").add(option);
+      } 
+      
+      else if (input == 'light_condition') {
+        document.getElementById("Filter_Value_Input").placeholder = "Enter Lichtverhältnis";
+
+        // Aktuelle Optionen clearen
+        document.getElementById("Filter_Value_Input").innerHTML = "";
+
+        /*
+          1 = Tageslicht
+          2 = Dämmerung
+          3 = Dunkelheit
+        */
+
+        // Optionen für Lichtverhältnisse einfügen
+        var option = document.createElement("option");
+        option.value = "1";
+        option.text = "Tageslicht";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "2";
+        option.text = "Dämmerung";
+        document.getElementById("Filter_Value_Input").add(option);
+
+        var option = document.createElement("option");
+        option.value = "3";
+        option.text = "Dunkelheit";
+        document.getElementById("Filter_Value_Input").add(option);
+      }
+    });
+  </script>
 </body>
 </html>
