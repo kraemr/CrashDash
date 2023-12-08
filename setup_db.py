@@ -86,7 +86,6 @@ def parse_csv():
                 else:
                     light_cond = row["ULICHTVERH"]
                     delivery_involved = row["IstGkfz"]
-
                 if(year_i == 2016): # they changed the name of this FOUR TIMES ... just why
                     road_surface_condition=row["IstStrasse"]
                 if(year_i == 2017 or year_i == 2018 or year_i == 2019 or year_i == 2020):

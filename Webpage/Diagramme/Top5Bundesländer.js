@@ -1,9 +1,7 @@
 
         var ctx = document.getElementById('BundeslandDiagramm').getContext('2d');
-
         // Hier rein die Unfalldaten aus der Datenbank...
         var accidentData = [120, 95, 80, 75, 69];
-
         // Farbskala wird generiert die von Hellrot bis Dunkelrot basierend auf den Unfalldaten verändert
         var colors = accidentData.map(function (value) {
             // Beispiel: Je höher die Unfallzahl, desto dunkler das Rot

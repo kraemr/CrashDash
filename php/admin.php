@@ -1,3 +1,3 @@
 <?php
-echo "I'm a teapot";
+    echo "I'm a teapot";
 ?>
