@@ -253,7 +253,13 @@
         let data = JSON.parse(xhr.responseText);
         data.forEach(element => {
           var m = L.marker([element.latitude, element.longitude]);
+          var href = "details.html?id=" + element["Id"];
+          var popupContent = "<button href='" + href + "'>" + "Mehr Informationen anzeigen" + "</button>";
+
+          m.bindPopup().openPopup();
+
           markers.addLayer(m);
+
         }); //foreach 
       } // if xhr ready
     };// xhr call back
