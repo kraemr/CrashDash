@@ -45,7 +45,6 @@ try {
         $query->execute();
     }
     $i = 0;
-    
     while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
         $json_obj[$i] = $row;
         $i += 1;

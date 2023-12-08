@@ -51,7 +51,6 @@ if($page < 1){
 $page = $page - 1; # page 0 is actually 
 $perpage = 100;
 $offset = $page * 100;
-
 require('util.php');
 if($filter_col == "None" || $filter_cond == "None" || $filter_val == "None"){
     $sql = "Select * from accident_data $JOINS LIMIT 100 OFFSET ?";
