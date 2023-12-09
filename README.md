@@ -50,6 +50,7 @@ sudo ./setup.sh
 sudo chmod 775 /var/www/html
 sudo mv apache2.conf /etc/apache2/apache2.conf
 sudo service apache2 restart
+sudo cp -r . /var/www/html
 ```
 
 

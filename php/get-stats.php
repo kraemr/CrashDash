@@ -1,6 +1,8 @@
 <?php
 # This code is probably not safe, but for time reasons well. it is what is
-const permitted=["year","land","region","district","munincipality","year","day","month","hour","category","kind","type","light_condition","bycicle_involved","car_involved","passenger_involved","motorcycle_involved","delivery_van_involved","truck_bus_or_tram_involved","road_surface_condition"];
+const permitted=["year","land","region","district","munincipality","year","day","month","hour","category",
+"kind","type","light_condition","bycicle_involved","car_involved","passenger_involved","motorcycle_involved",
+"delivery_van_involved","truck_bus_or_tram_involved","road_surface_condition"];
 function check_permitted_columns($cols){ # this checks if an array of cols is allowed to be used
     if(count($cols) == 0){
         return false;

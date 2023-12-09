@@ -11,10 +11,8 @@ else{
 require "db-conn.php";
 $conn = connect_db();
 require "util.php";
-// Process other options here
-// LEFT JOIN here ??
-$query = 
-$conn->prepare("Select * from accident_data $JOINS where Id = ?");
+
+$query = $conn->prepare("Select * from accident_data $JOINS where Id = ?");
 $query->bindValue(1,$id,PDO::PARAM_INT);
 $query->execute();  
 $data = $query->fetch(PDO::FETCH_ASSOC);

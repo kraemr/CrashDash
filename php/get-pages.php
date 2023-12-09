@@ -68,7 +68,7 @@ if($filter_col == "None" || $filter_cond == "None" || $filter_val == "None"){
     }
 }
 else{
-    $sql = "Select * from accident_data $JOINS where $filter_col $filter_cond ? LIMIT 100 OFFSET ?";
+    $sql = "Select * from accident_data $JOINS where accident_data.$filter_col $filter_cond ? LIMIT 100 OFFSET ?";
     try{
         $query = $conn->prepare($sql);
         $query->bindValue(1,$filter_val);
