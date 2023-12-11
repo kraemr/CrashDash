@@ -292,6 +292,7 @@
     search(true);
   }
 
+  var bounds;
   function search(areaChanged) {
     // Alle Marker entfernen
     markers.clearLayers();
@@ -359,14 +360,8 @@
       fetch(cityUrl)
         .then(response => response.json())
         .then(data => {
-        var bounds = L.geoJSON(data).getBounds();  
+        bounds = L.geoJSON(data).getBounds();  // todo: ->
         lMap.fitBounds(bounds);
-        // Alle Marker die nicht in der Grenze liegen entfernen
-        markers.eachLayer(function (marker) {
-          if (!bounds.contains(marker.getLatLng())) {
-            markers.removeLayer(marker);
-          }
-        });
 
         geojsonLayer = L.geoJSON(data, {
         style: function(feature) {
@@ -379,9 +374,17 @@
             };
         }
         }).addTo(lMap); 
-
       }).catch(error => console.error(error));
     }
+    else {
+      lMap.fitBounds(bounds);
+    }
+    // Alle Marker die nicht in der Grenze liegen entfernen
+    markers.eachLayer(function (marker) {
+      if (!bounds.contains(marker.getLatLng())) {
+        markers.removeLayer(marker);
+      }
+    });
   }
   
 </script>
