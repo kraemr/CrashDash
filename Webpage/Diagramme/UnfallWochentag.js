@@ -2,6 +2,8 @@
 var data = {
     labels: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag' ],
     datasets: [{
+        //day_str  in labels einsetzten
+
       label: 'Unfallkorrelation nach Wochentag',
       data: [25, 35, 8, 45, 35, 8, 45], // Hier sollten die tatsächlichen Daten aus DB stehen
       backgroundColor: [

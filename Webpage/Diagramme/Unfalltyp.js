@@ -11,6 +11,8 @@ var chart = new Chart(pieObject, {
             borderColor: '#fff',
             borderWidth: 2
         }],
+
+        // type_str
         labels: ["fahren", "abbiegen", "einbiegen/kreuzen", "überschreiten", "durch ruhenden Verkehr", "im Längsverkehr", "sonstiges"],
 
     }
