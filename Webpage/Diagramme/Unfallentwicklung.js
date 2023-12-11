@@ -1,7 +1,7 @@
 var ctx = document.getElementById('lineDiagramm').getContext('2d');
 
 var data = {
-    labels: [
+    labels: [   //map 1: Januar ....
         'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
         'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
     ],

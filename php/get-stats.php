@@ -47,19 +47,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if($operator == ">") $operator_val = ">";
             else if($operator == "<") $operator_val = "<";
             else if($operator == "<=") $operator_val = "<=";
-            else if(operator == ">=") $operator_val = ">=";
-            else $operator_val = "=";
+            else if($operator == ">=") $operator_val = ">=";
+            else if($operator == "=") $operator_val = "=";
             for($i=0;$i<count($cols);$i+=1){
                 $colnames .= $cols[$i] . ",";
             }
-            $sql .= $colnames . "COUNT(*) as count from accident_data where";
-            if(check_permitted_column($cond_col)){
+            $sql .= $colnames . "COUNT(*) as count from accident_data ";
+            if(!empty($cond_col) && check_permitted_column($cond_col)){
                 $sql .= " " . $cond_col . " " . $operator_val . " ?";
             }
-            if(check_permitted_column($group_by)){
+            if(!empty($group_by) && check_permitted_column($group_by)){
                 $sql .= " GROUP BY " . $group_by;
             }
-            if(check_permitted_column($orderby)){
+            if(!empty($orderby) && check_permitted_column($orderby)){
                 $sql .= " ORDER BY " . $orderby;
             }
             if(!empty($ascending) && !empty($orderby)){
@@ -74,6 +74,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             require "db-conn.php";
             $conn = connect_db();  
+
+            if(empty($cond_col) || empty($cond_val)){
+                try{
+                    $query = $conn->prepare($sql);
+                    $query->execute();    
+                    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                    header('Content-Type: application/json');
+                    echo json_encode(['success' => true, 'data' => $results]);
+                    return;
+                }
+                catch(PDOException $e){
+                    header('Content-Type: application/json');
+                    echo "Connection failed: " . $e->getMessage();
+                    return;
+                }
+            }else{
+
             try{
                 $query = $conn->prepare($sql);
                 $query->bindValue(1,$cond_val,PDO::PARAM_STR);
@@ -81,12 +98,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $results = $query->fetchAll(PDO::FETCH_ASSOC);
                 header('Content-Type: application/json');
                 echo json_encode(['success' => true, 'data' => $results]);
+                return;
             }
             catch(PDOException $e) {
                 header('Content-Type: application/json');
                 echo "Connection failed: " . $e->getMessage();
                 return;
             }
+        }
+
         }
     } 
     else {

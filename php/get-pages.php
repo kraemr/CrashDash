@@ -44,6 +44,7 @@ $page = 1;
 if(isset($_GET["page"])){
     $page = $_GET["page"];
 }
+
 if($page < 1){
     //error
     $page=1;
@@ -62,7 +63,7 @@ if($filter_col == "None" || $filter_cond == "None" || $filter_val == "None"){
         header('Content-Type: application/json');
         echo json_encode($results);
     }
-    catch(PDOException $e) {
+    catch(PDOException $e){
         header('Content-Type: application/json');
         echo '{"error":"Database Error"}';
     }
