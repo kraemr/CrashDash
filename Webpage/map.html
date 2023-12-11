@@ -315,12 +315,13 @@
       "land": document.getElementById("region").value,
       "kind": document.getElementById("kind").value,
       "category": category,
-      "bycicle_involved": document.getElementById("involveBike").checked,
-      "car_involved": document.getElementById("involvePKW").checked,
-      "passenger_involved": document.getElementById("involveGKFZ").checked,
-      "motorcycle_involved": document.getElementById("involveMotorcycle").checked,
-      "delivery_van_involved": document.getElementById("involveFoot").checked,
-      "truck_bus_or_tram_involved": document.getElementById("involveOther").checked
+
+      "bycicle_involved": document.getElementById("involveBike").checked ? 1 : 0,
+      "car_involved": document.getElementById("involvePKW").checked ? 1 : 0,
+      "truck_involved": document.getElementById("involveGKFZ").checked ? 1 : 0,
+      "motorcycle_involved": document.getElementById("involveMotorcycle").checked ? 1 : 0,
+      "pedestrian_involved": document.getElementById("involveFoot").checked ? 1 : 0,
+      "other_involved": document.getElementById("involveOther").checked ? 1 : 0
     };
     
     // JSON an PHP-Script senden
