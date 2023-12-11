@@ -30,27 +30,86 @@ try {
             $decoded_data = json_decode($json_data, true);
             require "db-conn.php";
             $conn = connect_db();
-            $query = $conn->prepare("Select longitude,latitude,ID from accident_data where 
-            accident_data.land = ?
-            and accident_data.category = ? 
-            and accident_data.kind = ? 
-            and accident_data.year = ? 
-            and accident_data.bycicle_involved = ? 
-            and accident_data.car_involved = ? 
-            and accident_data.passenger_involved = ? 
-            and accident_data.motorcycle_involved = ?
-            and accident_data.delivery_van_involved = ? 
-            and accident_data.truck_bus_or_tram_involved = ?");
-            $query->bindValue(1,$json_data["land"]);
-            $query->bindValue(2,$json_data["kind"]);
-            $query->bindValue(3,$json_data["category"]);
-            $query->bindValue(4,$json_data["year"]);
-            $query->bindValue(5,$json_data["bycicle_involved"]);
-            $query->bindValue(6,$json_data["car_involved"]);
-            $query->bindValue(7,$json_data["passenger_involved"]);
-            $query->bindValue(8,$json_data["motorcycle_involved"]);
-            $query->bindValue(9,$json_data["delivery_van_involved"]);
-            $query->bindValue(10,$json_data["truck_bus_or_tram_involved"]);
+            $json_obj = array();
+            $offset = 0;
+            $offset_array = array();
+            $any_involved = ($decoded_data["bycicle_involved"] || $decoded_data["car_involved"] || $decoded_data["passenger_involved"] || $decoded_data["motorcycle_involved"] || $decoded_data["delivery_van_involved"] || $decoded_data["truck_bus_or_tram_involved"] );
+            
+            $basic = "Select longitude,latitude,ID from accident_data where year = ?";
+            if($decoded_data["kind"] != -1 || $decoded_data["category"] != 0 || $decoded_data["land"] != 0){
+                $basic .= " and";
+            }
+            if($decoded_data["land"] != 0 ){
+                $basic .= " accident_data.land = ?";
+                if($decoded_data["kind"] != -1 || $decoded_data["category"] != 0){
+                    $basic .= " and";
+                }
+                $offset_array["land"] = $offset;
+                $offset+=1;
+            }
+            if($decoded_data["kind"] != -1){
+                $basic .= " accident_data.kind = ?";
+                if($decoded_data["category"] != 0){
+                    $basic .= " and";
+                }
+                $offset_array["kind"] = $offset;
+                $offset+=1;
+            }
+            if($decoded_data["category"] != 0 ){
+                $basic .= " accident_data.category = ?";
+                $offset_array["category"] = $offset; 
+                $offset+=1;
+            }
+
+
+            //$decoded_data["bycicle_involved"] || $decoded_data["bycicle_involved"]  
+            // I dont know if this can be done  any cleaner but well this will work
+            // Hmmm this probably could have been done with like a stack or smth
+            if($decoded_data["bycicle_involved"] == 1){
+                $basic .= " and";
+                $basic .= " accident_data.bycicle_involved = 1";
+                /*
+                if(
+                    $decoded_data["car_involved"] == 1 || 
+                    $decoded_data["passenger_involved"] == 1 || 
+                    $decoded_data["motorcycle_involved"]  == 1 || 
+                    $decoded_data["delivery_van_involved"] == 1 || 
+                    $decoded_data["truck_bus_or_tram_involved"] == 1)
+                {
+                    $basic .= " and";
+                }*/
+            }
+            if($decoded_data["car_involved"] == 1){
+                $basic .= " and";
+                $basic .= " accident_data.car_involved = 1";
+            }
+            if($decoded_data["passenger_involved"] == 1){
+                $basic .= " and";
+                $basic .= " accident_data.passenger_involved = 1";
+            }
+            if($decoded_data["motorcycle_involved"] == 1){
+                $basic .= " and";
+                $basic .= " accident_data.motorcycle_involved = 1";
+            }
+            if($decoded_data["delivery_van_involved"] == 1){
+                $basic .= " and";
+                $basic .= " accident_data.delivery_van_involved = 1";
+            }
+            if($decoded_data["truck_bus_or_tram_involved"] == 1){
+                $basic .= " and";
+                $basic .= " accident_data.truck_bus_or_tram_involved = 1"; // This would be the last one then
+            }
+            $query = $conn->prepare($basic);
+            if($decoded_data["land"] != 0){
+                $query->bindValue(2 + $offset_array["land"],$decoded_data["land"]);
+            }
+            if($decoded_data["kind"] != -1){
+                $query->bindValue(2 + $offset_array["kind"],$decoded_data["kind"]);
+            }
+            if($decoded_data["category"] != 0){
+                $query->bindValue(2 + $offset_array["category"],$decoded_data["category"]);
+            }
+            $query->bindValue(1,$decoded_data["year"]);
             $query->execute();
             $json_obj = array();
             $i = 0;
@@ -66,7 +125,8 @@ try {
             echo '{"error":"json ERROR"}';
             return;
         }
-    }else{
+    }
+    else{
     if(isset($_GET["year"])){
         $year = $_GET["year"];
     }
@@ -118,6 +178,6 @@ try {
 }
 catch(PDOException $e) {
     header('Content-Type: application/json');
-    echo " 'error':'database error' ";
+    echo json_encode($e->getMessage());
 }
 ?>
