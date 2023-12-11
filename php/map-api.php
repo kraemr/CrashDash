@@ -2,8 +2,71 @@
 // returns category,kind,type,longitude,latitude and ID
 // This gives a page of accident data
 // TODO write stored procedures
+
+/*
+unfallausgang,
+category,
+land,
+year,
+itpkw ist...
+*/
+function generate_sql($json_data){
+    $basic = "Select longitude,latitude,ID from accident_data where accident_data.category = ? 
+    and accident_data.kind = ? 
+    and accident_data.year = ? 
+    and accident_data.bycicle_involved = ? 
+    and accident_data.car_involved = ? 
+    and accident_data.passenger_involved = ? 
+    and accident_data.motorcycle_involved = ?
+    and accident_data.delivery_van_involved = ? 
+    and accident_data.truck_bus_or_tram_involved = ?";
+}
+
 try {
     $year = 2022;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $json_data = file_get_contents('php://input');
+        if (!empty($json_data)) {
+            $decoded_data = json_decode($json_data, true);
+            require "db-conn.php";
+            $conn = connect_db();
+            $query = $conn->prepare("Select longitude,latitude,ID from accident_data where 
+            accident_data.land = ?
+            and accident_data.category = ? 
+            and accident_data.kind = ? 
+            and accident_data.year = ? 
+            and accident_data.bycicle_involved = ? 
+            and accident_data.car_involved = ? 
+            and accident_data.passenger_involved = ? 
+            and accident_data.motorcycle_involved = ?
+            and accident_data.delivery_van_involved = ? 
+            and accident_data.truck_bus_or_tram_involved = ?");
+            $query->bindValue(1,$json_data["land"]);
+            $query->bindValue(2,$json_data["kind"]);
+            $query->bindValue(3,$json_data["category"]);
+            $query->bindValue(4,$json_data["year"]);
+            $query->bindValue(5,$json_data["bycicle_involved"]);
+            $query->bindValue(6,$json_data["car_involved"]);
+            $query->bindValue(7,$json_data["passenger_involved"]);
+            $query->bindValue(8,$json_data["motorcycle_involved"]);
+            $query->bindValue(9,$json_data["delivery_van_involved"]);
+            $query->bindValue(10,$json_data["truck_bus_or_tram_involved"]);
+            $query->execute();
+            $json_obj = array();
+            $i = 0;
+            while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                $json_obj[$i] = $row;
+                $i += 1;
+            }
+            header('Content-Type: application/json');
+            echo json_encode($json_obj);
+        }
+        else{
+            header('Content-Type: application/json');
+            echo '{"error":"json ERROR"}';
+            return;
+        }
+    }else{
     if(isset($_GET["year"])){
         $year = $_GET["year"];
     }
@@ -51,6 +114,7 @@ try {
     }
     header('Content-Type: application/json');
     echo json_encode($json_obj);
+}
 }
 catch(PDOException $e) {
     header('Content-Type: application/json');

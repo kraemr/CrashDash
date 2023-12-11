@@ -52,52 +52,32 @@
       <div style="display: flex; justify-content: space-between; gap: 64px;">
 
         <div class="map-menu">
-          <div class="filter-head">
-            <h3>Filter einstellen:</h3>
-            
-            <select style="width: 80px;" id="year">
-              <option value="2022" selected>2022</option>
-              <option value="2021">2021</option>
-              <option value="2020">2020</option>
-              <option value="2019">2019</option>
-              <option value="2018">2018</option>
-              <option value="2017">2017</option>
-              <option value="2016">2016</option>
-            </select> 
-          </div>
+          <h3>Nach Bundesland/Stadt filtern:</h3>
            
-          <div class="centered-HBox">
-            <div>
-              <p style="margin-bottom: 8px;">Region wählen:</p>
-              <select id="region">
-                <option value="0">Deutschland</option>
-                <option value="1">Schleswig-Holstein</option>
-                <option value="2">Hamburg</option>
-                <option value="3">Niedersachsen</option>
-                <option value="4">Bremen</option>
-                <option value="5">Nordrhein-Westfalen</option>
-                <option value="6">Hessen</option>
-                <option value="7">Rheinland-Pfalz</option>
-                <option value="8">Baden-Württemberg</option>
-                <option value="9">Bayern</option>
-                <option value="10">Saarland</option>
-                <option value="11">Berlin</option>
-                <option value="12">Brandenburg</option>
-                <option value="13">Mecklenburg-Vorpommern</option>
-                <option value="14">Sachsen</option>
-                <option value="15">Sachsen-Anhalt</option>
-                <option value="16">Thüringen</option>
-              </select>
-            </div>
+          <div>
+            <p>Bundesland auswählen:</p>
+            <select id="region">
+              <option value="1">Schleswig-Holstein (SH)</option>
+              <option value="2">Hamburg (HH)</option>
+              <option value="3">Niedersachsen (NI)</option>
+              <option value="4">Bremen (HB)</option>
+              <option value="5">Nordrhein-Westfalen (NW)</option>
+              <option value="6">Hessen (HE)</option>
+              <option value="7">Rheinland-Pfalz (RP)</option>
+              <option value="8">Baden-Württemberg (BW)</option>
+              <option value="9">Bayern (BY)</option>
+              <option value="10">Saarland (SL)</option>
+              <option value="11">Berlin (BE)</option>
+              <option value="12">Brandenburg (BB)</option>
+              <option value="13">Mecklenburg-Vorpommern (MV)</option>
+              <option value="14">Sachsen (SN)</option>
+              <option value="15">Sachsen-Anhalt (ST)</option>
+              <option value="16">Thüringen (TH)</option>
+            </select> 
             
-            <div>
-              <p style="margin-bottom: 8px;">Erweiterter Filter:</p>
-              <div class="centered-HBox">
-                <input type="text" id="search-filter" placeholder="Stadt/Bezirk/Straße" value="Mainz">
-              </div>
-            </div>
           </div>
-            
+
+
           <div>
             <p>Unfall-Ausgang:</p>
             <select id="kind">
@@ -111,99 +91,97 @@
               <option value="8">Abkommen von Fahrbahn nach rechts</option>
               <option value="9">Abkommen von Fahrbahn nach links</option>
               <option value="0">Unfall anderer Art</option>
-              <option value="-1" selected>Kein Filter</option>
+              <option value="-1">Kein Filter</option>
+
+            </select> 
+          </div>
+
+
+            
+
+          <div>
+            <p>oder erweiterten Filter benutzen</p>
+            <div class="centered-HBox">
+              <input type="text" id="search-filter" placeholder="Stadt/Bezirk/Straße" value="Mainz">
+            </div>
+          </div>
+
+          
+          <div>
+            <p>Jahr:</p>
+            <select id="year">
+              <option value="2022" selected>2022</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+              <option value="2018">2018</option>
+              <option value="2017">2017</option>
+              <option value="2016">2016</option>
             </select> 
           </div>
           
+          <button onclick="search(true)">Filtern</button>
+          
           <br><h3>Weitere Filteroptionen:</h3>
           <div>
-            <p style="font-size: 17px;">Unfall-Folge:</p>
-          
-            <div class="map-filterOptions">
-              <div class="leftSided-HBox">
-                <p>Tödlich</p>
-                <div class="checkbox-wrapper">
-                  <input class="toggleBox toggleBox-skewed" id="resultDead" type="checkbox" checked/>
-                  <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="resultDead"></label>
-                </div>
-              </div>
-
-              <div class="leftSided-HBox">
-                <p style="margin-right: 96px;">Schwere Verletung</p>
-                <div class="checkbox-wrapper">
-                  <input class="toggleBox toggleBox-skewed" id="resultSerious" type="checkbox" checked/>
-                  <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="resultSerious"></label>
-                </div>
-              </div>
-
-              <div class="leftSided-HBox">
-                <p>Leichte Verletzung</p>
-                <div class="checkbox-wrapper">
-                  <input class="toggleBox toggleBox-skewed" id="resultMild" type="checkbox" checked/>
-                  <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="resultMild"></label>
-                </div>
-              </div>
-            </div>
-          </div>  
-
-
-          <p style="font-size: 17px">Unfall-Beteiligungen</p>
-
-          <div class="leftSided-HBox">
             <div class="leftSided-HBox">
-              <p>PKW</p>
+              <p>Unfall mit Personenschaden</p>
               <div class="checkbox-wrapper">
-                <input class="toggleBox toggleBox-skewed" id="involvePKW" type="checkbox"/>
-                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involvePKW"></label>
-              </div>
-            </div>
-  
-            <div class="leftSided-HBox">
-              <p>Güter-KFZ</p>
-              <div class="checkbox-wrapper">
-                <input class="toggleBox toggleBox-skewed" id="involveGKFZ" type="checkbox"/>
-                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveGKFZ"></label>
-              </div>
-            </div>
-  
-            <div class="leftSided-HBox">
-              <p>Kraftrad</p>
-              <div class="checkbox-wrapper">
-                <input class="toggleBox toggleBox-skewed" id="involveMotorcycle" type="checkbox"/>
-                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveMotorcycle"></label>
+                <input class="toggleBox toggleBox-skewed" id="ctb1" type="checkbox" checked/>
+                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb1"></label>
               </div>
             </div>
           </div>
 
           <div class="leftSided-HBox">
-            <div class="leftSided-HBox">
-              <p>Fahrrad</p>
-              <div class="checkbox-wrapper">
-                <input class="toggleBox toggleBox-skewed" id="involveBike" type="checkbox"/>
-                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveBike"></label>
-              </div>
-            </div>
-  
-            <div class="leftSided-HBox">
-              <p>Fußgänger</p>
-              <div class="checkbox-wrapper">
-                <input class="toggleBox toggleBox-skewed" id="involveFoot" type="checkbox"/>
-                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveFoot"></label>
-              </div>
-            </div>
-  
-            <div class="leftSided-HBox">
-              <p>Sonstige</p>
-              <div class="checkbox-wrapper">
-                <input class="toggleBox toggleBox-skewed" id="involveOther" type="checkbox"/>
-                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveOther"></label>
-              </div>
+            <p>Unfall mit Todesfolge</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="ctb2" type="checkbox"/>
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb2"></label>
             </div>
           </div>
-        
-          <button style="margin-top: 32px; font-size: medium;" onclick="search(true)">Filter anwenden</button>
-          
-          <button style="margin-top: 8px; font-size: medium;" class="warning-btn" onclick="resetFilter()">Filter zurücksetzen</button> 
+
+          <div class="leftSided-HBox">
+            <p>Unfall mit PKW-Beteiligung</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="ctb3" type="checkbox"/>
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb3"></label>
+            </div>
+          </div>
+
+          <div class="leftSided-HBox">
+            <p>Unfall mit Güter-KFZ-Beteiligung</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="ctb4" type="checkbox"/>
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb4"></label>
+            </div>
+          </div>
+
+          <div class="leftSided-HBox">
+            <p>Unfall mit Kraftrad-Beteiligung</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="ctb5" type="checkbox"/>
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb5"></label>
+            </div>
+          </div>
+
+          <div class="leftSided-HBox">
+            <p>Unfall mit Fahrrad-Beteiligung</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="ctb6" type="checkbox"/>
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb6"></label>
+            </div>
+          </div>
+
+          <div class="leftSided-HBox">
+            <p>Unfall mit Fußgänger-Beteiligung</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="ctb7" type="checkbox"/>
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="ctb7"></label>
+            </div>
+          </div>
+
+          <button style="margin-top: 32px;" class="warning-btn" onclick="resetFilter()">Filter zurücksetzen</button> 
         </div>
         <div class="mapDiv">
           <div id="map" style="height: calc(100vh - 175px); position: inherit; border-radius: 16px; z-index: 1;"></div>
@@ -237,7 +215,7 @@
                 if (feature.properties.name !== "Germany") {
                     return {
                       fillColor: '#333',
-                      fillOpacity: 0.2,
+                      fillOpacity: 0.15,
                       color: 'transparent'
                     };
                 }
@@ -256,12 +234,34 @@
   // Globale Variable für den GeoJSON-Layer
   var geojsonLayer;
   resetFilter();
-
-
+  search(true);
   function search(areaChanged) {
     // Alle Marker entfernen -> todo: könnte man optimieren
     markers.clearLayers();
+    // Marker aus output.json laden
+    var jsonMarkers = [];
+    let year = document.getElementById("year").value;
+    let land = document.getElementById("region").value;// bundesland
+    let kind = document.getElementById("kind").value;// bundesland
+    console.log("bundesland: " + document.getElementById("region").value);
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "../php/map-api.php?year="+year+"&land="+land+"&kind="+kind, true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        let data = JSON.parse(xhr.responseText);
+        data.forEach(element => {
+          var m = L.marker([element.latitude, element.longitude]);
+          var href = "details.html?id=" + element.ID;
+          var popupContent = "<a href='" + href + "'>" + "Mehr Informationen anzeigen" + "</a>";
+          m.bindPopup(popupContent).openPopup();
 
+          markers.addLayer(m);
+
+        }); //foreach 
+      } // if xhr ready
+    };// xhr call back
+    xhr.send();
+  
     if (areaChanged) {
       // Alte GeoJSON entfernen
       if (geojsonLayer != null) {
@@ -269,10 +269,6 @@
       }
 
       var query = document.getElementById("search-filter").value;
-      if (document.getElementById("search-filter").value == "") {
-        query = document.getElementById("region").options[document.getElementById("region").selectedIndex].text;
-      }
-
       var cityUrl = "https://nominatim.openstreetmap.org/search.php?q=" + query + "&polygon_geojson=1&format=geojson&limit=1&countrycodes=de";
       fetch(cityUrl)
         .then(response => response.json())
@@ -290,7 +286,7 @@
         style: function(feature) {
             return {
                 fillColor: '#3296FF',
-                fillOpacity: 0.15,
+                fillOpacity: 0.1,
                 color: '#3296FF',
                 weight: 2
             };
@@ -298,61 +294,7 @@
         }).addTo(lMap); 
 
       }).catch(error => console.error(error));
-    }
-
-    let category;
-
-    if (document.getElementById("resultDead").checked) {
-      category = 1;
-    }
-    else if (document.getElementById("resultSerious").checked) {
-      category = 2;
-    }
-    else if (document.getElementById("resultMild").checked) {
-      category = 3;
-    }
-
-    // JSON für die Filteroptionen erstellen
-    var filter = {
-      "year": document.getElementById("year").value,
-      "region": document.getElementById("region").value,
-      "kind": document.getElementById("kind").value,
-      "category": category,
-      "bycicle_involved": document.getElementById("involveBike").checked,
-      "car_involved": document.getElementById("involvePKW").checked,
-      "passenger_involved": document.getElementById("involveGKFZ").checked,
-      "motorcycle_involved": document.getElementById("involveMotorcycle").checked,
-      "delivery_van_involved": document.getElementById("involveFoot").checked,
-      "truck_bus_or_tram_involved": document.getElementById("involveOther").checked
-    };
-
-    // Marker aus output.json laden
-    var jsonMarkers = [];
-    
-    // JSON an PHP-Script senden
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", 'your-url', true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-
-
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        let data = JSON.parse(xhr.responseText);
-        data.forEach(element => {
-          var m = L.marker([element.latitude, element.longitude]);
-          var href = "details.html?id=" + element.ID;
-          var popupContent = "<a href='" + href + "'>" + "Mehr Informationen anzeigen" + "</a>";
-          m.bindPopup(popupContent).openPopup();
-
-          markers.addLayer(m);
-
-        }); //foreach 
-      } // if xhr ready
-    };// xhr call back
-    var data = JSON.stringify(filter);
-    xhr.send(data);
-  }
+  }}
 
   function changeYear(){
     var year = document.getElementById("year").value;
@@ -377,21 +319,49 @@
     document.getElementById("region").value = 7;
     document.getElementById("search-filter").value = "Mainz";
     document.getElementById("year").value = "2022";
-    document.getElementById("kind").value = -1;
-
-    document.getElementById("resultDead").checked = false;
-    document.getElementById("resultSerious").checked = false;
-    document.getElementById("resultMild").checked = false;
-
-    document.getElementById("involvePKW").checked = false;
-    document.getElementById("involveGKFZ").checked = false;
-    document.getElementById("involveMotorcycle").checked = false;
-    document.getElementById("involveBike").checked = false;
-    document.getElementById("involveFoot").checked = false;
-    document.getElementById("involveOther").checked = false;
-
+    document.getElementById("kind").value = "";
+    document.getElementById("ctb1").checked = false;
+    document.getElementById("ctb2").checked = false;
+    document.getElementById("ctb3").checked = false;
+    document.getElementById("ctb4").checked = false;
+    document.getElementById("ctb5").checked = false;
+    document.getElementById("ctb6").checked = false;
+    document.getElementById("ctb7").checked = false;
     search(true);
   }
+
+  /*
+
+  // On-Change-Listener für die Checkboxen und die Select-Box hinzufügen
+  document.getElementById("ctb1").addEventListener("change", function() {
+    search(false);
+  });
+  document.getElementById("ctb2").addEventListener("change", function() {
+    search(false);
+  });
+  document.getElementById("ctb3").addEventListener("change", function() {
+    search(false);
+  });
+  document.getElementById("ctb4").addEventListener("change", function() {
+    search(false);
+  });
+  document.getElementById("ctb5").addEventListener("change", function() {
+    search(false);
+  });
+  document.getElementById("ctb6").addEventListener("change", function() {
+    search(false);
+  });
+  document.getElementById("ctb7").addEventListener("change", function() {
+    search(false);
+  });
+  document.getElementById("year").addEventListener("change", function() {
+    changeYear();
+  });
+
+  document.getElementById("region").addEventListener("change", function() {
+    search(true);
+  });
+  */
   
 </script>
 </html>
