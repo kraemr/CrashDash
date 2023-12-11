@@ -201,7 +201,7 @@
             </div>
           </div>
         
-          <button style="margin-top: 32px; font-size: medium;" onclick="search(true)">Filter anwenden</button>
+          <button style="margin-top: 32px; font-size: medium;" onclick="checkChangedArea()">Filter anwenden</button>
           
           <button style="margin-top: 8px; font-size: medium;" class="warning-btn" onclick="resetFilter()">Filter zurücksetzen</button> 
         </div>
@@ -257,11 +257,93 @@
   var geojsonLayer;
   resetFilter();
 
+  var searchBox = document.getElementById("search-filter").value;
+  var region = document.getElementById("region").value;
+
+  function checkChangedArea() {
+    // Check if the user changed the area (region or city)
+    if (document.getElementById("search-filter").value != searchBox || document.getElementById("region").value != region) {
+      searchBox = document.getElementById("search-filter").value;
+      region = document.getElementById("region").value;
+      search(true);
+    }
+    else {
+      search(false);
+    }
+  }
+
+  function resetFilter() {
+    document.getElementById("region").value = 7;
+    document.getElementById("search-filter").value = "Mainz";
+    document.getElementById("year").value = "2022";
+    document.getElementById("kind").value = -1;
+
+    document.getElementById("resultDead").checked = false;
+    document.getElementById("resultSerious").checked = false;
+    document.getElementById("resultMild").checked = false;
+
+    document.getElementById("involvePKW").checked = false;
+    document.getElementById("involveGKFZ").checked = false;
+    document.getElementById("involveMotorcycle").checked = false;
+    document.getElementById("involveBike").checked = false;
+    document.getElementById("involveFoot").checked = false;
+    document.getElementById("involveOther").checked = false;
+
+    search(true);
+  }
 
   function search(areaChanged) {
-    // Alle Marker entfernen -> todo: könnte man optimieren
+    // Alle Marker entfernen
     markers.clearLayers();
 
+    let category = 0;
+
+    if (document.getElementById("resultDead").checked) {
+      category = 1;
+    }
+    else if (document.getElementById("resultSerious").checked) {
+      category = 2;
+    }
+    else if (document.getElementById("resultMild").checked) {
+      category = 3;
+    }
+
+    // JSON für die Filteroptionen erstellen
+    var filter = {
+      "year": document.getElementById("year").value,
+      "land": document.getElementById("region").value,
+      "kind": document.getElementById("kind").value,
+      "category": category,
+      "bycicle_involved": document.getElementById("involveBike").checked,
+      "car_involved": document.getElementById("involvePKW").checked,
+      "passenger_involved": document.getElementById("involveGKFZ").checked,
+      "motorcycle_involved": document.getElementById("involveMotorcycle").checked,
+      "delivery_van_involved": document.getElementById("involveFoot").checked,
+      "truck_bus_or_tram_involved": document.getElementById("involveOther").checked
+    };
+    
+    // JSON an PHP-Script senden
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '../php/map-api.php', true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        let data = JSON.parse(xhr.responseText);
+        data.forEach(element => {
+          var m = L.marker([element.latitude, element.longitude]);
+          var href = "details.html?id=" + element.ID;
+          var popupContent = "<a href='" + href + "'>" + "Mehr Informationen anzeigen" + "</a>";
+          m.bindPopup(popupContent).openPopup();
+
+          markers.addLayer(m);
+
+        }); //foreach 
+      } // if xhr ready
+    };// xhr call back
+    var data = JSON.stringify(filter);
+    xhr.send(data);
+    
     if (areaChanged) {
       // Alte GeoJSON entfernen
       if (geojsonLayer != null) {
@@ -292,103 +374,14 @@
                 fillColor: '#3296FF',
                 fillOpacity: 0.15,
                 color: '#3296FF',
-                weight: 2
+                weight: 4,
+                opacity: 1
             };
         }
         }).addTo(lMap); 
 
       }).catch(error => console.error(error));
     }
-
-    let category = 0;
-
-    if (document.getElementById("resultDead").checked) {
-      category = 1;
-    }
-    else if (document.getElementById("resultSerious").checked) {
-      category = 2;
-    }
-    else if (document.getElementById("resultMild").checked) {
-      category = 3;
-    }
-
-    // JSON für die Filteroptionen erstellen
-    var filter = {
-      "year": document.getElementById("year").value,
-      "land": document.getElementById("region").value,
-      "kind": document.getElementById("kind").value,
-      "category": category,
-      "bycicle_involved": document.getElementById("involveBike").checked,
-      "car_involved": document.getElementById("involvePKW").checked,
-      "passenger_involved": document.getElementById("involveGKFZ").checked,
-      "motorcycle_involved": document.getElementById("involveMotorcycle").checked,
-      "delivery_van_involved": document.getElementById("involveFoot").checked,
-      "truck_bus_or_tram_involved": document.getElementById("involveOther").checked
-    };
-
-    // Marker aus output.json laden
-    var jsonMarkers = [];
-    
-    // JSON an PHP-Script senden
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", '../php/map-api.php', true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        let data = JSON.parse(xhr.responseText);
-        data.forEach(element => {
-          var m = L.marker([element.latitude, element.longitude]);
-          var href = "details.html?id=" + element.ID;
-          var popupContent = "<a href='" + href + "'>" + "Mehr Informationen anzeigen" + "</a>";
-          m.bindPopup(popupContent).openPopup();
-
-          markers.addLayer(m);
-
-        }); //foreach 
-      } // if xhr ready
-    };// xhr call back
-    var data = JSON.stringify(filter);
-    xhr.send(data);
-  }
-
-  function changeYear(){
-    var year = document.getElementById("year").value;
-    var land = document.getElementById("region").value;// bundesland
-    var kind = document.getElementById("kind").value;
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "../php/map-api.php?year="+year+"&land="+land, true);
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        var data = JSON.parse(xhr.responseText);
-        data.forEach(element => {
-          var m = L.marker([element.latitude, element.longitude]);
-          markers.addLayer(m);
-        }); //foreach 
-      } // if xhr ready
-    };// xhr call back
-    xhr.send();
-  
-  }
-
-  function resetFilter() {
-    document.getElementById("region").value = 7;
-    document.getElementById("search-filter").value = "Mainz";
-    document.getElementById("year").value = "2022";
-    document.getElementById("kind").value = -1;
-
-    document.getElementById("resultDead").checked = false;
-    document.getElementById("resultSerious").checked = false;
-    document.getElementById("resultMild").checked = false;
-
-    document.getElementById("involvePKW").checked = false;
-    document.getElementById("involveGKFZ").checked = false;
-    document.getElementById("involveMotorcycle").checked = false;
-    document.getElementById("involveBike").checked = false;
-    document.getElementById("involveFoot").checked = false;
-    document.getElementById("involveOther").checked = false;
-
-    search(true);
   }
   
 </script>
