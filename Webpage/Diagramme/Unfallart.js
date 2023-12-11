@@ -1,7 +1,4 @@
-  
-
 var donutObject = document.getElementById('UnfallArtDiagramm');
-
 var chart = new Chart(donutObject, {
     type: 'doughnut',
     data: {

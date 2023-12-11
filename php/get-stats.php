@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if($operator == ">") $operator_val = ">";
             else if($operator == "<") $operator_val = "<";
             else if($operator == "<=") $operator_val = "<=";
-            else if(operator == ">=") $operator_val = ">=";
+            else if($operator == ">=") $operator_val = ">=";
             else $operator_val = "=";
             for($i=0;$i<count($cols);$i+=1){
                 $colnames .= $cols[$i] . ",";
