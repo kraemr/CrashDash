@@ -278,11 +278,11 @@
     document.getElementById("year").value = "2022";
     document.getElementById("kind").value = -1;
 
-    document.getElementById("resultDead").checked = false;
+    document.getElementById("resultDead").checked = true;
     document.getElementById("resultSerious").checked = false;
     document.getElementById("resultMild").checked = false;
 
-    document.getElementById("involvePKW").checked = false;
+    document.getElementById("involvePKW").checked = true;
     document.getElementById("involveGKFZ").checked = false;
     document.getElementById("involveMotorcycle").checked = false;
     document.getElementById("involveBike").checked = false;
@@ -387,6 +387,16 @@
       }
     });
   }
-  
+
+  // Event-Listener für entf-Taste und Enter-Taste
+  document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.key === 'r' || event.key === 'Delete') {
+      resetFilter();
+    }
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      checkChangedArea();
+    }
+  });
 </script>
 </html>
