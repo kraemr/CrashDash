@@ -188,7 +188,7 @@ body {
     flex-direction: column;
     align-items: left;
     padding: 24px;
-    width: 360px;
+    width: 496px;
     background-color: #fff;
     border-radius: 16px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -210,7 +210,7 @@ body {
 }
 
 .map-menu h3 {
-    font-size: 17px;
+    font-size: 18px;
     font-family: 'Outfit', sans-serif;
     font-weight: 600;
     margin-bottom: 6px;
@@ -224,6 +224,15 @@ body {
     border-radius: 16px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     height: calc(100vh - 175px);
+}
+
+.map-filterOptions {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+    width: fit-content;
 }
 
 input {
@@ -308,6 +317,14 @@ th {
 .leftSided-HBox p {
     margin: 0px;
     padding: 0px;
+}
+
+.filter-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
 }
 
 .centered-HBox {
