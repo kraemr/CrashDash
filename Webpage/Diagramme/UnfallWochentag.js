@@ -1,16 +1,16 @@
-var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-var url = "../php/get-stats.php";
-xmlhttp.open("POST", url,true);
-xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-xmlhttp.send(JSON.stringify({
+var xmlhttp6 = new xmlhttp6Request();   // new HttpRequest instance 
+var url6 = "../php/get-stats6.php";
+xmlhttp6.open("POST", url6,true);options6
+xmlhttp6.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xmlhttp6.send(JSON.stringify({
     "columns":["day"],"group_by":"day"
 }));
 
-xmlhttp.onreadystatechange = function(){
-  if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-    var res_data = JSON.parse (xmlhttp.responseText);
-    var stats = res_data["data"];
-    stats.forEach(element => {
+xmlhttp6.onreadystatechange = function(){
+  if (xmlhttp6.readyState === 4 && xmlhttp6.status === 200) {
+    var res_data6 = JSON.parse (xmlhttp6.responseText);
+    var stats6 = res_data6["data"];
+    stats6.forEach(element => {
         data.datasets[0].data.push(element["count"]);
         data.labels.push(element["day_str"]);
     });
@@ -20,7 +20,7 @@ xmlhttp.onreadystatechange = function(){
 
 
 
-var statsdata = {
+var stats6data6 = {
   datasets: [{
     label: 'Unfallkorrelation nach Wochentag',
       data: [],  // hier noch Beispielwerte mit echten Werten ersetzen...
@@ -46,7 +46,7 @@ var statsdata = {
     }],
   labels: [],
 }
-var options = {
+var options6 = {
   scales: {
     y: {
       beginAtZero: false,
@@ -65,6 +65,6 @@ var options = {
 var ctx = document.getElementById('WochentagChartDiagramm').getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'bar',
-  options: options,
-  data: statsdata
+  options6: options6,
+  data: stats6data6
 });
