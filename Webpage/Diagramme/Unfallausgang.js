@@ -29,6 +29,6 @@ var statsdata = {
 
 var pieObject = document.getElementById('UnfallAusgangDiagramm');
 var chart = new Chart(pieObject, {
-    type: 'doughnut',
+    type: 'pie',
     data: statsdata
 });

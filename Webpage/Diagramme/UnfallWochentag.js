@@ -17,6 +17,7 @@ xmlhttp.onreadystatechange = function(){
 
 
 
+
 var statsdata = {
   datasets: [{
     label: 'Unfallkorrelation nach Wochentag',

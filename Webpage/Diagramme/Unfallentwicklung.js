@@ -1,37 +1,39 @@
+var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+var url = "../php/get-stats.php";
+xmlhttp.open("POST", url,true);
+xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xmlhttp.send(JSON.stringify({
+    "columns":["month", "passenger_involved"],"group_by":"month", "order_by": "month", "asc": true
+}));
+
+xmlhttp.onreadystatechange = function(){
+    var res_data = JSON.parse (xmlhttp.responseText);
+    var stats = res_data["data"];
+    stats.forEach(element => {
+        data.datasets[0].data.push(element["count"]);
+    });
+};
+
+
+
+
+
+
+
+
 var ctx = document.getElementById('lineDiagramm').getContext('2d');
 
 var data = {
-    labels: [   //map 1: Januar ....
+    labels: [   //month 
         'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
         'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
     ],
-    datasets: [
+    datasets: [   //passenger_involved
         {
             label: 'Fußgänger',
             borderColor: '#9b59b6',
             backgroundColor: 'rgba(0, 0, 0, 0)', // Transparente Hintergrundfarbe entfernt
-            data: [50, 75, 60, 45, 80, 65, 70, 55, 40, 60, 75, 90],
-            borderWidth: 4 // Dicke der Linie erhöht
-        },
-        {
-            label: 'Pkw',
-            borderColor: '#3498db',
-            backgroundColor: 'rgba(0, 0, 0, 0)', // Transparente Hintergrundfarbe entfernt
-            data: [30, 45, 40, 35, 60, 50, 55, 40, 30, 45, 60, 70],
-            borderWidth: 4 // Dicke der Linie erhöht
-        },
-        {
-            label: 'Lkw',
-            borderColor: '#e74c3c',
-            backgroundColor: 'rgba(0, 0, 0, 0)', // Transparente Hintergrundfarbe entfernt
-            data: [10, 20, 15, 10, 20, 15, 15, 10, 10, 15, 20, 25],
-            borderWidth: 4 // Dicke der Linie erhöht
-        },
-        {
-            label: 'Motorrad',
-            borderColor: '#f39c12',
-            backgroundColor: 'rgba(0, 0, 0, 0)', // Transparente Hintergrundfarbe entfernt
-            data: [5, 10, 8, 5, 12, 10, 9, 7, 6, 8, 11, 13],
+            data: [],
             borderWidth: 4 // Dicke der Linie erhöht
         }
     ]
