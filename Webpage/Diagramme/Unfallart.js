@@ -8,6 +8,16 @@ xmlhttp.send(JSON.stringify({
 
 xmlhttp.onreadystatechange = function(){
     if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+        var statsdata = {
+            datasets: [{
+                data: [],  // hier noch Beispielwerte mit echten Werten ersetzen...
+                backgroundColor: ['#82CAFA', '#001F3F', '#00FF00', '#0F1FFF', '#F11F00', '#82CAFB', '#001FFF', '#00FA00', '#001FAA', '#011F00', '#82FAFF'],
+                borderColor: '#fff',
+                borderWidth: 2
+            }],
+            labels: [],
+        }
+
     var res_data = JSON.parse (xmlhttp.responseText);
     var stats = res_data["data"];
     console.log(xmlhttp.responseText);
@@ -15,23 +25,18 @@ xmlhttp.onreadystatechange = function(){
         data.datasets[0].data.push(element["count"]);
         data.labels.push(element["kind_str"]);
     });
+   
+   
+    
+    var donutObject = document.getElementById('UnfallArtDiagramm');
+    var chart = new Chart(donutObject, {
+        type: 'doughnut',
+        data: statsdata
+    });
+
 }
 };
 
-var statsdata = {
-    datasets: [{
-        data: [],  // hier noch Beispielwerte mit echten Werten ersetzen...
-        backgroundColor: ['#82CAFA', '#001F3F', '#00FF00', '#0F1FFF', '#F11F00', '#82CAFB', '#001FFF', '#00FA00', '#001FAA', '#011F00', '#82FAFF'],
-        borderColor: '#fff',
-        borderWidth: 2
-    }],
-    labels: [],
-}
 
-var donutObject = document.getElementById('UnfallArtDiagramm');
-var chart = new Chart(donutObject, {
-    type: 'doughnut',
-    data: statsdata
-});
 
 
