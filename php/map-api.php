@@ -89,7 +89,7 @@ try {
             }
             if($decoded_data["motorcycle_involved"] == 1){
                 $basic .= " and";
-                $basic .= " accident_data.motorcycle_involved = 1";
+                $basic .= " accident_data.motorcycle_involved = 1"; 
             }
             if($decoded_data["delivery_van_involved"] == 1){
                 $basic .= " and";

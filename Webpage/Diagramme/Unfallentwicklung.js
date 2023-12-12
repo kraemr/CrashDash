@@ -7,11 +7,13 @@ xmlhttp.send(JSON.stringify({
 }));
 
 xmlhttp.onreadystatechange = function(){
+    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
     var res_data = JSON.parse (xmlhttp.responseText);
     var stats = res_data["data"];
     stats.forEach(element => {
         data.datasets[0].data.push(element["count"]);
     });
+}
 };
 
 
