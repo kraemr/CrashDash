@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <style>
+        .dashboad-card-upper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px; /* Passen Sie die Höhe nach Bedarf an */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="home.html">
+                <img src="img/logo.jpg" alt="logo">
+            </a>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="map.html">Map</a></li>
+            <li><a href="table-view.html">Table-View</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="dashboad-row">
+            <div class="dashboad-card">
+                <div class="dashboad-card-upper">
+                    <h2>Top 5 Bundesländer</h2>
+                </div><br><br>
+                <div class="dashboad-card-lower">
+                    <canvas id="BundeslandDiagramm" height="300"></canvas>
+                    <script src="Diagramme/Top5Bundesländer.js"></script>
+                </div>
+            </div>
+
+
+            <div class="dashboad-card">
+                <div class="dashboad-card-upper">
+                    <h2>Unfallausgang nach Verletzungsgrad</h2>
+                </div><br><br>
+                <div class="dashboad-card-lower">
+                    <canvas id="UnfallAusgangDiagramm"></canvas>
+                    <script src="Diagramme/Unfallausgang.js"></script>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="dashboad-row">
+            <div class="dashboad-card">
+                <div class="dashboad-card-upper">
+                    <h2>Unfallausgang nach Wochentag in: ****</h2>
+                </div><br><br>
+                <div class="dashboad-card-lower">
+                    <canvas id="WochentagChartDiagramm" height="300"></canvas>
+                    <script src="Diagramme/UnfallWochentag.js"></script>
+                </div>
+            </div>
+
+
+            <div class="dashboad-card">
+                <div class="dashboad-card-upper">
+                    <h2>Unfallentwicklung im Jahr: ****</h2>
+                </div><br><br>
+                <div class="dashboad-card-lower">
+                    <canvas id="lineDiagramm" height="300"></canvas>
+                    <script>
+                        var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+                        var url = "../php/get-stats.php";
+                        xmlhttp.open("POST", url,true);
+                        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                        xmlhttp.send(JSON.stringify({
+                            "columns":["month", "passenger_involved"],"group_by":"month", "order_by": "month", "asc": true
+                        }));
+                    
+                        xmlhttp.onreadystatechange = function(){
+                            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                                var res_data = JSON.parse (xmlhttp.responseText);
+                                var stats = res_data["data"];
+                    
+                                var ctx = document.getElementById('lineDiagramm').getContext('2d');
+                    
+                                var data = {
+                                    labels: [   //month 
+                                        'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+                                        'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
+                                    ],
+                                    datasets: [   //passenger_involved
+                                        {
+                                            label: 'Fußgänger',
+                                            borderColor: '#9b59b6',
+                                            backgroundColor: 'rgba(0, 0, 0, 0)', // Transparente Hintergrundfarbe entfernt
+                                            data: [],
+                                            borderWidth: 4 // Dicke der Linie erhöht
+                                        }
+                                    ]
+                                };
+                    
+                                stats.forEach(element => {
+                                    data.datasets[0].data.push(element["count"]);
+                                });
+                    
+                                var options = {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                };
+                    
+                                var myLineChart = new Chart(ctx, {
+                                    type: 'line',
+                                    data: data,
+                                    options: options
+                                });
+                            }
+                        };
+                    </script>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="dashboad-row">
+            <div class="dashboad-card">
+                <div class="dashboad-card-upper">
+                    <h2>Unfallart - Fahrzeugzusammenstoß: </h2>
+                </div><br><br>
+                <div class="dashboad-card-lower">
+                    <canvas id="UnfallArtDiagramm"></canvas>
+                    <script src="Diagramme/Unfallart.js"></script>
+                </div>
+            </div>
+
+            <div class="dashboad-card">
+                <div class="dashboad-card-upper">
+                    <h2>Unfalltyp verursacht durch: </h2>
+                </div><br><br>
+                <div class="dashboad-card-lower">
+                    <canvas id="UnfallTypDiagramm"></canvas>
+                    <script src="Diagramme/Unfalltyp.js"></script>
+                </div>
+            </div>
+        </div>
+    </div>  
+</body>
+</html>
+

@@ -31,7 +31,6 @@
       integrity="sha384-89yDmbSkL9reFc77m10ZbqLaUMf1sp7FAJs2oAD/rczNnY7I+17yN9KML6tpYpCk"
       crossorigin="anonymous"
     ></script>
-
 </head>
 <body>
   <div class="navbar">
@@ -380,12 +379,12 @@
     else {
       lMap.fitBounds(bounds);
     }
-    // Alle Marker die nicht in der Grenze liegen entfernen
+
     markers.eachLayer(function (marker) {
-      if (!bounds.contains(marker.getLatLng())) {
-        markers.removeLayer(marker);
-      }
-    });
+        if (!bounds.contains(marker.getLatLng())) {
+          markers.removeLayer(marker);
+        }
+      });
   }
 
   // Event-Listener für entf-Taste und Enter-Taste
@@ -396,15 +395,6 @@
     if (event.keyCode === 13) {
       event.preventDefault();
       checkChangedArea();
-
-    // Alle Marker die nicht in der Grenze liegen entfernen
-    markers.eachLayer(function (marker) {
-      if (!bounds.contains(marker.getLatLng())) {
-        markers.removeLayer(marker);
-      }
-    });
-
-    
     }
   });
 </script>
