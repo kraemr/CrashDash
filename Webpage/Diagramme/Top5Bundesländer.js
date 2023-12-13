@@ -1,41 +1,41 @@
-var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-var url = "../php/get-stats.php";
-xmlhttp.open("POST", url,true);
-xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-xmlhttp.send(JSON.stringify({
+var xmlhttp1 = new XMLHttpRequest();   // new HttpRequest instance 
+var url1 = "../php/get-stats.php";
+xmlhttp1.open("POST", url1,true);
+xmlhttp1.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xmlhttp1.send(JSON.stringify({
     "columns":["land"],"group_by":"land", "order_by": "count", "asc": false
 }));
 
-xmlhttp.onreadystatechange = function(){
-    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-    let res_data = JSON.parse (xmlhttp.responseText);
-    let stats = res_data["data"];
+xmlhttp1.onreadystatechange = function(){
+    if (xmlhttp1.readyState === 4 && xmlhttp1.status === 200) {
+    let res_data1 = JSON.parse (xmlhttp1.responseText);
+    let stats1 = res_data1["data1"];
     for(i=0; i< 5; i++){    
-        data.datasets[0].data.push(stats[i]["count"]);
-        data.labels.push(element["land_str"]);
+        data1.data1sets[0].data1.push(stats1[i]["count"]);
+        data1.labels.push(element["land_str"]);
     }
     }
 
 
 
-    var ctx = document.getElementById('BundeslandDiagramm').getContext('2d');
-    var accidentData = [];
-    var colors = accidentData.map(function (value) {
-        var redIntensity = 255 - Math.round((value / Math.max(...accidentData)) * 255);
-        return 'rgba(255, ' + redIntensity + ', 0)';
+    var ctx1 = document.getElementById('BundeslandDiagramm').getContext('2d');
+    var accidentdata1 = [];
+    var colors1 = accidentdata11.map(function (value) {
+        var redIntensity1 = 255 - Math.round((value / Math.max(...accidentdata1)) * 255);
+        return 'rgba(255, ' + redIntensity1 + ', 0)';
     });
 //HIERHER Bundesland aus DB ziehen  --> land_str vom einzelnen JSON -Element ziehen 
-    var data = {
+    var data1 = {
         labels: [],
-        datasets: [
+        data1sets: [
             {
-                backgroundColor: colors,
-                data: accidentData
+                backgroundColor: colors1,
+                data1: accidentdata11
             }
         ]
     };
 
-    var options = {
+    var options1 = {
         scales: {
             x: {
                 beginAtZero: true
@@ -46,10 +46,10 @@ xmlhttp.onreadystatechange = function(){
         }
     };
 
-    var myBarChart = new Chart(ctx, {
+    var myBarChart1 = new Chart(ctx1, {
         type: 'horizontalBar',
-        data: data,
-        options: options
+        data1: data1,
+        options1: options1
     });
 
 
