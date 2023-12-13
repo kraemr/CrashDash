@@ -1,6 +1,6 @@
-loadChart();
+loadChart2();
 
-function loadChart() {
+function loadChart2() {
     var xmlhttp2 = new XMLHttpRequest();   // new HttpRequest instance 
     var url2 = "../php/get-stats.php";
     xmlhttp2.open("POST", url2,true);
@@ -40,4 +40,4 @@ function loadChart() {
     };
 }
 
-document.getElementById("year").addEventListener("change", loadChart);
+document.getElementById("year").addEventListener("change", loadChart2);
