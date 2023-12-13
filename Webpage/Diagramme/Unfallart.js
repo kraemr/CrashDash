@@ -14,7 +14,7 @@ function loadChart2() {
             let stats2data = {
                 datasets: [{
                     data: [], 
-                    backgroundColor: ['#52B2CF', '#FB6F92', '#FB6F92', '#84DCC6', '#FFC2D1', '#FDFFB6', '#F574E9', '#536AA6', '#DEB439', '#FFCD9A', '#887892', '#AA806A', '#80AA6A', '#B8CFE0', '#A183AF', '#FE9C9E'],
+                    backgroundColor: ['#52B2CF', '#ADF7B6', '#FB6F92', '#84DCC6', '#FFC2D1', '#FDFFB6', '#F574E9', '#536AA6', '#DEB439', '#FFCD9A', '#887892', '#AA806A', '#80AA6A', '#B8CFE0', '#A183AF', '#FE9C9E'],
                     borderColor: '#fff',
                     borderWidth: 2
                 }],
