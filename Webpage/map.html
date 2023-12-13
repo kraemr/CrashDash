@@ -1,44 +1,34 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Dashboard</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Dashboard</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="style.css">
 
-    
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-      integrity="sha384-VzLXTJGPSyTLX6d96AxgkKvE/LRb7ECGyTxuwtpjHnVWVZs2gp5RDjeM/tgBnVdM"
-      crossorigin="anonymous"
-    />
- 
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet.markercluster@1.5.0/dist/MarkerCluster.Default.css"
-      integrity="sha384-wgw+aLYNQ7dlhK47ZPK7FRACiq7ROZwgFNg0m04avm4CaXS+Z9Y7nMu8yNjBKYC+"
-      crossorigin="anonymous"
-    />
-    
-    <script
-      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-      integrity="sha384-RFZC58YeKApoNsIbBxf4z6JJXmh+geBSgkCQXFyh+4tiFSJmJBt+2FbjxW7Ar16M"
-      crossorigin="anonymous"
-    ></script>
 
-    <script
-      src="https://unpkg.com/leaflet.markercluster@1.5.0/dist/leaflet.markercluster.js"
-      integrity="sha384-89yDmbSkL9reFc77m10ZbqLaUMf1sp7FAJs2oAD/rczNnY7I+17yN9KML6tpYpCk"
-      crossorigin="anonymous"
-    ></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha384-VzLXTJGPSyTLX6d96AxgkKvE/LRb7ECGyTxuwtpjHnVWVZs2gp5RDjeM/tgBnVdM" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.0/dist/MarkerCluster.Default.css"
+    integrity="sha384-wgw+aLYNQ7dlhK47ZPK7FRACiq7ROZwgFNg0m04avm4CaXS+Z9Y7nMu8yNjBKYC+" crossorigin="anonymous" />
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha384-RFZC58YeKApoNsIbBxf4z6JJXmh+geBSgkCQXFyh+4tiFSJmJBt+2FbjxW7Ar16M"
+    crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.0/dist/leaflet.markercluster.js"
+    integrity="sha384-89yDmbSkL9reFc77m10ZbqLaUMf1sp7FAJs2oAD/rczNnY7I+17yN9KML6tpYpCk"
+    crossorigin="anonymous"></script>
 </head>
+
 <body>
   <div class="navbar">
     <div class="logo">
       <a href="home.html">
-          <img src="img/logo.jpg" alt="logo">
+        <img src="img/logo.jpg" alt="logo">
       </a>
-  </div>
+    </div>
     <ul class="nav-menu">
       <li><a href="home.html">Home</a></li>
       <li><a href="dashboard.html">Dashboard</a></li>
@@ -48,168 +38,170 @@
   </div>
 
   <div class="content">
-      <div style="display: flex; justify-content: space-between; gap: 64px;">
+    <div style="display: flex; justify-content: space-between; gap: 64px;">
 
-        <div class="map-menu">
-          <div class="filter-head">
-            <h3>Filter einstellen:</h3>
-            
-            <select style="width: 80px;" id="year">
-              <option value="2022" selected>2022</option>
-              <option value="2021">2021</option>
-              <option value="2020">2020</option>
-              <option value="2019">2019</option>
-              <option value="2018">2018</option>
-              <option value="2017">2017</option>
-              <option value="2016">2016</option>
-            </select> 
-          </div>
-           
-          <div class="centered-HBox">
-            <div>
-              <p style="margin-bottom: 8px;">Region wählen:</p>
-              <select id="region">
-                <option value="0">Deutschland</option>
-                <option value="1">Schleswig-Holstein</option>
-                <option value="2">Hamburg</option>
-                <option value="3">Niedersachsen</option>
-                <option value="4">Bremen</option>
-                <option value="5">Nordrhein-Westfalen</option>
-                <option value="6">Hessen</option>
-                <option value="7">Rheinland-Pfalz</option>
-                <option value="8">Baden-Württemberg</option>
-                <option value="9">Bayern</option>
-                <option value="10">Saarland</option>
-                <option value="11">Berlin</option>
-                <option value="12">Brandenburg</option>
-                <option value="13">Mecklenburg-Vorpommern</option>
-                <option value="14">Sachsen</option>
-                <option value="15">Sachsen-Anhalt</option>
-                <option value="16">Thüringen</option>
-              </select>
-            </div>
-            
-            <div>
-              <p style="margin-bottom: 8px;">Erweiterter Filter:</p>
-              <div class="centered-HBox">
-                <input type="text" id="search-filter" placeholder="Stadt/Bezirk/Straße" value="Mainz">
-              </div>
-            </div>
-          </div>
-            
-          <div>
-            <p>Unfall-Ausgang:</p>
-            <select id="kind">
-              <option value="1">Zusammenstoß mit anfahrendem/anhaltendem/ruhendem Fahrzeug</option>
-              <option value="2">Zusammenstoß mit vorausfahrendem / wartendem Fahrzeug</option>
-              <option value="3">Zusammenstoß mit seitlich in gleicher Richtung fahrendem Fahrzeug</option>
-              <option value="4">Zusammenstoß mit entgegenkommendem Fahrzeug</option>
-              <option value="5">Zusammenstoß mit einbiegendem / kreuzendem Fahrzeug</option>
-              <option value="6">Zusammenstoß zwischen Fahrzeug und Fußgänger</option>
-              <option value="7">Aufprall auf Fahrbahnhindernis</option>
-              <option value="8">Abkommen von Fahrbahn nach rechts</option>
-              <option value="9">Abkommen von Fahrbahn nach links</option>
-              <option value="0">Unfall anderer Art</option>
-              <option value="-1" selected>Kein Filter</option>
-            </select> 
-          </div>
-          
-          <br><h3>Weitere Filteroptionen:</h3>
-          <div>
-            <p style="font-size: 17px;">Unfall-Folge:</p>
-          
-            <div class="map-filterOptions">
-              <div class="leftSided-HBox">
-                <p>Tödlich</p>
-                <div class="checkbox-wrapper">
-                  <input class="toggleBox toggleBox-skewed" id="resultDead" type="checkbox" checked/>
-                  <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="resultDead"></label>
-                </div>
-              </div>
+      <div class="map-menu">
+        <div class="filter-head">
+          <h3>Filter einstellen:</h3>
 
-              <div class="leftSided-HBox">
-                <p style="margin-right: 96px;">Schwere Verletung</p>
-                <div class="checkbox-wrapper">
-                  <input class="toggleBox toggleBox-skewed" id="resultSerious" type="checkbox" checked/>
-                  <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="resultSerious"></label>
-                </div>
-              </div>
-
-              <div class="leftSided-HBox">
-                <p>Leichte Verletzung</p>
-                <div class="checkbox-wrapper">
-                  <input class="toggleBox toggleBox-skewed" id="resultMild" type="checkbox" checked/>
-                  <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="resultMild"></label>
-                </div>
-              </div>
-            </div>
-          </div>  
-
-
-          <p style="font-size: 17px">Unfall-Beteiligungen</p>
-
-          <div class="leftSided-HBox">
-            <div class="leftSided-HBox">
-              <p>PKW</p>
-              <div class="checkbox-wrapper">
-                <input class="toggleBox toggleBox-skewed" id="involvePKW" type="checkbox"/>
-                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involvePKW"></label>
-              </div>
-            </div>
-  
-            <div class="leftSided-HBox">
-              <p>Güter-KFZ</p>
-              <div class="checkbox-wrapper">
-                <input class="toggleBox toggleBox-skewed" id="involveGKFZ" type="checkbox"/>
-                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveGKFZ"></label>
-              </div>
-            </div>
-  
-            <div class="leftSided-HBox">
-              <p>Kraftrad</p>
-              <div class="checkbox-wrapper">
-                <input class="toggleBox toggleBox-skewed" id="involveMotorcycle" type="checkbox"/>
-                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveMotorcycle"></label>
-              </div>
-            </div>
-          </div>
-
-          <div class="leftSided-HBox">
-            <div class="leftSided-HBox">
-              <p>Fahrrad</p>
-              <div class="checkbox-wrapper">
-                <input class="toggleBox toggleBox-skewed" id="involveBike" type="checkbox"/>
-                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveBike"></label>
-              </div>
-            </div>
-  
-            <div class="leftSided-HBox">
-              <p>Fußgänger</p>
-              <div class="checkbox-wrapper">
-                <input class="toggleBox toggleBox-skewed" id="involveFoot" type="checkbox"/>
-                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveFoot"></label>
-              </div>
-            </div>
-  
-            <div class="leftSided-HBox">
-              <p>Sonstige</p>
-              <div class="checkbox-wrapper">
-                <input class="toggleBox toggleBox-skewed" id="involveOther" type="checkbox"/>
-                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveOther"></label>
-              </div>
-            </div>
-          </div>
-        
-          <button style="margin-top: 32px; font-size: medium;" onclick="checkChangedArea()">Filter anwenden</button>
-          
-          <button style="margin-top: 8px; font-size: medium;" class="warning-btn" onclick="resetFilter()">Filter zurücksetzen</button> 
+          <select style="width: 80px;" id="year">
+            <option value="2022" selected>2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+          </select>
         </div>
-        <div class="mapDiv">
-          <div id="map" style="height: calc(100vh - 175px); position: inherit; border-radius: 16px; z-index: 1;"></div>
-          </div>   
-      </div>
 
-  </div>  
+        <div class="centered-HBox">
+          <div>
+            <p style="margin-bottom: 8px;">Region wählen:</p>
+            <select id="region">
+              <option value="0">Deutschland</option>
+              <option value="1">Schleswig-Holstein</option>
+              <option value="2">Hamburg</option>
+              <option value="3">Niedersachsen</option>
+              <option value="4">Bremen</option>
+              <option value="5">Nordrhein-Westfalen</option>
+              <option value="6">Hessen</option>
+              <option value="7">Rheinland-Pfalz</option>
+              <option value="8">Baden-Württemberg</option>
+              <option value="9">Bayern</option>
+              <option value="10">Saarland</option>
+              <option value="11">Berlin</option>
+              <option value="12">Brandenburg</option>
+              <option value="13">Mecklenburg-Vorpommern</option>
+              <option value="14">Sachsen</option>
+              <option value="15">Sachsen-Anhalt</option>
+              <option value="16">Thüringen</option>
+            </select>
+          </div>
+
+          <div>
+            <p style="margin-bottom: 8px;">Erweiterter Filter:</p>
+            <div class="centered-HBox">
+              <input type="text" id="search-filter" placeholder="Stadt/Bezirk/Straße" value="Mainz">
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p>Unfall-Ausgang:</p>
+          <select id="kind">
+            <option value="1">Zusammenstoß mit anfahrendem/anhaltendem/ruhendem Fahrzeug</option>
+            <option value="2">Zusammenstoß mit vorausfahrendem / wartendem Fahrzeug</option>
+            <option value="3">Zusammenstoß mit seitlich in gleicher Richtung fahrendem Fahrzeug</option>
+            <option value="4">Zusammenstoß mit entgegenkommendem Fahrzeug</option>
+            <option value="5">Zusammenstoß mit einbiegendem / kreuzendem Fahrzeug</option>
+            <option value="6">Zusammenstoß zwischen Fahrzeug und Fußgänger</option>
+            <option value="7">Aufprall auf Fahrbahnhindernis</option>
+            <option value="8">Abkommen von Fahrbahn nach rechts</option>
+            <option value="9">Abkommen von Fahrbahn nach links</option>
+            <option value="0">Unfall anderer Art</option>
+            <option value="-1" selected>Kein Filter</option>
+          </select>
+        </div>
+
+        <br>
+        <h3>Weitere Filteroptionen:</h3>
+        <div>
+          <p style="font-size: 17px;">Unfall-Folge:</p>
+
+          <div class="map-filterOptions">
+            <div class="leftSided-HBox">
+              <p>Tödlich</p>
+              <div class="checkbox-wrapper">
+                <input class="toggleBox toggleBox-skewed" id="resultDead" type="checkbox" checked />
+                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="resultDead"></label>
+              </div>
+            </div>
+
+            <div class="leftSided-HBox">
+              <p style="margin-right: 96px;">Schwere Verletung</p>
+              <div class="checkbox-wrapper">
+                <input class="toggleBox toggleBox-skewed" id="resultSerious" type="checkbox" checked />
+                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="resultSerious"></label>
+              </div>
+            </div>
+
+            <div class="leftSided-HBox">
+              <p>Leichte Verletzung</p>
+              <div class="checkbox-wrapper">
+                <input class="toggleBox toggleBox-skewed" id="resultMild" type="checkbox" checked />
+                <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="resultMild"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <p style="font-size: 17px">Unfall-Beteiligungen</p>
+
+        <div class="leftSided-HBox">
+          <div class="leftSided-HBox">
+            <p>PKW</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="involvePKW" type="checkbox" />
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involvePKW"></label>
+            </div>
+          </div>
+
+          <div class="leftSided-HBox">
+            <p>Güter-KFZ</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="involveGKFZ" type="checkbox" />
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveGKFZ"></label>
+            </div>
+          </div>
+
+          <div class="leftSided-HBox">
+            <p>Kraftrad</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="involveMotorcycle" type="checkbox" />
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveMotorcycle"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="leftSided-HBox">
+          <div class="leftSided-HBox">
+            <p>Fahrrad</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="involveBike" type="checkbox" />
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveBike"></label>
+            </div>
+          </div>
+
+          <div class="leftSided-HBox">
+            <p>Fußgänger</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="involveFoot" type="checkbox" />
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveFoot"></label>
+            </div>
+          </div>
+
+          <div class="leftSided-HBox">
+            <p>Sonstige</p>
+            <div class="checkbox-wrapper">
+              <input class="toggleBox toggleBox-skewed" id="involveOther" type="checkbox" />
+              <label class="toggleBox-btn" data-tg-off="aus" data-tg-on="an" for="involveOther"></label>
+            </div>
+          </div>
+        </div>
+
+        <button style="margin-top: 32px; font-size: medium;" onclick="checkChangedArea()">Filter anwenden</button>
+
+        <button style="margin-top: 8px; font-size: medium;" class="warning-btn" onclick="resetFilter()">Filter
+          zurücksetzen</button>
+      </div>
+      <div class="mapDiv">
+        <div id="map" style="height: calc(100vh - 175px); position: inherit; border-radius: 16px; z-index: 1;"></div>
+      </div>
+    </div>
+
+  </div>
 </body>
 
 <script>
@@ -230,27 +222,27 @@
   fetch('geojson/countries.geojson')
     .then(response => response.json())
     .then(data => {
-        L.geoJSON(data, {
-            style: function(feature) {
-                // Alle Länder außer Deutschland grau färben
-                if (feature.properties.name !== "Germany") {
-                    return {
-                      fillColor: '#333',
-                      fillOpacity: 0.2,
-                      color: 'transparent'
-                    };
-                }
-                else {
-                    return {
-                      fillColor: 'transparent',
-                      fillOpacity: 0.0,
-                      color: '#3296FF',
-                      weight: 2
-                    };
-                }
-            }
-        }).addTo(lMap);
-  }).catch(error => console.error(error));
+      L.geoJSON(data, {
+        style: function (feature) {
+          // Alle Länder außer Deutschland grau färben
+          if (feature.properties.name !== "Germany") {
+            return {
+              fillColor: '#333',
+              fillOpacity: 0.2,
+              color: 'transparent'
+            };
+          }
+          else {
+            return {
+              fillColor: 'transparent',
+              fillOpacity: 0.0,
+              color: '#3296FF',
+              weight: 2
+            };
+          }
+        }
+      }).addTo(lMap);
+    }).catch(error => console.error(error));
 
   // Globale Variable für den GeoJSON-Layer
   var geojsonLayer;
@@ -322,7 +314,7 @@
       "passenger_involved": document.getElementById("involveFoot").checked ? 1 : 0,
       "truck_bus_or_tram_involved": document.getElementById("involveOther").checked ? 1 : 0
     };
-    
+
     // JSON an PHP-Script senden
     var xhr = new XMLHttpRequest();
     xhr.open("POST", '../php/map-api.php', true);
@@ -344,7 +336,7 @@
     };// xhr call back
     var data = JSON.stringify(filter);
     xhr.send(data);
-    
+
     if (areaChanged) {
       // Alte GeoJSON entfernen
       if (geojsonLayer != null) {
@@ -360,35 +352,35 @@
       fetch(cityUrl)
         .then(response => response.json())
         .then(data => {
-        bounds = L.geoJSON(data).getBounds();  // todo: ->
-        lMap.fitBounds(bounds);
+          bounds = L.geoJSON(data).getBounds();  // todo: ->
+          lMap.fitBounds(bounds);
 
-        geojsonLayer = L.geoJSON(data, {
-        style: function(feature) {
-            return {
+          geojsonLayer = L.geoJSON(data, {
+            style: function (feature) {
+              return {
                 fillColor: '#3296FF',
                 fillOpacity: 0.15,
                 color: '#3296FF',
                 weight: 4,
                 opacity: 1
-            };
-        }
-        }).addTo(lMap); 
-      }).catch(error => console.error(error));
+              };
+            }
+          }).addTo(lMap);
+        }).catch(error => console.error(error));
     }
     else {
       lMap.fitBounds(bounds);
     }
 
     markers.eachLayer(function (marker) {
-        if (!bounds.contains(marker.getLatLng())) {
-          markers.removeLayer(marker);
-        }
-      });
+      if (!bounds.contains(marker.getLatLng())) {
+        markers.removeLayer(marker);
+      }
+    });
   }
 
   // Event-Listener für entf-Taste und Enter-Taste
-  document.addEventListener('keydown', function(event) {
+  document.addEventListener('keydown', function (event) {
     if (event.ctrlKey && event.key === 'r' || event.key === 'Delete') {
       resetFilter();
     }
@@ -398,4 +390,5 @@
     }
   });
 </script>
+
 </html>
