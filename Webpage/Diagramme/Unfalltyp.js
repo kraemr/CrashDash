@@ -1,21 +1,13 @@
-var xmlhttp5 = new xmlhttp5Request();   // new HttpRequest instance 
-var url5 = "../php/get-stats5.php";
+var xmlhttp5 = new XMLHttpRequest();   // new HttpRequest instance 
+var url5 = "../php/get-stats.php";
 xmlhttp5.open("POST", url5,true);
 xmlhttp5.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp5.send(JSON.stringify({
-    "columns":["type"],"group_by":"type"
+    "columns":["type"],"group_by":"type","year":2022
 }));
 
 xmlhttp5.onreadystatechange = function(){
     if (xmlhttp5.readyState === 4 && xmlhttp5.status === 200) {
-    var res_data5 = JSON.parse (xmlhttp5.responseText);
-    var stats5 = res_data5["data"];
-    stats5.forEach(element => {
-        data.datasets[0].data.push(element["count"]);
-        data.labels.push(element["type_str"]);
-    });
-}
-};  
 
 var stats5data5 = {
     datasets: [{
@@ -26,13 +18,21 @@ var stats5data5 = {
     }],
     labels: [],
 }
+    var res_data5 = JSON.parse (xmlhttp5.responseText);
+    var stats5 = res_data5["data"];
+    stats5.forEach(element => {
+        stats5data5.datasets[0].data.push(element["count"]);
+        stats5data5.labels.push(element["type_str"]);
+    });
+
 
 var pieObject5 = document.getElementById('UnfallTypDiagramm');
 var chart = new Chart(pieObject5, {
     type: 'pie',
     data: stats5data5
 });
-
+}
+};  
 
 
 

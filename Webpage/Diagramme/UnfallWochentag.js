@@ -1,24 +1,13 @@
-var xmlhttp6 = new xmlhttp6Request();   // new HttpRequest instance 
-var url6 = "../php/get-stats6.php";
-xmlhttp6.open("POST", url6,true);options6
+var xmlhttp6 = new XMLHttpRequest();   // new HttpRequest instance 
+var url6 = "../php/get-stats.php";
+xmlhttp6.open("POST", url6,true);
 xmlhttp6.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xmlhttp6.send(JSON.stringify({
-    "columns":["day"],"group_by":"day"
+    "columns":["day"],"group_by":"day","year":2022
 }));
 
 xmlhttp6.onreadystatechange = function(){
   if (xmlhttp6.readyState === 4 && xmlhttp6.status === 200) {
-    var res_data6 = JSON.parse (xmlhttp6.responseText);
-    var stats6 = res_data6["data"];
-    stats6.forEach(element => {
-        data.datasets[0].data.push(element["count"]);
-        data.labels.push(element["day_str"]);
-    });
-  }
-};
-
-
-
 
 var stats6data6 = {
   datasets: [{
@@ -62,9 +51,21 @@ var options6 = {
   }
 };
 
-var ctx = document.getElementById('WochentagChartDiagramm').getContext('2d');
-var myChart = new Chart(ctx, {
+  var res_data6 = JSON.parse (xmlhttp6.responseText);
+  var stats6 = res_data6["data"];
+  stats6.forEach(element => {
+    stats6data6.datasets[0].data.push(element["count"]);
+      stats6data6.labels.push(element["day_str"]);
+    });
+  var ctx = document.getElementById('WochentagChartDiagramm').getContext('2d');
+  var myChart = new Chart(ctx, {
   type: 'bar',
-  options6: options6,
+  options: options6,
   data: stats6data6
 });
+
+  }
+};
+
+
+
