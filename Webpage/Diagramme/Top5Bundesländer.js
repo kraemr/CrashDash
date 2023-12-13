@@ -20,7 +20,7 @@ xmlhttp1.onreadystatechange = function(){
 
     var ctx1 = document.getElementById('BundeslandDiagramm').getContext('2d');
     var accidentdata1 = [];
-    var colors1 = accidentdata11.map(function (value) {
+    var colors = accidentdata11.map(function (value) {
         var redIntensity1 = 255 - Math.round((value / Math.max(...accidentdata1)) * 255);
         return 'rgba(255, ' + redIntensity1 + ', 0)';
     });
@@ -29,7 +29,7 @@ xmlhttp1.onreadystatechange = function(){
         labels: [],
         data1sets: [
             {
-                backgroundColor: colors1,
+                backgroundColor: colors,
                 data1: accidentdata11
             }
         ]

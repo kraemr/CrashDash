@@ -1,17 +1,17 @@
-var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-var url = "../php/get-stats.php";
-xmlhttp.open("POST", url,true);
-xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-xmlhttp.send(JSON.stringify({
+var xmlhttp4 = new xmlhttp4Request();   // new HttpRequest instance 
+var url4 = "../php/get-stats4.php";
+xmlhttp4.open("POST", url4,true);
+xmlhttp4.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xmlhttp4.send(JSON.stringify({
     "columns":["month", "passenger_involved"],"group_by":"month", "order_by": "month", "asc": true
 }));
 
-xmlhttp.onreadystatechange = function(){
-    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-    let res_data = JSON.parse (xmlhttp.responseText);
-    let stats = res_data["data"];
-    var ctx1 = document.getElementById('lineDiagramm').getContext('2d');
-    var data1 = {
+xmlhttp4.onreadystatechange = function(){
+    if (xmlhttp4.readyState === 4 && xmlhttp4.status === 200) {
+    let res_data4 = JSON.parse (xmlhttp4.responseText);
+    let stats4 = res_data4["data"];
+    var ctx4 = document.getElementById('lineDiagramm').getContext('2d');
+    var data4 = {
         labels: [   //month 
             'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni','Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
         ],
@@ -25,12 +25,12 @@ xmlhttp.onreadystatechange = function(){
             }]
 
     };
-    //stats.forEach(element => {
-    for(i=0;i<stats.length;i++){
-        data1.datasets[0].data.push(stats[i]["count"]);
+    //stats4.forEach(element => {
+    for(i=0;i<stats4.length;i++){
+        data4.datasets[0].data.push(stats4[i]["count"]);
     }
     //});
-    var options1 = {
+    var options4 = {
         scales: {
             y: {
                 beginAtZero: true
@@ -38,13 +38,14 @@ xmlhttp.onreadystatechange = function(){
         }
     };
     
-    var myLineChart1 = new Chart(ctx1, {
+    var myLineChart4 = new Chart(ctx4, {
         type: 'line',
-        data: data1,
-        options: options1
+        data: data4,
+        options: options4
     });
 }
 };
+
 
 
 
