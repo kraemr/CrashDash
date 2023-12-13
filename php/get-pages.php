@@ -54,7 +54,7 @@ $perpage = 100;
 $offset = $page * 100;
 require('util.php');
 if($filter_col == "None" || $filter_cond == "None" || $filter_val == "None"){
-    $sql = "Select * from accident_data $JOINS LIMIT 100 OFFSET ?";
+    $sql = "Select * from (Select * from accident_data LIMIT 100 OFFSET ?) as ad $JOINS ";
     try{
         $query = $conn->prepare($sql);
         $query->bindValue(1,$offset,PDO::PARAM_INT);
@@ -69,7 +69,9 @@ if($filter_col == "None" || $filter_cond == "None" || $filter_val == "None"){
     }
 }
 else{
-    $sql = "Select * from accident_data $JOINS where accident_data.$filter_col $filter_cond ? LIMIT 100 OFFSET ?";
+    #$sql = "Select * from accident_data $JOINS where accident_data.$filter_col $filter_cond ? LIMIT 100 OFFSET ?";
+    $sql = "Select * from (Select * from accident_data where accident_data.$filter_col $filter_cond LIMIT 100 OFFSET ?) as ad $JOINS ";
+
     try{
         $query = $conn->prepare($sql);
         $query->bindValue(1,$filter_val);

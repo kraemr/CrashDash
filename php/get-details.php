@@ -1,5 +1,4 @@
 <?php
-// This is used to get all info on a single accident
 $id=0;
 if(isset($_GET["id"])){
     $id = $_GET["id"];
@@ -11,8 +10,7 @@ else{
 require "db-conn.php";
 $conn = connect_db();
 require "util.php";
-
-$query = $conn->prepare("Select * from accident_data $JOINS where Id = ?");
+$query = $conn->prepare("Select * from ( Select * from accident_data $JOINS where Id = ?) $JOINS");
 $query->bindValue(1,$id,PDO::PARAM_INT);
 $query->execute();  
 $data = $query->fetch(PDO::FETCH_ASSOC);

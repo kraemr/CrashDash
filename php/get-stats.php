@@ -44,11 +44,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $cond_col = $decoded_data["condition_column"];
             $cond_val = $decoded_data["condition_value"];
             $sql = "Select ";
+
             $colnames ="";
-            $operator = $decoded_data["operator"];# <,>,>=,<= or =
-            $group_by =  $decoded_data["group_by"]; # column name (string)
-            $orderby =  $decoded_data["order_by"]; # column name (string)
-            $ascending = $decoded_data["asc"]; # boolean
+            $operator  = "";
+            $group_by = "";
+            $orderby = "";
+            $ascending = "";
+            
+            if(!empty($decoded_data["operator"])){
+                $operator = $decoded_data["operator"];# <,>,>=,<= or =
+            }
+            if(!empty($decoded_data["group_by"])){
+                $group_by =  $decoded_data["group_by"]; # column name (string)
+            }
+            if(!empty($decoded_data["order_by"])){
+                $orderby =  $decoded_data["order_by"]; # column name (string)
+            }
+            if(!empty($decoded_data["asc"])){
+                $ascending = $decoded_data["asc"]; # boolean
+            }
+            
+            
             # for security reasons we dont just accept input and pass it on, since it does not get validated by prepared staement (which compiles a function in sql backend)
             # instead check if strings match and insert the value else return error
             $operator_val = "";
@@ -57,6 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             else if($operator == "<=") $operator_val = "<=";
             else if($operator == ">=") $operator_val = ">=";
             else if($operator == "=") $operator_val = "=";
+            else $operator_val = "";
+
             for($i=0;$i<count($cols);$i+=1){
                 if(col_has_def($cols[$i])){
                     $colnames .= $cols[$i] . "_def." . $cols[$i] . "_str" . ",";
@@ -89,18 +107,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $sql .= " ORDER BY accident_data." . $orderby;
                     }
                 }
-                    if($ascending == 1){
-                        $sql .= " asc";
-                    }else if($ascending == 0){
-                        $sql .= " desc";
-                    }
+                if($ascending == 1){
+                    $sql .= " asc";
+                }
+                else if($ascending == 0){
+                    $sql .= " desc";
+                }
                 
     
             }
-
-
             require "db-conn.php";
             $conn = connect_db();
+            
             if(empty($cond_col) || empty($cond_val)){
                 try{
                     $query = $conn->prepare($sql);
@@ -147,5 +165,6 @@ else {
     // Return a JSON response for empty data
     header('Content-Type: application/json');
     echo json_encode(['success' => false, 'error' => 'Empty JSON data or GET request instead of POST']);
+    return;
 }
 ?>
