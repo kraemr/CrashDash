@@ -48,7 +48,7 @@
         <div class="dashboad-row">
             <div class="dashboad-card">
                 <div class="dashboad-card-upper">
-                    <h2>Top 5 Bundesländer</h2>
+                    <h2 id="hTop">Top 5 Bundesländer mit den meisten Unfällen in</h2>
                 </div><br><br>
                 <div class="dashboad-card-lower">
                     <canvas id="BundeslandDiagramm" height="300"></canvas>
@@ -59,7 +59,7 @@
 
             <div class="dashboad-card">
                 <div class="dashboad-card-upper">
-                    <h2>Unfallausgang nach Verletzungsgrad</h2>
+                    <h2 id="hVg">Unfallausgang nach Verletzungsgrad in</h2>
                 </div><br><br>
                 <div class="dashboad-card-lower">
                     <canvas id="UnfallAusgangDiagramm" height="300"></canvas>
@@ -72,7 +72,7 @@
         <div class="dashboad-row">
             <div class="dashboad-card">
                 <div class="dashboad-card-upper">
-                    <h2>Unfallausgang nach Wochentag in: ****</h2>
+                    <h2 id="hWd">Unfallausgang nach Wochentag in: ****</h2>
                 </div><br><br>
                 <div class="dashboad-card-lower">
                     <canvas id="WochentagChartDiagramm" height="300"></canvas>
@@ -83,7 +83,7 @@
 
             <div class="dashboad-card">
                 <div class="dashboad-card-upper">
-                    <h2>Unfallentwicklung im Jahr: ****</h2>
+                    <h2 id="hUe">Unfallentwicklung im Jahr: ****</h2>
                 </div><br><br>
                 <div class="dashboad-card-lower">
                     <canvas id="lineDiagramm" height="300"></canvas>
@@ -96,7 +96,7 @@
         <div class="dashboad-row">
             <div class="dashboad-card">
                 <div class="dashboad-card-upper">
-                    <h2>Unfallart - Fahrzeugzusammenstoß: </h2>
+                    <h2 id="hUa">Unfallart - Fahrzeugzusammenstoß: </h2>
                 </div><br><br>
                 <div class="dashboad-card-lower">
                     <canvas id="UnfallArtDiagramm" height="300"></canvas>
@@ -106,7 +106,7 @@
 
             <div class="dashboad-card">
                 <div class="dashboad-card-upper">
-                    <h2>Unfalltyp verursacht durch: </h2>
+                    <h2 id="uUt">Unfalltyp verursacht durch: </h2>
                 </div><br><br>
                 <div class="dashboad-card-lower">
                     <canvas id="UnfallTypDiagramm" height="300"></canvas>
@@ -116,4 +116,32 @@
         </div>
     </div>  
 </body>
+
+<script>
+    var year = document.getElementById("year");
+    var hTop = document.getElementById("hTop");
+    var hVg = document.getElementById("hVg");
+    var hWd = document.getElementById("hWd");
+    var hUe = document.getElementById("hUe");
+    var hUa = document.getElementById("hUa");
+    var uUt = document.getElementById("uUt");
+
+    hTop.innerHTML = "Top 5 Bundesländer mit den meisten Unfällen in " + year.value;
+    hVg.innerHTML = "Unfallausgang nach Verletzungsgrad in " + year.value;
+    hWd.innerHTML = "Unfallausgang nach Wochentag in " + year.value;
+    hUe.innerHTML = "Unfallentwicklung im Jahr " + year.value;
+    hUa.innerHTML = "Unfallart - Fahrzeugzusammenstoß " + year.value;
+    uUt.innerHTML = "Unfalltyp verursacht durch " + year.value;
+
+    year.addEventListener("change", function() {
+        hTop.innerHTML = "Top 5 Bundesländer mit den meisten Unfällen in " + year.value;
+        hVg.innerHTML = "Unfallausgang nach Verletzungsgrad in " + year.value;
+        hWd.innerHTML = "Unfallausgang nach Wochentag in " + year.value;
+        hUe.innerHTML = "Unfallentwicklung im Jahr " + year.value;
+        hUa.innerHTML = "Unfallart - Fahrzeugzusammenstoß " + year.value;
+        uUt.innerHTML = "Unfalltyp verursacht durch " + year.value;
+    });
+</script>
+
+
 </html>

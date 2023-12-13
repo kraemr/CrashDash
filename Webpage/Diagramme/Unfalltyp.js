@@ -1,3 +1,5 @@
+ loadChart();
+
  function loadChart(){
     var xmlhttp5 = new XMLHttpRequest();   // new HttpRequest instance 
     var url5 = "../php/get-stats.php";
