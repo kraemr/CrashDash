@@ -1,3 +1,5 @@
+loadChart6();
+
 function loadChart6() {
   var xmlhttp6 = new XMLHttpRequest();   // new HttpRequest instance 
   var url6 = "../php/get-stats.php";
@@ -13,25 +15,8 @@ function loadChart6() {
   var stats6data6 = {
     datasets: [{
       label: 'Unfallkorrelation nach Wochentag',
-        data: [],  // hier noch Beispielwerte mit echten Werten ersetzen...
-        backgroundColor: [
-          'rgba(75, 192, 192, 1.0)',
-          'rgba(255, 99, 132, 1.0)',
-          'rgba(255, 206, 86, 1.0)',
-          'rgba(54, 162, 235, 1.0)',
-          'rgba(255, 99, 132, 1.0)',
-          'rgba(255, 206, 86, 1.0)',
-          'rgba(54, 162, 235, 1.0)'
-        ],
-        borderColor: [
-          'rgba(75, 192, 192, 1)',
-          'rgba(255, 99, 132, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 99, 132, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(54, 162, 235, 1)'
-        ],
+        data: [],
+        backgroundColor: ['#52B2CF', '#FB6F92', '#FB6F92', '#84DCC6', '#FFC2D1', '#FDFFB6', '#F574E9', '#536AA6', '#DEB439', '#FFCD9A', '#887892', '#AA806A', '#80AA6A', '#B8CFE0', '#A183AF', '#FE9C9E'],
         borderWidth: 1
       }],
     labels: [],

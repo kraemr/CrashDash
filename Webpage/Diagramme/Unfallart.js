@@ -1,3 +1,5 @@
+loadChart2();
+
 function loadChart2() {
     var xmlhttp2 = new XMLHttpRequest();   // new HttpRequest instance 
     var url2 = "../php/get-stats.php";
@@ -11,8 +13,8 @@ function loadChart2() {
         if (xmlhttp2.readyState === 4 && xmlhttp2.status === 200) {
             let stats2data = {
                 datasets: [{
-                    data: [],  // hier noch Beispielwerte mit echten Werten ersetzen...
-                    backgroundColor: ['#82CAFA', '#001F3F', '#00FF00', '#0F1FFF', '#F11F00', '#82CAFB', '#001FFF', '#00FA00', '#001FAA', '#011F00', '#82FAFF'],
+                    data: [], 
+                    backgroundColor: ['#52B2CF', '#FB6F92', '#FB6F92', '#84DCC6', '#FFC2D1', '#FDFFB6', '#F574E9', '#536AA6', '#DEB439', '#FFCD9A', '#887892', '#AA806A', '#80AA6A', '#B8CFE0', '#A183AF', '#FE9C9E'],
                     borderColor: '#fff',
                     borderWidth: 2
                 }],

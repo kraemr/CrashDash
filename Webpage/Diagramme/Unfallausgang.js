@@ -1,3 +1,5 @@
+loadChart3();
+
 function loadChart3() {
     var xmlhttp3 = new XMLHttpRequest();   // new HttpRequest instance 
     var url3 = "../php/get-stats.php";
@@ -13,8 +15,8 @@ function loadChart3() {
         var stats3 = res_data3["data"];
         var stats3data3 = {
             datasets: [{
-                data: [],  // hier noch Beispielwerte mit echten Werten ersetzen...
-                backgroundColor: ['#2ecc71', '#3498db', '#e74c3c'],
+                data: [],
+                backgroundColor: ['#52B2CF', '#FB6F92', '#FB6F92', '#84DCC6', '#FFC2D1', '#FDFFB6', '#F574E9', '#536AA6', '#DEB439', '#FFCD9A', '#887892', '#AA806A', '#80AA6A', '#B8CFE0', '#A183AF', '#FE9C9E'],
                 borderColor: '#fff',
                 borderWidth: 2
             }],

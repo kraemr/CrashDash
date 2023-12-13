@@ -1,3 +1,5 @@
+loadChart5();
+
 function loadChart5(){
     var xmlhttp5 = new XMLHttpRequest();   // new HttpRequest instance 
     var url5 = "../php/get-stats.php";
@@ -12,8 +14,8 @@ function loadChart5(){
 
     var stats5data5 = {
         datasets: [{
-            data: [],  // hier noch Beispielwerte mit echten Werten ersetzen...
-            backgroundColor: ['#82CAFA', '#001F3F', '#00FF00', '#0F1FFF', '#F11F00', '#82CAFB', '#001FFF'],
+            data: [],
+            backgroundColor: ['#52B2CF', '#FB6F92', '#FB6F92', '#84DCC6', '#FFC2D1', '#FDFFB6', '#F574E9', '#536AA6', '#DEB439', '#FFCD9A', '#887892', '#AA806A', '#80AA6A', '#B8CFE0', '#A183AF', '#FE9C9E'],
             borderColor: '#fff',
             borderWidth: 2
         }],
