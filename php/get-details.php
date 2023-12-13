@@ -10,7 +10,7 @@ else{
 require "db-conn.php";
 $conn = connect_db();
 require "util.php";
-$query = $conn->prepare("Select * from ( Select * from accident_data $JOINS where Id = ?) $JOINS");
+$query = $conn->prepare("Select * from accident_data $JOINS2 where Id = ? ");
 $query->bindValue(1,$id,PDO::PARAM_INT);
 $query->execute();  
 $data = $query->fetch(PDO::FETCH_ASSOC);
