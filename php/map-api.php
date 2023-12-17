@@ -1,27 +1,4 @@
 <?php
-// returns category,kind,type,longitude,latitude and ID
-// This gives a page of accident data
-// TODO write stored procedures
-
-/*
-unfallausgang,
-category,
-land,
-year,
-itpkw ist...
-*/
-function generate_sql($json_data){
-    $basic = "Select longitude,latitude,ID from accident_data where accident_data.category = ? 
-    and accident_data.kind = ? 
-    and accident_data.year = ? 
-    and accident_data.bycicle_involved = ? 
-    and accident_data.car_involved = ? 
-    and accident_data.passenger_involved = ? 
-    and accident_data.motorcycle_involved = ?
-    and accident_data.delivery_van_involved = ? 
-    and accident_data.truck_bus_or_tram_involved = ?";
-}
-
 try {
     $year = 2022;
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -60,24 +37,11 @@ try {
                 $offset_array["category"] = $offset; 
                 $offset+=1;
             }
-
-
-            //$decoded_data["bycicle_involved"] || $decoded_data["bycicle_involved"]  
             // I dont know if this can be done  any cleaner but well this will work
             // Hmmm this probably could have been done with like a stack or smth
             if($decoded_data["bycicle_involved"] == 1){
                 $basic .= " and";
                 $basic .= " accident_data.bycicle_involved = 1";
-                /*
-                if(
-                    $decoded_data["car_involved"] == 1 || 
-                    $decoded_data["passenger_involved"] == 1 || 
-                    $decoded_data["motorcycle_involved"]  == 1 || 
-                    $decoded_data["delivery_van_involved"] == 1 || 
-                    $decoded_data["truck_bus_or_tram_involved"] == 1)
-                {
-                    $basic .= " and";
-                }*/
             }
             if($decoded_data["car_involved"] == 1){
                 $basic .= " and";

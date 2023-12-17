@@ -3,25 +3,24 @@
 require("db-conn.php");
 $conn = connect_db();
 
-if(isset($_GET["col"])){
+if(isset($_GET["col"])){ // filter column
     $filter_col = $_GET["col"];
 }else{
     $filter_col = "None";
 }
 
-if(isset($_GET["val"])){
+if(isset($_GET["val"])){ // filter value
     $filter_val = $_GET["val"];
 }
 else{
     $filter_col = "None";
 }
 $filter_cond = "None";
-if(isset($_GET["cond"])){
+if(isset($_GET["cond"])){ // filter by operator given by cond
     $filter_cond = $_GET["cond"];
 }
 
-$fval = ""; 
-if($filter_cond=="less"){
+if($filter_cond=="less"){ 
     $filter_cond ="<";
 }
 else if($filter_cond=="greater"){
@@ -39,14 +38,11 @@ else if($filter_cond=="greatereq"){
 else{
     $filter_cond = "None";
 }
-
 $page = 1;
 if(isset($_GET["page"])){
     $page = $_GET["page"];
 }
-
 if($page < 1){
-    //error
     $page=1;
 }
 $page = $page - 1; # page 0 is actually 
@@ -69,9 +65,7 @@ if($filter_col == "None" || $filter_cond == "None" || $filter_val == "None"){
     }
 }
 else{
-    #$sql = "Select * from accident_data $JOINS where accident_data.$filter_col $filter_cond ? LIMIT 100 OFFSET ?";
     $sql = "Select * from (Select * from accident_data where accident_data.$filter_col $filter_cond ? LIMIT 100 OFFSET ?) as ad $JOINS ";
-
     try{
         $query = $conn->prepare($sql);
         $query->bindValue(1,$filter_val);

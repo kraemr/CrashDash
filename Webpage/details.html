@@ -111,16 +111,14 @@
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get('id');
         xhr.open('GET', "../php/get-details.php?id="+id, true);
-        xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = function (){
           if (xhr.readyState === 4 && xhr.status === 200) {
             var data = JSON.parse(xhr.responseText);
             for (const key in data) {
-                console.log(key);
                 var detail_div = document.getElementById(key);
                 if(detail_div != null){
                     let paragraph = document.createElement("p");
                     const textNode = document.createTextNode(columnMap[key] + ": " + data[key]);
-                    //detail_div.textContent = columnMap[key] + ": " + data[key];
                     paragraph.appendChild(textNode);
                     detail_div.appendChild(paragraph);
                 }
@@ -132,6 +130,5 @@
       }
       window.onload = loadpage;
     </script>
-    
     </body>
 </html>

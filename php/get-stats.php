@@ -3,10 +3,7 @@
 const permitted=["year","land","region","district","munincipality","year","day","month","hour","category",
 "kind","type","light_condition","bycicle_involved","car_involved","passenger_involved","motorcycle_involved",
 "delivery_van_involved","truck_bus_or_tram_involved","road_surface_condition","count"];
-
-
 const no_defs=["year","month","hour"];
-
 function check_permitted_columns($cols){ # this checks if an array of cols is allowed to be used
     if(count($cols) == 0){
         return false;
@@ -26,6 +23,11 @@ function check_permitted_column($col){ #check one column only
 function col_has_def($col){
     return ! in_array($col,no_defs);
 }
+
+
+// website.com/?hallo=world
+// website.com/
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the raw POST data

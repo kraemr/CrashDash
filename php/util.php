@@ -27,8 +27,6 @@ $JOINS=
 " JOIN road_surface_condition_def ON road_surface_condition_def.road_surface_condition = ad.road_surface_condition" .
 " JOIN day_def ON day_def.day = ad.day";
 
-
-
 function send_json_err($msg){
     echo "{\"error\":\"$msg\"}";
 }
