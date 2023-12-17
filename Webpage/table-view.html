@@ -1,77 +1,78 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Dashboard</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <style>
-      .control_row{
-        display: flex;
-        gap: 32px;
-      }
+  <title>Dashboard</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    .control_row {
+      display: flex;
+      gap: 32px;
+    }
   </style>
-  </head>
+</head>
 
-  <script>
-    var currentPage = 1;
-    var filterValue  =  null; // something like '2016' 
-    var filterCond   =  null; // something like '<'
-    var filterColumn =  null; // something like 'land'
+<script>
+  var currentPage = 1;
+  var filterValue = null; // something like '2016' 
+  var filterCond = null; // something like '<'
+  var filterColumn = null; // something like 'land'
 
-    function applyFilter(){
-      filterColumn = readSelectedColumn();
-      filterCond = readSelectedOperator();
-      let filterVal = document.querySelector('#Filter_Value_Input');
-      filterValue = filterVal.value;
-      loadpage();
-    }
+  function applyFilter() {
+    filterColumn = readSelectedColumn();
+    filterCond = readSelectedOperator();
+    let filterVal = document.querySelector('#Filter_Value_Input');
+    filterValue = filterVal.value;
+    loadpage();
+  }
 
-    function addRow(element) {
-      let tableBody = document.querySelector('#table-data tbody');
-      let newRow = tableBody.insertRow();
-      
-      let cell = newRow.insertCell(0);
-      cell.innerHTML = element["land_str"];
-      let cell1 = newRow.insertCell(1);
-      cell1.innerHTML = element["hour"];
-      let cell2 = newRow.insertCell(2);
-      cell2.innerHTML = element["day_str"];
-      let cell3 = newRow.insertCell(3);
-      cell3.innerHTML = element["month"];
-      let cell4 = newRow.insertCell(4);
-      cell4.innerHTML = element["year"];
-      let cell5 = newRow.insertCell(5);
-      cell5.innerHTML = element["category_str"];
-      let cell6 = newRow.insertCell(6);
-      cell6.innerHTML = element["kind_str"];
-      let cell7 = newRow.insertCell(7);
-      cell7.innerHTML = element["type_str"];
-      let cell8 = newRow.insertCell(8);
-      cell8.innerHTML = element["light_condition_str"];
-      let cell9 = newRow.insertCell(9)
-      let link = document.createElement("a");
-      link.href = "details.html?id=" + element["Id"];
-      link.text = "More Details";
-      cell9.appendChild(link);
-      /*
-    category TINYINT, # UKATEGORIE
-    kind TINYINT, # UART
-    type TINYINT, # UTYP1
-    light_condition TINYINT, # ULICHTVERH
-    bycicle_involved BOOLEAN,
-    car_involved BOOLEAN,
-    passenger_involved BOOLEAN,
-    motorcycle_involved BOOLEAN,
-    delivery_van_involved BOOLEAN,
-    truck_bus_or_tram_involved BOOLEAN,
-    road_surface_condition TINYINT,
-    */
-      
-    }
+  function addRow(element) {
+    let tableBody = document.querySelector('#table-data tbody');
+    let newRow = tableBody.insertRow();
+
+    let cell = newRow.insertCell(0);
+    cell.innerHTML = element["land_str"];
+    let cell1 = newRow.insertCell(1);
+    cell1.innerHTML = element["hour"];
+    let cell2 = newRow.insertCell(2);
+    cell2.innerHTML = element["day_str"];
+    let cell3 = newRow.insertCell(3);
+    cell3.innerHTML = element["month"];
+    let cell4 = newRow.insertCell(4);
+    cell4.innerHTML = element["year"];
+    let cell5 = newRow.insertCell(5);
+    cell5.innerHTML = element["category_str"];
+    let cell6 = newRow.insertCell(6);
+    cell6.innerHTML = element["kind_str"];
+    let cell7 = newRow.insertCell(7);
+    cell7.innerHTML = element["type_str"];
+    let cell8 = newRow.insertCell(8);
+    cell8.innerHTML = element["light_condition_str"];
+    let cell9 = newRow.insertCell(9)
+    let link = document.createElement("a");
+    link.href = "details.html?id=" + element["Id"];
+    link.text = "More Details";
+    cell9.appendChild(link);
+    /*
+  category TINYINT, # UKATEGORIE
+  kind TINYINT, # UART
+  type TINYINT, # UTYP1
+  light_condition TINYINT, # ULICHTVERH
+  bycicle_involved BOOLEAN,
+  car_involved BOOLEAN,
+  passenger_involved BOOLEAN,
+  motorcycle_involved BOOLEAN,
+  delivery_van_involved BOOLEAN,
+  truck_bus_or_tram_involved BOOLEAN,
+  road_surface_condition TINYINT,
+  */
+
+  }
 
   function removeAllRows() { // resets the table
-      let tableBody = document.querySelector('#table-data tbody');
-      tableBody.innerHTML = '';
+    let tableBody = document.querySelector('#table-data tbody');
+    tableBody.innerHTML = '';
   }
 
   function updatePagination() { // update page numbers
@@ -80,27 +81,27 @@
     const page = document.createElement('span');
     page.textContent = "Page: ";
     for (let i = currentPage; i <= currentPage + 3; i++) {
-        const pageNumber = document.createElement('span');
-        pageNumber.textContent = i + ' ';
-        if (i === currentPage) {
-          pageNumber.style.fontWeight = 'bold';
-        }
-        paginationContainer.appendChild(pageNumber);
-        }
-        const ellipsis = document.createElement('span');
-        ellipsis.textContent = '... ';
-        paginationContainer.appendChild(ellipsis);
+      const pageNumber = document.createElement('span');
+      pageNumber.textContent = i + ' ';
+      if (i === currentPage) {
+        pageNumber.style.fontWeight = 'bold';
+      }
+      paginationContainer.appendChild(pageNumber);
     }
+    const ellipsis = document.createElement('span');
+    ellipsis.textContent = '... ';
+    paginationContainer.appendChild(ellipsis);
+  }
 
-  function loadpage(){ //loads currentPage
+  function loadpage() { //loads currentPage
     updatePagination();
     removeAllRows();
     var xhr = new XMLHttpRequest();
-    if(filterValue === null || filterCond === null || filterColumn === null){
-      xhr.open('GET', "../php/get-pages.php?page="+currentPage, true);
+    if (filterValue === null || filterCond === null || filterColumn === null) {
+      xhr.open('GET', "../php/get-pages.php?page=" + currentPage, true);
     }
-    else{
-      xhr.open('GET', "../php/get-pages.php?page="+currentPage+"&col="+filterColumn+"&cond="+filterCond+"&val="+filterValue, true);
+    else {
+      xhr.open('GET', "../php/get-pages.php?page=" + currentPage + "&col=" + filterColumn + "&cond=" + filterCond + "&val=" + filterValue, true);
     }
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
@@ -120,19 +121,19 @@
   }
 
   // Reads the given filteroperator and parses it
-  function readSelectedOperator(){
+  function readSelectedOperator() {
     var selectElement = document.getElementById("Filter_Condition");
-    return selectElement.value; 
+    return selectElement.value;
   }
 
-  function changepage(action){ // loads next or previous page
+  function changepage(action) { // loads next or previous page
     // three = becuase of js string shenanigans example: 1 == "1" is true 1 == 1 also, but 1 === "1" is false
-    if(action === "next"){ 
+    if (action === "next") {
       currentPage++;
     }
-    else if(action === "back"){
+    else if (action === "back") {
       currentPage--;
-      if(currentPage < 1){
+      if (currentPage < 1) {
         currentPage = 1;
       }
     }
@@ -140,15 +141,15 @@
   }
   window.onload = loadpage;
 
-  </script>
+</script>
 
-  <body>
+<body>
   <div class="navbar">
     <div class="logo">
       <a href="home.html">
-          <img src="img/logo.jpg" alt="logo">
+        <img src="img/logo.jpg" alt="logo">
       </a>
-  </div>
+    </div>
     <ul class="nav-menu">
       <li><a href="home.html">Home</a></li>
       <li><a href="dashboard.html">Dashboard</a></li>
@@ -163,30 +164,30 @@
         <div>
           <label for="Filter_Column">Filter Column:</label>
           <select id="Filter_Column" name="selectOption">
-              <option value="land">Bundesland</option>
-              <option value="hour">Stunde</option>
-              <option value="day">Wochentag</option>
-              <option value="month">Monat</option>
-              <option value="year">Jahr</option>
-              <option value="category">Kategorie</option>
-              <option value="kind">Unfall-Art</option>
-              <option value="type">Unfall-Typ</option>
-              <option value="light_condition">Lichtverhältnis</option>
+            <option value="land">Bundesland</option>
+            <option value="hour">Stunde</option>
+            <option value="day">Wochentag</option>
+            <option value="month">Monat</option>
+            <option value="year">Jahr</option>
+            <option value="category">Kategorie</option>
+            <option value="kind">Unfall-Art</option>
+            <option value="type">Unfall-Typ</option>
+            <option value="light_condition">Lichtverhältnis</option>
           </select>
         </div>
-  
+
         <div>
           <label for="Filter_Condition">Filter Condition:</label>
           <select id="Filter_Condition" name="selectOption">
-              <option value="greater">größer</option>
-              <option value="less">kleiner</option>
-              <option value="eq">gleich</option>
-              <option value="greatereq">größer-gleich</option>
-              <option value="lesseq">kleiner-gleich</option>
-              <option value="null">ohne Filter</option>
+            <option value="greater">größer</option>
+            <option value="less">kleiner</option>
+            <option value="eq">gleich</option>
+            <option value="greatereq">größer-gleich</option>
+            <option value="lesseq">kleiner-gleich</option>
+            <option value="null">ohne Filter</option>
           </select>
         </div>
-    
+
         <div style="width: 500px;">
           <label for="Filter_Value_Input">Enter Value:</label>
           <select type="text" id="Filter_Value_Input" name="Filter_Value_Input" placeholder="">
@@ -209,40 +210,40 @@
           </select>
         </div>
       </div>
-      
+
       <button onclick="applyFilter()">Filter anwenden</button>
     </div>
-    
+
     <table id="table-data" border="1">
       <thead>
-          <tr>
-              <th>Bundesland</th>
-              <th>Stunde</th>
-              <th>Wochentag</th>
-              <th>Monat</th>
-              <th>Jahr</th>
-              <th>Kategorie</th>
-              <th>Unfall-Art</th>
-              <th>Unfall-Typ</th>
-              <th>Lichtverhältnis</th>
-              <th>Details</th>
-          </tr>
+        <tr>
+          <th>Bundesland</th>
+          <th>Stunde</th>
+          <th>Wochentag</th>
+          <th>Monat</th>
+          <th>Jahr</th>
+          <th>Kategorie</th>
+          <th>Unfall-Art</th>
+          <th>Unfall-Typ</th>
+          <th>Lichtverhältnis</th>
+          <th>Details</th>
+        </tr>
       </thead>
       <tbody>
-          <!-- This will be dynamically filled by js -->
+        <!-- This will be dynamically filled by js -->
       </tbody>
-  </table>
-  <div class="control_row">
-    <button onclick="changepage('back')">Letze Seite</button>
-    <div class="page-numbers" id="pagination"></div>
-    <button onclick="changepage('next')">Nächste Seite</button>
+    </table>
+    <div class="control_row">
+      <button onclick="changepage('back')">Letze Seite</button>
+      <div class="page-numbers" id="pagination"></div>
+      <button onclick="changepage('next')">Nächste Seite</button>
+    </div>
   </div>
   </div>
-</div>
 
-<script>
-  // Check if "Filter_Column" text has been changed
-  document.getElementById("Filter_Column").addEventListener("change", function() {
+  <script>
+    // Check if "Filter_Column" text has been changed
+    document.getElementById("Filter_Column").addEventListener("change", function () {
       // Get the value of the input field with id="Filter_Column"
       var input = document.getElementById("Filter_Column").value;
       // If the input field is empty, display a message
@@ -345,8 +346,8 @@
           option.text = i.toString();
           document.getElementById("Filter_Value_Input").add(option);
         }
-      } 
-      
+      }
+
       else if (input == 'day') {
         document.getElementById("Filter_Value_Input").placeholder = "Wochentag wählen";
 
@@ -388,8 +389,8 @@
         option.value = "1";
         option.text = "Sonntag";
         document.getElementById("Filter_Value_Input").add(option);
-      } 
-      
+      }
+
       else if (input == 'month') {
         document.getElementById("Filter_Value_Input").placeholder = "Monat auswählen";
 
@@ -456,8 +457,8 @@
         option.value = "12";
         option.text = "Dezember";
         document.getElementById("Filter_Value_Input").add(option);
-      } 
-      
+      }
+
       else if (input == 'year') {
         document.getElementById("Filter_Value_Input").placeholder = "Jahr auswählen";
 
@@ -471,8 +472,8 @@
           option.text = i.toString();
           document.getElementById("Filter_Value_Input").add(option);
         }
-      } 
-      
+      }
+
       else if (input == 'category') {
         document.getElementById("Filter_Value_Input").placeholder = "Kategorie auswählen";
 
@@ -500,8 +501,8 @@
         option.value = "3";
         option.text = "Unfall mit Leichtverletzten";
         document.getElementById("Filter_Value_Input").add(option);
-      } 
-      
+      }
+
       else if (input == 'kind') {
         document.getElementById("Filter_Value_Input").placeholder = "Unfall-Art auswählen";
 
@@ -571,8 +572,8 @@
         option.value = "0";
         option.text = "Unfall anderer Art";
         document.getElementById("Filter_Value_Input").add(option);
-      } 
-      
+      }
+
       else if (input == 'type') {
         document.getElementById("Filter_Value_Input").placeholder = "Unfall-Typ auswählen";
 
@@ -624,8 +625,8 @@
         option.value = "7";
         option.text = "sonstiger Unfall";
         document.getElementById("Filter_Value_Input").add(option);
-      } 
-      
+      }
+
       else if (input == 'light_condition') {
         document.getElementById("Filter_Value_Input").placeholder = "Enter Lichtverhältnis";
 
@@ -657,4 +658,5 @@
     });
   </script>
 </body>
+
 </html>

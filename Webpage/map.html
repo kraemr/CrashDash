@@ -6,12 +6,13 @@
   <meta charset="utf-8" />
   <link rel="stylesheet" type="text/css" href="style.css">
 
-
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha384-VzLXTJGPSyTLX6d96AxgkKvE/LRb7ECGyTxuwtpjHnVWVZs2gp5RDjeM/tgBnVdM" crossorigin="anonymous" />
+    integrity="sha384-VzLXTJGPSyTLX6d96AxgkKvE/LRb7ECGyTxuwtpjHnVWVZs2gp5RDjeM/tgBnVdM"
+    crossorigin="anonymous"/>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.0/dist/MarkerCluster.Default.css"
-    integrity="sha384-wgw+aLYNQ7dlhK47ZPK7FRACiq7ROZwgFNg0m04avm4CaXS+Z9Y7nMu8yNjBKYC+" crossorigin="anonymous" />
+    integrity="sha384-wgw+aLYNQ7dlhK47ZPK7FRACiq7ROZwgFNg0m04avm4CaXS+Z9Y7nMu8yNjBKYC+" 
+    crossorigin="anonymous"/>
 
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha384-RFZC58YeKApoNsIbBxf4z6JJXmh+geBSgkCQXFyh+4tiFSJmJBt+2FbjxW7Ar16M"
@@ -200,7 +201,6 @@
         <div id="map" style="height: calc(100vh - 175px); position: inherit; border-radius: 16px; z-index: 1;"></div>
       </div>
     </div>
-
   </div>
 </body>
 
@@ -218,7 +218,6 @@
   // Erstellen Sie eine LayerGroup
   var geojsonLayer = L.layerGroup().addTo(lMap);
 
-  // Todo: ggf. auf Nominatim wechseln (falls wir das echt benutzen)
   fetch('geojson/countries.geojson')
     .then(response => response.json())
     .then(data => {
@@ -245,7 +244,6 @@
     }).catch(error => console.error(error));
 
   // Globale Variable für den GeoJSON-Layer
-  var geojsonLayer;
   resetFilter();
 
   var searchBox = document.getElementById("search-filter").value;
@@ -353,7 +351,7 @@
       fetch(cityUrl)
         .then(response => response.json())
         .then(data => {
-          bounds = L.geoJSON(data).getBounds();  // todo: ->
+          bounds = L.geoJSON(data).getBounds(); 
           lMap.fitBounds(bounds);
 
           geojsonLayer = L.geoJSON(data, {

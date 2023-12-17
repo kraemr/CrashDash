@@ -1,57 +1,64 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Dashboard</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body class="dark-mode">
-  <div class="content" style="padding-top: 32px;">
-    <div class="title-div">
-        <img class="mp-logo" src="img/logo.jpg" alt="Crash-Dash" >
-        <h2>Bitte wählen Sie eine Ansicht aus</h2>
+    <div class="content" style="padding-top: 32px;">
+        <div class="title-div">
+            <img class="mp-logo" src="img/logo.jpg" alt="Crash-Dash">
+            <h2>Bitte wählen Sie eine Ansicht aus</h2>
+        </div>
+        <div class="selection-div">
+            <ul class="home-selector">
+                <li class="selectioncard">
+                    <a href="dashboard.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="128" viewBox="0 0 24 24" stroke-width="1.75"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M4 4h6v8h-6z" />
+                            <path d="M4 16h6v4h-6z" />
+                            <path d="M14 12h6v8h-6z" />
+                            <path d="M14 4h6v4h-6z" />
+                        </svg>
+                        Dashboard</a>
+                </li>
+
+                <li class="selectioncard">
+                    <a href="map.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="128" viewBox="0 0 24 24" stroke-width="1.75"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M3 7l6 -3l6 3l6 -3v13l-6 3l-6 -3l-6 3v-13" />
+                            <path d="M9 4v13" />
+                            <path d="M15 7v13" />
+                        </svg>
+                        Unfallkarte
+                    </a>
+                </li>
+
+                <li class="selectioncard">
+                    <a href="table-view.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="128" viewBox="0 0 24 24" stroke-width="1.75"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path
+                                d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
+                            <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+                            <path d="M9 17v-4" />
+                            <path d="M12 17v-1" />
+                            <path d="M15 17v-2" />
+                            <path d="M12 17v-1" />
+                        </svg>
+                        Table-View</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="selection-div">
-        <ul class="home-selector">
-            <li class="selectioncard">
-                <a href="dashboard.html">
-                <svg xmlns="http://www.w3.org/2000/svg" width="128" viewBox="0 0 24 24" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M4 4h6v8h-6z" />
-                    <path d="M4 16h6v4h-6z" />
-                    <path d="M14 12h6v8h-6z" />
-                    <path d="M14 4h6v4h-6z" />
-                  </svg>
-                Dashboard</a>
-            </li>
-    
-            <li class="selectioncard">
-                <a href="map.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="128" viewBox="0 0 24 24" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M3 7l6 -3l6 3l6 -3v13l-6 3l-6 -3l-6 3v-13" />
-                        <path d="M9 4v13" />
-                        <path d="M15 7v13" />
-                    </svg>
-                    Unfallkarte
-                </a>
-            </li>     
-            
-            <li class="selectioncard">
-                <a href="table-view.html">
-                <svg xmlns="http://www.w3.org/2000/svg" width="128" viewBox="0 0 24 24" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
-                    <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-                    <path d="M9 17v-4" />
-                    <path d="M12 17v-1" />
-                    <path d="M15 17v-2" />
-                    <path d="M12 17v-1" />
-                  </svg>
-                Table-View</a>
-            </li>
-        </ul>
-    </div>
-  </div>  
 </body>
+
 </html>

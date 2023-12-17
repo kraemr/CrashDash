@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Dashboard</title>
     <meta charset="utf-8" />
@@ -10,10 +11,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 50px; /* Passen Sie die Höhe nach Bedarf an */
+            height: 50px;
+            /* Passen Sie die Höhe nach Bedarf an */
         }
     </style>
 </head>
+
 <body>
     <div class="navbar">
         <div class="logo">
@@ -31,7 +34,8 @@
 
     <div class="content">
         <div class="leftSided-HBox" style="gap:32px;">
-            <label for="Filter_Column" style="font-size: medium; font-weight: 600; margin-right: 30px;">Jahr für die Statistiken:</label>
+            <label for="Filter_Column" style="font-size: medium; font-weight: 600; margin-right: 30px;">Jahr für die
+                Statistiken:</label>
             <div>
                 <select id="year" name="selectOption">
                     <option value="2022" selected>2022</option>
@@ -114,7 +118,7 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
 </body>
 
 <script>
@@ -133,7 +137,7 @@
     hUa.innerHTML = "Unfallart - Fahrzeugzusammenstoß " + year.value;
     uUt.innerHTML = "Unfalltyp verursacht durch " + year.value;
 
-    year.addEventListener("change", function() {
+    year.addEventListener("change", function () {
         hTop.innerHTML = "Top 5 Bundesländer mit den meisten Unfällen in " + year.value;
         hVg.innerHTML = "Unfallausgang nach Verletzungsgrad in " + year.value;
         hWd.innerHTML = "Unfallausgang nach Wochentag in " + year.value;

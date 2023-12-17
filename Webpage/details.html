@@ -1,134 +1,137 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title> Details - View </title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
     <div class="navbar">
-      <div class="logo">
-        <a href="home.html">
-            <img src="img/logo.jpg" alt="logo">
-        </a>
-    
-    </div>
+        <div class="logo">
+            <a href="home.html">
+                <img src="img/logo.jpg" alt="logo">
+            </a>
+
+        </div>
         <ul class="nav-menu">
             <li><a href="home.html">Home</a></li>
             <li><a href="dashboard.html">Dashboard</a></li>
             <li><a href="map.html">Map</a></li>
             <li><a href="table-view.html">Table-View</a></li>
         </ul>
-    
+
     </div>
     <div class="content">
         <h1>Details</h1>
         <div id="details">
-        <div id="Id">
-        </div> 
-        <div id="uident">
-        </div> <!-- UIDENTSTLAE -->
-        <div id="land_str">
-        </div> <!-- ULAND -->
-        <div id="region">
-        </div> <!-- UREGBEZ -->
-        <div id="district">
-        </div> <!-- UKREIS -->
-        <div id="munincipality">
-        </div> <!-- UGEMEINDE -->
-        <div id="year">
-        </div> 
-        <div id="day_str">
-        </div> 
-        <div id="hour">
-        </div> 
-        <div id="month">
-        </div> 
-        <div id="category_str">
-        </div> <!-- UKATEGORIE -->
-        <div id="kind_str">
-        </div> <!-- UART -->
-        <div id="type_str">
-        </div> <!-- UTYP1 -->
-        <div id="light_condition_str">
-        </div> <!-- ULICHTVERH -->
-        <div id="bycicle_involved_str">
-        </div> 
-        <div id="car_involved_str">
-        </div> 
-        <div id="passenger_involved_str">
-        </div> 
-        <div id="motorcycle_involved_str" >
-        </div> 
-        <div id="delivery_van_involved_str" >
-        </div> 
-        <div id="truck_bus_or_tram_involved_str" >
-        </div> 
-        <div id="road_surface_condition_str" >
-        </div> 
-        <div id="coordinate_UTM_x" >
-        </div> <!-- LINREFX -->
-        <div id="coordinate_UTM_y" >
-        </div> <!-- LINREFY -->
-        <div id="longitude" >
-        </div> <!-- x -->
-        <div id="latitude" >
-        </div> <!-- y -->
+            <div id="Id">
+            </div>
+            <div id="uident">
+            </div> <!-- UIDENTSTLAE -->
+            <div id="land_str">
+            </div> <!-- ULAND -->
+            <div id="region">
+            </div> <!-- UREGBEZ -->
+            <div id="district">
+            </div> <!-- UKREIS -->
+            <div id="munincipality">
+            </div> <!-- UGEMEINDE -->
+            <div id="year">
+            </div>
+            <div id="day_str">
+            </div>
+            <div id="hour">
+            </div>
+            <div id="month">
+            </div>
+            <div id="category_str">
+            </div> <!-- UKATEGORIE -->
+            <div id="kind_str">
+            </div> <!-- UART -->
+            <div id="type_str">
+            </div> <!-- UTYP1 -->
+            <div id="light_condition_str">
+            </div> <!-- ULICHTVERH -->
+            <div id="bycicle_involved_str">
+            </div>
+            <div id="car_involved_str">
+            </div>
+            <div id="passenger_involved_str">
+            </div>
+            <div id="motorcycle_involved_str">
+            </div>
+            <div id="delivery_van_involved_str">
+            </div>
+            <div id="truck_bus_or_tram_involved_str">
+            </div>
+            <div id="road_surface_condition_str">
+            </div>
+            <div id="coordinate_UTM_x">
+            </div> <!-- LINREFX -->
+            <div id="coordinate_UTM_y">
+            </div> <!-- LINREFY -->
+            <div id="longitude">
+            </div> <!-- x -->
+            <div id="latitude">
+            </div> <!-- y -->
         </div>
     </div>
 
-<script>
-    const columnMap = {
-        'Id':'Id',
-        'uident':"Uident", // UIDENTSTLAE
-        'land_str':'Bundesland', // ULAND
-        'region':'Bezirk', // UREGBEZ
-        'district':"Kreis", // UKREIS
-        'munincipality':"Gemeinde", // UGEMEINDE
-        'year':"Jahr",
-        'day_str':"Wochentag",
-        'hour':"Stunde",
-        'month':"Monat",
-        'category_str':"Kategorie", // UKATEGORIE
-        'kind_str':"UnfallArt", // UART
-        'type_str':"UnfallTyp", // UTYP1
-        'light_condition_str':"Lichtverhältnis", // ULICHTVERH
-        'bycicle_involved_str':"Fahrrad involviert",
-        'car_involved_str':"Pkw involviert",
-        'passenger_involved_str':"Fußgänger involviert",
-        'motorcycle_involved_str':"Motorrad involviert",
-        'delivery_van_involved_str':"Lieferwagen involviert",
-        'truck_bus_or_tram_involved_str':"sonstige Fahrzeuge involviert",
-        'road_surface_condition_str':"Straßen Oberfläche",
-        'coordinate_UTM_x':"Koordinate UTM X", // LINREFX
-        'coordinate_UTM_y':"Koordinate UTM Y", // LINREFY
-        'longitude':"Längengrad", // x
-        'latitude':"Breitengrad", // y
-    };
-    
-    function loadpage(){ //loads currentPage
-        var xhr = new XMLHttpRequest();
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get('id');
-        xhr.open('GET', "../php/get-details.php?id="+id, true);
-        xhr.onreadystatechange = function (){
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            var data = JSON.parse(xhr.responseText);
-            for (const key in data) {
-                var detail_div = document.getElementById(key);
-                if(detail_div != null){
-                    let paragraph = document.createElement("p");
-                    const textNode = document.createTextNode(columnMap[key] + ": " + data[key]);
-                    paragraph.appendChild(textNode);
-                    detail_div.appendChild(paragraph);
-                }
-            }
-          } // if xhr ready
-        };// xhr call back
-        xhr.send();
-        return xhr.responseType;
-      }
-      window.onload = loadpage;
+    <script>
+        const columnMap = {
+            'Id': 'Id',
+            'uident': "Uident", // UIDENTSTLAE
+            'land_str': 'Bundesland', // ULAND
+            'region': 'Bezirk', // UREGBEZ
+            'district': "Kreis", // UKREIS
+            'munincipality': "Gemeinde", // UGEMEINDE
+            'year': "Jahr",
+            'day_str': "Wochentag",
+            'hour': "Stunde",
+            'month': "Monat",
+            'category_str': "Kategorie", // UKATEGORIE
+            'kind_str': "UnfallArt", // UART
+            'type_str': "UnfallTyp", // UTYP1
+            'light_condition_str': "Lichtverhältnis", // ULICHTVERH
+            'bycicle_involved_str': "Fahrrad involviert",
+            'car_involved_str': "Pkw involviert",
+            'passenger_involved_str': "Fußgänger involviert",
+            'motorcycle_involved_str': "Motorrad involviert",
+            'delivery_van_involved_str': "Lieferwagen involviert",
+            'truck_bus_or_tram_involved_str': "sonstige Fahrzeuge involviert",
+            'road_surface_condition_str': "Straßen Oberfläche",
+            'coordinate_UTM_x': "Koordinate UTM X", // LINREFX
+            'coordinate_UTM_y': "Koordinate UTM Y", // LINREFY
+            'longitude': "Längengrad", // x
+            'latitude': "Breitengrad", // y
+        };
+
+        function loadpage() { //loads currentPage
+            var xhr = new XMLHttpRequest();
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            xhr.open('GET', "../php/get-details.php?id=" + id, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    for (const key in data) {
+                        var detail_div = document.getElementById(key);
+                        if (detail_div != null) {
+                            let paragraph = document.createElement("p");
+                            const textNode = document.createTextNode(columnMap[key] + ": " + data[key]);
+                            paragraph.appendChild(textNode);
+                            detail_div.appendChild(paragraph);
+                        }
+                    }
+                } // if xhr ready
+            };// xhr call back
+            xhr.send();
+            return xhr.responseType;
+        }
+        window.onload = loadpage;
     </script>
-    </body>
+</body>
+
 </html>
