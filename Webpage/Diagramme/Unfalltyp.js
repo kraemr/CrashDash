@@ -15,7 +15,7 @@ function loadChart5(){
     var stats5data5 = {
         datasets: [{
             data: [],
-            backgroundColor: ['#52B2CF', '#ADF7B6', '#FB6F92', '#84DCC6', '#FFC2D1', '#FDFFB6', '#F574E9', '#536AA6', '#DEB439', '#FFCD9A', '#887892', '#AA806A', '#80AA6A', '#B8CFE0', '#A183AF', '#FE9C9E'],
+            backgroundColor: ['#3cb44b', '#f58231', '#e6194B', '#9A6324', '#ffe119', '#911eb4', '#469990', '#ffd8b1', '#aaffc3', '#000075', '#dcbeff', '#fffac8', '#42d4f4', '#a9a9a9', '#f032e6', '#4363d8'],
             borderColor: '#fff',
             borderWidth: 2
         }],
