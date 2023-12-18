@@ -21,7 +21,7 @@ echo $res
 
 mkdir ./csvs
 python3 setup_db.py -i land_def land land_str setup_csvs/bundesländer.csv
-python3 setup_db.py -i type_def type type_str type.csv
+python3 setup_db.py -i type_def type type_str setup_csvs/type.csv
 python3 setup_db.py -i category_def category category_str setup_csvs/category.csv
 python3 setup_db.py -i kind_def kind kind_str setup_csvs/kind.csv
 python3 setup_db.py -i light_condition_def light_condition light_condition_str setup_csvs/licht.csv
